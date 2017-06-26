@@ -1,0 +1,157 @@
+{% extends "SonataAdminBundle:CRUD:show.html.twig" %}
+
+{% block actions %}
+    {{ parent() }}
+    <div class="navbar-right">
+        <ul class="nav navbar-nav">
+            <li id="tpx-dq-query-header-paginator-numbers-{{ object.id }}"
+                style="margin-top:13px; margin-bottom: 10px; margin-right: 10px; text-align: center;">
+
+                <div id="tpx-dq-table-paginator-numbers-{{ object.id }}">
+                    <h4>{% if ((paginator.currentPageResults|length)>0) %}
+                            <span><strong>{{ (paginator.currentPage-1)*paginator.maxPerPage+1 }}</strong> {{ 'to' | trans({},'TechPromuxDynamicQueryBundle') }}
+                                <strong>{{ (paginator.currentPage-1)*paginator.maxPerPage+(paginator.currentPageResults|length) }}</strong> {{ 'of' | trans({},'TechPromuxDynamicQueryBundle') }}
+                                <strong>{{ paginator.nbResults }}</strong></span>
+                        {% else %}
+                            <span>No results found</span>
+                        {% endif %}
+                    </h4>
+                </div>
+            </li>
+
+            <li id="tpx-dq-query-header-paginator-links-{{ object.id }}"
+                style="margin-top:15px; margin-bottom: 10px; text-align: center;">
+
+                <div id="tpx-dq-table-paginator-links-{{ object.id }}" style="display: inline-block;">
+                    <img src="{{ asset('bundles/techpromuxcore/img/ajax-wait.gif') }}" style="display: none;"
+                         id="execute-paginated-table-container-{{ object.id }}-ajax-wait" class="pull-left">
+                    <style>
+                        .pager {
+                            margin: 0px 0;
+                        }
+                    </style>
+                    {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.paginator.html.twig',{
+                        'admin': admin,
+                        'routeParams':{'id': object.id},
+                        'paginator': paginator,
+                        'maxPaginatorLinks': 3,
+                        'paginator_container_class':'pager pull-right',
+                        'currentClass':'active',
+                        'firstPageText':'««',
+                        'firstEnabledClass':'first',
+                        'firstDisabledClass':'disabled',
+                        'previousPageText':'«',
+                        'previousEnabledClass':'left',
+                        'previousDisabledClass':'disabled',
+                        'nextPageText':'»',
+                        'nextEnabledClass':'right',
+                        'nextDisabledClass':'disabled',
+                        'lastPageText':'»»',
+                        'lastEnabledClass':'last',
+                        'lastDisabledClass':'disabled'
+                    }) }}
+                </div>
+
+            </li>
+            <li>
+                <div style="text-align: center; margin-top:13px; margin-left: 10px;">
+                    <a href="#tpx-dq-query-filters-form-modal-{{ object.id }}" data-toggle="modal">
+                        <button type="button" class="btn btn-default"
+                                title="{{ 'execute.label_filter'|trans({},admin.getResourceManager().getBundleName()) }}">
+                            <i class="glyphicon glyphicon-filter"></i>
+                        </button>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}
+
+{% block show %}
+    <div id="tpx-dq-query-container-{{ object.id }}" class="box box-primary">
+
+        <div id="tpx-dq-query-table-container-{{ object.id }}" class="box-body table-responsive no-padding">
+            {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.table.html.twig') }}
+        </div>
+
+        <div id="tpx-dq-query-panel-extras-{{ object.id }}">
+
+            <!-- FILTERS FORM MODAL -->
+
+            {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.filters-form-modal.html.twig') }}
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('.sidebar-toggle').trigger('click');
+
+            // customize filter form fields
+
+            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > label').css({'text-align': 'right'});
+            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > div.select2-container').addClass('col-lg-5').css({width: '40%'});
+            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > input.form-control').addClass('col-lg-6').css({width: '50%'});
+
+            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group input.date').datetimepicker({
+                useSeconds: true,
+                pickDate: true,
+                pickTime: false,
+                format: 'YYYY-MM-DD',
+                locale: '{{ (locale is defined)?locale:'en' }}'
+            });
+            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group input.time').datetimepicker({
+                useSeconds: true,
+                pickDate: false,
+                pickTime: true,
+                format: 'HH:mm:ss',
+                locale: '{{ (locale is defined)?locale:'en' }}'
+            });
+            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group input.datetime').datetimepicker({
+                useSeconds: true,
+                pickDate: true,
+                pickTime: true,
+                format: 'YYYY-MM-DD HH:mm:ss',
+                locale: '{{ (locale is defined)?locale:'en' }}'
+            });
+            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > div.col-lg-6 input').first().focus();
+
+        });
+
+    </script>
+
+    <script>
+
+        // linking paginator links with filters form submit action
+
+        $(document).on('click', '#tpx-dq-table-paginator-links-{{ object.id }} .pager a', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $("#tpx-dq-query-filters-form-{{ object.id }}").attr("action", $(this).attr("href"));
+            $("#tpx-dq-query-filters-form-{{ object.id }}").trigger('submit');
+        });
+
+        // linking table header order arrows with filters form submit action
+
+        $(document).on('click', '#tpx-dq-query-table-{{ object.id }} a.table-column-arrow-order-by-{{ object.id }}', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            $("#tpx-dq-query-filters-form-{{ object.id }} #form__sort_by").val($(this).attr('data-sort-by'));
+            $("#tpx-dq-query-filters-form-{{ object.id }} #form__sort_order").val($(this).attr('data-sort-order'));
+
+            $("#tpx-dq-query-filters-form-{{ object.id }}").trigger('submit');
+        });
+
+
+    </script>
+
+{% endblock %}

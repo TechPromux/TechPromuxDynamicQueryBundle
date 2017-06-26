@@ -1,0 +1,31 @@
+{% extends "SonataAdminBundle:CRUD:edit.html.twig" %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+
+            $('#sonata-ba-field-container-{{ form.vars.id }}_plainPassword label').append(
+                '<i class="glyphicon glyphicon-eye-open" style="margin-left: 5px;" id="{{ form.vars.id }}_plainPassword_show"></i>'
+            );
+            $('#sonata-ba-field-container-{{ form.vars.id }}_plainPassword label').append(
+                '<i class="glyphicon glyphicon-eye-close" style="margin-left: 5px;" id="{{ form.vars.id }}_plainPassword_hide"></i>'
+            );
+
+            $(document).on('click', '#{{ form.vars.id }}_plainPassword_show', function(){
+                $('#{{ form.vars.id }}_plainPassword_show').hide();
+                $('#{{ form.vars.id }}_plainPassword_hide').show();
+                $('#{{ form.vars.id }}_plainPassword').attr('type','text');
+            });
+
+            $(document).on('click', '#{{ form.vars.id }}_plainPassword_hide', function(){
+                $('#{{ form.vars.id }}_plainPassword_hide').hide();
+                $('#{{ form.vars.id }}_plainPassword_show').show();
+                $('#{{ form.vars.id }}_plainPassword').attr('type','password');
+            });
+
+            $('#{{ form.vars.id }}_plainPassword_hide').hide();
+
+        });
+    </script>
+{% endblock %}

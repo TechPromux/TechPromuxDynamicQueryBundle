@@ -1,0 +1,3 @@
+techpromux_configuration_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: TechPromuxConfigurationBundle:Default:index }
