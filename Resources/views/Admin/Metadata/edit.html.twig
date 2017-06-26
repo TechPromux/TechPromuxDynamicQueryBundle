@@ -1,0 +1,374 @@
+{% extends "SonataAdminBundle:CRUD:edit.html.twig" %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        // utils functions
+        function str_to_camel_case(string) {
+            return ("_" + string.replace(/ /g, "_").toLowerCase()).replace(/(\_[a-z])/g, function ($1) {
+                return $1.toUpperCase().replace('_', ' ')
+            }).substring(1);
+        }
+    </script>
+
+    <script>
+        // general options and configs
+        $(document).ready(function () {
+            $('.sidebar-toggle').trigger('click');
+            // var step = 1; $($('a[data-toggle="tab"]')[step]).trigger('click'); change tab active
+        });
+
+    </script>
+    <script>
+        // general options and configs
+        $(document).ready(function () {
+            {#
+            $('ul.sidebar-menu a[href="{{ admin.getParent().generateUrl('tech_prommux_dynamic_query.admin.datasourcedatasource.list', [], true) }}"]').parent().addClass('active');
+            $('ul.sidebar-menu a[href="{{ admin.getParent().generateUrl('tech_prommux_dynamic_query.admin.datasourcedatasource.list', [], true) }}"]').parent().parent().addClass('active');
+            $('ul.sidebar-menu a[href="{{ admin.getParent().generateUrl('tech_prommux_dynamic_query.admin.datasourcedatasource.list', [], true) }}"]').parent().parent().addClass('menu-open');
+            $('ul.sidebar-menu a[href="{{ admin.getParent().generateUrl('tech_prommux_dynamic_query.admin.datasourcedatasource.list', [], true) }}"]').parent().parent().css({display:'block'});
+            $('ul.sidebar-menu a[href="{{ admin.getParent().generateUrl('tech_prommux_dynamic_query.admin.datasourcedatasource.list', [], true) }}"]').parent().parent().parent().addClass('active');
+            #}
+        });
+
+    </script>
+    <script>
+        // Step - 1: datasource and metadata descriptions
+
+        $(document).ready(function () {
+            {% if admin.id(object) is not null %}
+            window.selected_tables_and_columns_descriptions = JSON.parse('{{ admin.getResourceManager().getTablesAndColumnsDescriptionsFromMetadata(object) | json_encode | raw }}');
+            {% else %}
+            window.selected_tables_and_columns_descriptions = null;
+            {% endif %}
+        });
+    </script>
+
+    <script>
+        // Step - 2: tables and queries
+
+        $(document).on('change', 'select[data-ctype="metadata-table-type-field"]', function (event) {
+
+            var id = $(this).attr('id');
+            var id_data = id.split('_');
+            var form_id = id_data[0];
+            var relation_name = id_data[1];
+            var item_pos = id_data[2];
+
+            var target_table_id = form_id + '_' + relation_name + '_' + item_pos + '_tableName';
+            var target_query_id = form_id + '_' + relation_name + '_' + item_pos + '_customQuery';
+
+            var type = $(this).select2('data').id;
+
+            if (type == 'table') {
+
+                $('#' + target_query_id).val('');
+                $('#' + target_table_id).val($('#' + target_table_id).attr('data-last-value'));
+                $('#' + target_table_id).select2('data',
+                    {
+                        id: $('#' + target_table_id).attr('data-last-value'),
+                        text: $('#' + target_table_id).attr('data-last-value')
+                    }
+                ).trigger('change');
+
+                $('#' + target_table_id).attr('required', true).select2({allowClear: false});
+                $('#' + target_query_id).attr('required', false);
+
+                $('#s2id_' + target_table_id.replace('#', '')).show();
+                $('#' + target_query_id).hide();
+            }
+            else if (type == 'query') {
+                if ($('#' + target_table_id).select2('data') != null) {
+                    $('#' + target_query_id).val('SELECT * FROM ' + $('#' + target_table_id).select2('data').id);
+                    $('#' + target_table_id).attr('data-last-value', $('#' + target_table_id).val());
+                    $('#' + target_table_id).select2('data', null); //.trigger('change');
+                }
+
+                $('#' + target_table_id).attr('required', false);
+                $('#' + target_query_id).attr('required', true);
+
+                $('#s2id_' + target_table_id.replace('#', '')).hide();
+                $('#' + target_query_id).show();
+            }
+
+        });
+
+        $(document).on('change', 'select[data-ctype="metadata-table-name-field"]', function (event) {
+
+            var id = $(this).attr('id');
+            var id_data = id.split('_');
+            var form_id = id_data[0];
+            var item_pos = id_data[2];
+
+            var target_id = form_id + '_tables_' + item_pos + '_title';
+            $('#' + target_id).val(str_to_camel_case($(this).val()));
+
+        });
+
+        $(document).on('sonata.add_element', '#field_container_{{ form.vars.id }}_tables', function () {
+            $('select[data-ctype="metadata-table-type-field"]').trigger('change');
+            $('#field_container_{{ form.vars.id }}_tables div.checkbox label span.control-label__text').remove();
+
+            $($('#field_widget_{{ form.vars.id }}_tables table thead th')[0]).css({'width':'25px'});
+            $($('#field_widget_{{ form.vars.id }}_tables table thead th')[1]).css({'width':'50px'});
+            $($('#field_widget_{{ form.vars.id }}_tables table thead th')[2]).css({'width':'200px'});
+            $($('#field_widget_{{ form.vars.id }}_tables table thead th')[3]).css({'width':'250px'});
+
+            // mix tableName and customQuery tds
+
+            $('#field_widget_{{ form.vars.id }}_tables table thead th:last').addClass('hidden');
+
+            var tables_td = $('.control-group.sonata-ba-td-{{ form.vars.id }}_tables-tableName');
+            var customQueries_td = $('.control-group.sonata-ba-td-{{ form.vars.id }}_tables-customQuery');
+
+            for (var i = 0; i < tables_td.length; i++) {
+                $(tables_td[i]).append($(customQueries_td[i]).children());
+                $(customQueries_td[i]).addClass('hidden');
+            }
+        });
+
+        // TABLE ARROWS 
+
+        $(document).on('sonata.add_element', '#field_container_{{ form.vars.id }}_tables', function () {
+
+            // poner flechas y actualizar las position
+
+            var all_positions = $('input[data-ctype="metadata-table-position-field"]');
+
+            for (var i = 0; i < all_positions.length; i++) {
+                $(all_positions[i]).val(i);
+                $(all_positions[i]).parent().append('<a class="metadata-table-arrow-up-down btn" href="#_table-up" data-ctype="up" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-up"></span></a>');
+                $(all_positions[i]).parent().append('<a class="metadata-table-arrow-up-down btn" href="#_table-down" data-ctype="down" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-down"></span></a>');
+            }
+            $($('a.metadata-table-arrow-up-down[data-ctype="up"]')[0]).addClass('disabled');
+            $($('a.metadata-table-arrow-up-down[data-ctype="down"]')[all_positions.length - 1]).addClass('disabled');
+        });
+
+        // TABLE ARROWS EVENT
+
+        $(document).on('click', 'a.metadata-table-arrow-up-down', function () {
+
+            var pos = parseInt($(this).attr('data-cpos'));
+
+            var dir = $(this).attr('data-ctype');
+
+            var pos_1 = -1;
+            var pos_2 = -1;
+
+            if (dir == 'up') {
+                pos_1 = pos - 1;
+                pos_2 = pos;
+            } else if (dir == 'down') {
+                pos_1 = pos;
+                pos_2 = pos + 1;
+            }
+
+            var all_positions = $('input[data-ctype="metadata-table-position-field"]');
+
+            var value_1 = $(all_positions[pos_1]).val();
+            var value_2 = $(all_positions[pos_2]).val();
+            $(all_positions[pos_1]).val(value_2);
+            $(all_positions[pos_2]).val(value_1);
+
+            var trs = $('#field_widget_{{ form.vars.id }}_tables tbody tr');
+            var row_1 = $(trs[pos_1]);
+            var row_2 = $(trs[pos_2]);
+            $(row_1).insertAfter($(row_2));
+
+            // update arrows
+
+            for (var i = 0; i < all_positions.length; i++) {
+                $($('a.metadata-table-arrow-up-down[data-ctype="up"]')[i]).removeClass('disabled');
+                $($('a.metadata-table-arrow-up-down[data-ctype="down"]')[i]).removeClass('disabled');
+                $($('a.metadata-table-arrow-up-down[data-ctype="up"]')[i]).attr('data-cpos', i);
+                $($('a.metadata-table-arrow-up-down[data-ctype="down"]')[i]).attr('data-cpos', i);
+            }
+
+            $($('a.metadata-table-arrow-up-down[data-ctype="up"]')[0]).addClass('disabled');
+            $($('a.metadata-table-arrow-up-down[data-ctype="down"]')[all_positions.length - 1]).addClass('disabled');
+
+        });
+
+        $(document).ready(function () {
+            // ON DOCUMENT READY UPDATE ARROWS 
+            $('#field_container_{{ form.vars.id }}_tables').trigger('sonata.add_element');
+
+            $('#field_container_{{ form.vars.id }}_tables').addClass('table-responsive');  //box-body table-responsive no-padding
+
+        });
+    </script>
+
+    <script>
+        // Step - 3: relations
+
+        $(document).on('change', 'select[data-ctype="metadata-relation-lefttable"]', function (event) {
+
+            var id = $(this).attr('id');
+            var id_data = id.split('_');
+            var form_id = id_data[0];
+            var relation_name = id_data[1];
+            var item_pos = id_data[2];
+
+            var target_id = form_id + '_' + relation_name + '_' + item_pos + '_leftColumn';
+
+            var last_value_selected = $('#' + target_id).select2('data').id;
+
+            $('#' + target_id).html('').val('');
+
+            var columns = null;
+
+            for (var i = 0; i < window.selected_tables_and_columns_descriptions.length; i++) {
+                if (window.selected_tables_and_columns_descriptions[i].id == $(this).val())
+                    columns = window.selected_tables_and_columns_descriptions[i].columns;
+            }
+
+            var last_value_index = 0;
+
+            for (var i = 0; i < columns.length; i++) {
+                if (columns[i].name == last_value_selected) {
+                    last_value_index = i;
+                }
+            }
+            for (var i = 0; i < columns.length; i++) {
+                if (i == last_value_index) {
+                    $('#' + target_id).append(new Option(columns[i].name, columns[i].name, true, true));
+                    $('#' + target_id).select2('data', {id: columns[i].name, text: columns[i].name});
+                }
+                else
+                    $('#' + target_id).append(new Option(columns[i].name, columns[i].name));
+            }
+        });
+
+        $(document).on('change', 'select[data-ctype="metadata-relation-righttable"]', function (event) {
+            var id = $(this).attr('id');
+            var id_data = id.split('_');
+            var form_id = id_data[0];
+            var item_pos = id_data[2];
+
+            var target_id = form_id + '_relations_' + item_pos + '_rightColumn';
+
+            var last_value_selected = $('#' + target_id).select2('data').id;
+
+            $('#' + target_id).html('').val('');
+
+            var columns = null;
+
+            for (var i = 0; i < window.selected_tables_and_columns_descriptions.length; i++) {
+                if (window.selected_tables_and_columns_descriptions[i].id == $(this).val())
+                    columns = window.selected_tables_and_columns_descriptions[i].columns;
+            }
+
+            var last_value_index = 0;
+
+            for (var i = 0; i < columns.length; i++) {
+                if (columns[i].name == last_value_selected) {
+                    last_value_index = i;
+                }
+            }
+            for (var i = 0; i < columns.length; i++) {
+                if (i === last_value_index) {
+                    $('#' + target_id).append(new Option(columns[i].name, columns[i].name, true, true));
+                    $('#' + target_id).select2('data', {id: columns[i].name, text: columns[i].name});
+                }
+                else
+                    $('#' + target_id).append(new Option(columns[i].name, columns[i].name));
+            }
+
+        });
+
+        $(document).on('sonata.add_element', '#field_container_{{ form.vars.id }}_relations', function () {
+
+            $('#field_container_{{ form.vars.id }}_relations div.checkbox label span.control-label__text').remove();
+
+            $('select[data-ctype="metadata-relation-lefttable"]').trigger('change');
+            $('select[data-ctype="metadata-relation-righttable"]').trigger('change');
+        });
+
+        // RELATIONS ARROWS 
+
+        $(document).on('sonata.add_element', '#field_container_{{ form.vars.id }}_relations', function () {
+
+            // poner flechas y actualizar las position
+
+            var all_positions = $('input[data-ctype="metadata-relation-position"]');
+
+            for (var i = 0; i < all_positions.length; i++) {
+                $(all_positions[i]).val(i);
+                $(all_positions[i]).parent().append('<a class="metadata-relation-arrow-up-down btn" href="#_relation-up" data-ctype="up" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-up"></span></a>');
+                $(all_positions[i]).parent().append('<a class="metadata-relation-arrow-up-down btn" href="#_relation-down" data-ctype="down" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-down"></span></a>');
+            }
+            $($('a.metadata-relation-arrow-up-down[data-ctype="up"]')[0]).addClass('disabled');
+            $($('a.metadata-relation-arrow-up-down[data-ctype="down"]')[all_positions.length - 1]).addClass('disabled');
+        });
+
+        // RELATIONS ARROWS EVENT
+
+        $(document).on('click', 'a.metadata-relation-arrow-up-down', function () {
+
+            var pos = parseInt($(this).attr('data-cpos'));
+
+            var dir = $(this).attr('data-ctype');
+
+            var pos_1 = -1;
+            var pos_2 = -1;
+
+            if (dir == 'up') {
+                pos_1 = pos - 1;
+                pos_2 = pos;
+            } else if (dir == 'down') {
+                pos_1 = pos;
+                pos_2 = pos + 1;
+            }
+
+            var all_positions = $('input[data-ctype="metadata-relation-position"]');
+
+            var value_1 = $(all_positions[pos_1]).val();
+            var value_2 = $(all_positions[pos_2]).val();
+            $(all_positions[pos_1]).val(value_2);
+            $(all_positions[pos_2]).val(value_1);
+
+            var trs = $('#field_widget_{{ form.vars.id }}_relations tbody tr');
+            var row_1 = $(trs[pos_1]);
+            var row_2 = $(trs[pos_2]);
+            $(row_1).insertAfter($(row_2));
+
+            // update arrows
+
+            for (var i = 0; i < all_positions.length; i++) {
+                $($('a.metadata-relation-arrow-up-down[data-ctype="up"]')[i]).removeClass('disabled');
+                $($('a.metadata-relation-arrow-up-down[data-ctype="down"]')[i]).removeClass('disabled');
+                $($('a.metadata-relation-arrow-up-down[data-ctype="up"]')[i]).attr('data-cpos', i);
+                $($('a.metadata-relation-arrow-up-down[data-ctype="down"]')[i]).attr('data-cpos', i);
+            }
+
+            $($('a.metadata-relation-arrow-up-down[data-ctype="up"]')[0]).addClass('disabled');
+            $($('a.metadata-relation-arrow-up-down[data-ctype="down"]')[all_positions.length - 1]).addClass('disabled');
+
+        });
+
+        $(document).ready(function () {
+
+            $('select[data-ctype="metadata-relation-lefttable"]').trigger('change');
+
+            $('select[data-ctype="metadata-relation-righttable"]').trigger('change');
+
+            $('#field_container_{{ form.vars.id }}_relations').trigger('sonata.add_element');
+
+            $('#field_container_{{ form.vars.id }}_relations').addClass('table-responsive');  //box-body table-responsive no-padding
+
+        });
+    </script>
+
+    <script>
+        // Step - 4: options and configurations
+
+        $(document).ready(function () {
+
+            $('#field_container_{{ form.vars.id }}_fields div.checkbox label span.control-label__text').remove();
+
+            $('#field_container_{{ form.vars.id }}_fields').addClass('table-responsive');  //box-body table-responsive no-padding
+        });
+
+
+    </script>
+{% endblock %}
