@@ -2,10 +2,104 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="TechPromuxDynamicQueryBundle.en.xliff">
         <body>
-            <trans-unit id="text">
-                <source>text</source>
-                <target>Text</target>
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>name</target>
             </trans-unit>
+            <trans-unit id="list.label_db_host">
+                <source>list.label_db_host</source>
+                <target>host</target>
+            </trans-unit>
+            <trans-unit id="list.label_db_port">
+                <source>list.label_db_port</source>
+                <target>Port</target>
+            </trans-unit>
+            <trans-unit id="list.label_driver_type">
+                <source>list.label_driver_type</source>
+                <target>Type</target>
+            </trans-unit>
+            <trans-unit id="list.label_db_name">
+                <source>list.label_db_name</source>
+                <target>Db name</target>
+            </trans-unit>
+			<trans-unit id="list.label_enabled">
+                <source>list.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+			<trans-unit id="Actions">
+                <source>Actions</source>
+                <target>Actions</target>
+            </trans-unit>			
+			<trans-unit id="filter.label_name">
+                <source>filter.label_name</source>
+                <target>Label Name</target>
+            </trans-unit>			
+			<trans-unit id="filter.label_driver_type">
+                <source>filter.label_driver_type</source>
+                <target>Driver Type</target>
+            </trans-unit>
+			<trans-unit id="filter.label_db_host">
+                <source>filter.label_db_host</source>
+                <target>Db Host</target>
+            </trans-unit>
+			<trans-unit id="filter.label_db_name">
+                <source>filter.label_db_name</source>
+                <target>Db Name</target>
+            </trans-unit>
+			<trans-unit id="breadcrumb.link_data_source_list">
+                <source>breadcrumb.link_data_source_list</source>
+                <target>Data Source List</target>
+            </trans-unit>
+			<trans-unit id="Dynamic Queries">
+                <source>Dynamic Queries</source>
+                <target>Dynamic Queries</target>
+            </trans-unit>
+			<trans-unit id="DataSource">
+                <source>DataSource</source>
+                <target>DataSource</target>
+            </trans-unit>
+			<trans-unit id="Metadata">
+                <source>Metadata</source>
+                <target>Metadata</target>
+            </trans-unit>
+			<trans-unit id="DataModel">
+                <source>DataModel</source>
+                <target>DataModel</target>
+            </trans-unit>
+			<trans-unit id="list.label_title">
+                <source>list.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+			<trans-unit id="list.label_tables">
+                <source>list.label_tables</source>
+                <target>Tables</target>
+            </trans-unit>
+			<trans-unit id="breadcrumb.link_metadata_list">
+                <source>breadcrumb.link_metadata_list</source>
+                <target>Metadata List</target>
+            </trans-unit>
+			<trans-unit id="list.label_metadata_datasource">
+                <source>list.label_metadata_datasource</source>
+                <target>Metadata Datasource</target>
+            </trans-unit>
+			<trans-unit id="list.label_metadata">
+                <source>list.label_metadata</source>
+                <target>Metadata</target>
+            </trans-unit>
+			<trans-unit id="filter.label_title">
+                <source>filter.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="filter.label_description">
+                <source>filter.label_description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_data_model_list">
+                <source>breadcrumb.link_data_model_list</source>
+                <target>Data Model List</target>
+            </trans-unit>			
+			
+			
         </body>
     </file>
 </xliff>
