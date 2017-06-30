@@ -72,7 +72,8 @@ class MetadataFieldAdmin extends BaseResourceAdmin
                     'disabled' => false,
                     'attr' => array('style' => 'max-width:120px',
                         'data-ctype' => 'metadata-field-type-field'
-                    )
+                    ),
+                    'translation_domain' => $this->getResourceManager()->getBundleName()
                 )
             );
     }

@@ -81,7 +81,8 @@ class MetadataTableAdmin extends BaseResourceAdmin
                     "expanded" => false,
                     "multiple" => false,
                     'required' => true,
-                    'attr' => array('data-ctype' => 'metadata-table-type')
+                    'attr' => array('data-ctype' => 'metadata-table-type'),
+                    'translation_domain' => $this->getResourceManager()->getBundleName()
                 )
             );
         $formMapper
@@ -94,7 +95,8 @@ class MetadataTableAdmin extends BaseResourceAdmin
                         'style' => 'width: 100%',
                         'data-ctype' => 'metadata-table-name',
                         'data-last-value' => ($object == null || $object->getType() == 'query') ? $table_name_first : $object->getTableName()
-                    )
+                    ),
+                   // 'translation_domain' => $this->getResourceManager()->getBundleName()
                 )
             );
 

@@ -91,17 +91,24 @@ class DataModelDetailAdmin extends BaseResourceAdmin
                     'choice_label' => 'title',
                     'group_by' => 'table.title',
                     'attr' => array('data-ctype' => 'datamodel-detail-field'),
-                    "multiple" => false, "expanded" => false, 'required' => true)
+                    "multiple" => false, "expanded" => false, 'required' => true,
+                )
             )
             ->add('function', 'choice', array(
                 'choices' => $util_manager->getFieldFunctionsChoices(),
                 'required' => false,
-                'attr' => array('data-ctype' => 'datamodel-detail-function'),
+                'attr' => array(
+                    'placeholder' => '------------ Select a function ------------',
+                    'data-ctype' => 'datamodel-detail-function'),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('presentationFormat', 'choice', array(
                 'choices' => $util_manager->getValuesFormatsChoices(),
                 'required' => false,
-                'attr' => array('data-ctype' => 'datamodel-detail-format'),
+                'attr' => array(
+                    'placeholder' => '-------- Select a format --------',
+                    'data-ctype' => 'datamodel-detail-format'),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('title', null, array(
                 'attr' => array('data-ctype' => 'datamodel-detail-title'),
@@ -121,9 +128,7 @@ class DataModelDetailAdmin extends BaseResourceAdmin
                 'trim' => false,
                 'attr' => array(
                     'data-ctype' => 'datamodel-detail-suffix'),
-            ))
-
-        ;
+            ));
     }
 
     public function validate(\Sonata\CoreBundle\Validator\ErrorElement $errorElement, $object)
@@ -141,7 +146,8 @@ class DataModelDetailAdmin extends BaseResourceAdmin
             ->end()
             ->with('abbreviation')
             ->assertNotBlank()
-            ->end();
+            ->end()
+        ;
     }
 
 }

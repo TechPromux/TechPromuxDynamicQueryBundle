@@ -167,6 +167,7 @@ class DataSourceAdmin extends BaseResourceAdmin
             ->add('driverType', 'choice', array(
                 'choices' => $this->getResourceManager()->getDynamicQueryUtilManager()->getDriverTypesChoices(),
                 'required' => true,
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('dbHost', null, array(
                 'empty_data' => '127.0.0.1',

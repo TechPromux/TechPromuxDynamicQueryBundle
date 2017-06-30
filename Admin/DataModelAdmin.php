@@ -160,7 +160,7 @@ class DataModelAdmin extends BaseResourceAdmin
         $request = $this->getRequest();
 
         $formMapper
-            ->tab('form.tab.description')
+            ->tab('form.tab.datamodel.description')
             ->with('form.group.datamodel.description', array("class" => "col-md-6"))
             ->add('name')
             ->add('title')
@@ -189,8 +189,8 @@ class DataModelAdmin extends BaseResourceAdmin
         if ($object->getId() != null) {
 
             $formMapper
-                ->tab('form.tab.details')
-                ->with('form.group.details.select')
+                ->tab('form.tab.datamodel.details')
+                ->with('form.group.datamodel.select_details')
                 ->add('details', 'sonata_type_collection', array(
                     "label" => false,
                     "by_reference" => false,
@@ -206,8 +206,8 @@ class DataModelAdmin extends BaseResourceAdmin
             ;
 
             $formMapper
-                ->tab('form.tab.groups')
-                ->with('form.group.groups.select')
+                ->tab('form.tab.datamodel.groups')
+                ->with('form.group.datamodel.select_groups')
                 ->add('groups', 'sonata_type_collection', array(
                     "label" => false,
                     "by_reference" => false,
@@ -223,8 +223,8 @@ class DataModelAdmin extends BaseResourceAdmin
             ;
 
             $formMapper
-                ->tab('form.tab.orders')
-                ->with('form.group.orders.select')
+                ->tab('form.tab.datamodel.orders')
+                ->with('form.group.datamodel.select_orders')
                 ->add('orders', 'sonata_type_collection', array(
                     "label" => false,
                     "by_reference" => false,
@@ -240,8 +240,8 @@ class DataModelAdmin extends BaseResourceAdmin
             ;
 
             $formMapper
-                ->tab('form.tab.conditions')
-                ->with('form.group.conditions.select')
+                ->tab('form.tab.datamodel.conditions')
+                ->with('form.group.datamodel.select_conditions')
                 ->add('conditions', 'sonata_type_collection', array(
                     "label" => false,
                     "by_reference" => false,
@@ -276,12 +276,12 @@ class DataModelAdmin extends BaseResourceAdmin
 
         if (in_array($action, array('edit'))) {
             $menu->addChild(
-                'link_action_execute', array('uri' => $admin->generateUrl('execute', array('id' => $id)))
+                $this->trans('link_action_execute'), array('uri' => $admin->generateUrl('execute', array('id' => $id)))
             );
         }
         if (in_array($action, array('execute'))) {
             $menu->addChild(
-                'link_action_edit', array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+                $this->trans('link_action_edit'), array('uri' => $admin->generateUrl('edit', array('id' => $id)))
             );
         }
     }

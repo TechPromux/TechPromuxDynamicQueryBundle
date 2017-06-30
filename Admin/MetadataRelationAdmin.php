@@ -81,7 +81,8 @@ class MetadataRelationAdmin extends BaseResourceAdmin
                 "expanded" => false,
                 "multiple" => false,
                 'required' => true,
-                'attr' => array('data-ctype' => 'metadata-relation-jointype')
+                'attr' => array('data-ctype' => 'metadata-relation-jointype'),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('rightTable', 'entity', array('class' => $this->getResourceManager()->getMetadataManager()->getMetadataTableManager()->getResourceClass(),
                     'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($metadata) {

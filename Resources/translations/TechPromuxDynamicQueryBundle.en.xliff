@@ -4,102 +4,539 @@
         <body>
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
-                <target>name</target>
+                <target><![CDATA[Name]]></target>
             </trans-unit>
             <trans-unit id="list.label_db_host">
                 <source>list.label_db_host</source>
-                <target>host</target>
+                <target><![CDATA[Host]]></target>
             </trans-unit>
             <trans-unit id="list.label_db_port">
                 <source>list.label_db_port</source>
-                <target>Port</target>
+                <target><![CDATA[Port]]></target>
             </trans-unit>
             <trans-unit id="list.label_driver_type">
                 <source>list.label_driver_type</source>
-                <target>Type</target>
+                <target><![CDATA[Type]]></target>
             </trans-unit>
             <trans-unit id="list.label_db_name">
                 <source>list.label_db_name</source>
-                <target>Db name</target>
+                <target><![CDATA[Database]]></target>
             </trans-unit>
 			<trans-unit id="list.label_enabled">
                 <source>list.label_enabled</source>
-                <target>Enabled</target>
+                <target><![CDATA[Enabled]]></target>
             </trans-unit>
 			<trans-unit id="Actions">
                 <source>Actions</source>
-                <target>Actions</target>
+                <target><![CDATA[Actions]]></target>
             </trans-unit>			
 			<trans-unit id="filter.label_name">
                 <source>filter.label_name</source>
-                <target>Label Name</target>
+                <target><![CDATA[Name]]></target>
             </trans-unit>			
 			<trans-unit id="filter.label_driver_type">
                 <source>filter.label_driver_type</source>
-                <target>Driver Type</target>
+                <target><![CDATA[Driver Type]]></target>
             </trans-unit>
 			<trans-unit id="filter.label_db_host">
                 <source>filter.label_db_host</source>
-                <target>Db Host</target>
+                <target><![CDATA[Host]]></target>
             </trans-unit>
 			<trans-unit id="filter.label_db_name">
                 <source>filter.label_db_name</source>
-                <target>Db Name</target>
+                <target><![CDATA[Name]]></target>
             </trans-unit>
 			<trans-unit id="breadcrumb.link_data_source_list">
                 <source>breadcrumb.link_data_source_list</source>
-                <target>Data Source List</target>
+                <target><![CDATA[Data Sources]]></target>
             </trans-unit>
 			<trans-unit id="Dynamic Queries">
                 <source>Dynamic Queries</source>
-                <target>Dynamic Queries</target>
+                <target><![CDATA[Dynamic Queries]]></target>
             </trans-unit>
 			<trans-unit id="DataSource">
                 <source>DataSource</source>
-                <target>DataSource</target>
+                <target><![CDATA[Data Source]]></target>
             </trans-unit>
 			<trans-unit id="Metadata">
                 <source>Metadata</source>
-                <target>Metadata</target>
+                <target><![CDATA[Metadata]]></target>
             </trans-unit>
 			<trans-unit id="DataModel">
                 <source>DataModel</source>
-                <target>DataModel</target>
+                <target><![CDATA[Data Model]]></target>
             </trans-unit>
 			<trans-unit id="list.label_title">
                 <source>list.label_title</source>
-                <target>Title</target>
+                <target><![CDATA[Title]]></target>
             </trans-unit>
 			<trans-unit id="list.label_tables">
                 <source>list.label_tables</source>
-                <target>Tables</target>
+                <target><![CDATA[Tables]]></target>
             </trans-unit>
 			<trans-unit id="breadcrumb.link_metadata_list">
                 <source>breadcrumb.link_metadata_list</source>
-                <target>Metadata List</target>
+                <target><![CDATA[Metadatas]]></target>
             </trans-unit>
 			<trans-unit id="list.label_metadata_datasource">
                 <source>list.label_metadata_datasource</source>
-                <target>Metadata Datasource</target>
+                <target><![CDATA[Data Source]]></target>
             </trans-unit>
 			<trans-unit id="list.label_metadata">
                 <source>list.label_metadata</source>
-                <target>Metadata</target>
+                <target><![CDATA[Metadata]]></target>
             </trans-unit>
 			<trans-unit id="filter.label_title">
                 <source>filter.label_title</source>
-                <target>Title</target>
+                <target><![CDATA[Title]]></target>
             </trans-unit>
             <trans-unit id="filter.label_description">
                 <source>filter.label_description</source>
-                <target>Description</target>
+                <target><![CDATA[Description]]></target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_data_model_list">
                 <source>breadcrumb.link_data_model_list</source>
-                <target>Data Model List</target>
-            </trans-unit>			
-			
-			
+                <target><![CDATA[Data Models]]></target>
+            </trans-unit>
+
+            <trans-unit id="form.tab.datamodel.description">
+                <source>form.tab.datamodel.description</source>
+                <target><![CDATA[Description]]></target>
+            </trans-unit>
+            <trans-unit id="form.tab.datamodel.details">
+                <source>form.tab.datamodel.details</source>
+                <target><![CDATA[Configure Details]]></target>
+            </trans-unit>
+            <trans-unit id="form.tab.datamodel.groups">
+                <source>form.tab.datamodel.groups</source>
+                <target><![CDATA[Configure Groups]]></target>
+            </trans-unit>
+            <trans-unit id="form.tab.datamodel.orders">
+                <source>form.tab.datamodel.orders</source>
+                <target><![CDATA[Configure Orders]]></target>
+            </trans-unit>
+            <trans-unit id="form.tab.datamodel.conditions">
+                <source>form.tab.datamodel.conditions</source>
+                <target><![CDATA[Configure Conditions]]></target>
+            </trans-unit>
+
+            <trans-unit id="form.group.datamodel.description">
+                <source>form.group.datamodel.description</source>
+                <target><![CDATA[Description]]></target>
+            </trans-unit>
+            <trans-unit id="form.group.datamodel.configuration">
+                <source>form.group.datamodel.configuration</source>
+                <target><![CDATA[Other Options]]></target>
+            </trans-unit>
+            <trans-unit id="form.group.datamodel.select_details">
+                <source>form.group.datamodel.select_details</source>
+                <target><![CDATA[Select Fields and apply Function for Details]]></target>
+            </trans-unit>
+            <trans-unit id="form.group.datamodel.select_groups">
+                <source>form.group.datamodel.select_groups</source>
+                <target><![CDATA[Select Fields and apply Functions for Groups]]></target>
+            </trans-unit>
+            <trans-unit id="form.group.datamodel.select_orders">
+                <source>form.group.datamodel.select_orders</source>
+                <target><![CDATA[Select Fields and apply Functions for Orders]]></target>
+            </trans-unit>
+            <trans-unit id="form.group.datamodel.select_conditions">
+                <source>form.group.datamodel.select_conditions</source>
+                <target><![CDATA[Select Fields and apply Functions for Conditions]]></target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target><![CDATA[Name]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target><![CDATA[Title]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target><![CDATA[Description]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_metadata">
+                <source>form.label_metadata</source>
+                <target><![CDATA[Metadata]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_enabled">
+                <source>form.label_enabled</source>
+                <target><![CDATA[Enabled]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_position">
+                <source>form.label_position</source>
+                <target><![CDATA[Position]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_type">
+                <source>form.label_type</source>
+                <target><![CDATA[Type]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_field">
+                <source>form.label_field</source>
+                <target><![CDATA[Field]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_function">
+                <source>form.label_function</source>
+                <target><![CDATA[Function]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_presentation_format">
+                <source>form.label_presentation_format</source>
+                <target><![CDATA[Format]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_abbreviation">
+                <source>form.label_abbreviation</source>
+                <target><![CDATA[Short]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_presentation_prefix">
+                <source>form.label_presentation_prefix</source>
+                <target><![CDATA[Prefix]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_presentation_suffix">
+                <source>form.label_presentation_suffix</source>
+                <target><![CDATA[Suffix]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_operator">
+                <source>form.label_operator</source>
+                <target><![CDATA[Operator]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_compare_to_type">
+                <source>form.label_compare_to_type</source>
+                <target><![CDATA[Compare With]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_compare_to_fixed_value">
+                <source>form.label_compare_to_fixed_value</source>
+                <target><![CDATA[Value]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_compare_to_function">
+                <source>form.label_compare_to_function</source>
+                <target><![CDATA[Function]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_compare_to_dynamic_value">
+                <source>form.label_compare_to_dynamic_value</source>
+                <target><![CDATA[Calculated Value]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_compare_to_field">
+                <source>form.label_compare_to_field</source>
+                <target><![CDATA[Field]]></target>
+            </trans-unit>
+
+            <trans-unit id="AGGREGATION_FUNCTIONS">
+                <source>AGGREGATION_FUNCTIONS</source>
+                <target><![CDATA[Aggregation Functions]]></target>
+            </trans-unit>
+            <trans-unit id="AGGREGATION.COUNT">
+                <source>AGGREGATION.COUNT</source>
+                <target><![CDATA[Count]]></target>
+            </trans-unit>
+            <trans-unit id="AGGREGATION.SUM">
+                <source>AGGREGATION.SUM</source>
+                <target><![CDATA[Sum]]></target>
+            </trans-unit>
+            <trans-unit id="AGGREGATION.AVG">
+                <source>AGGREGATION.AVG</source>
+                <target><![CDATA[Avg]]></target>
+            </trans-unit>
+            <trans-unit id="AGGREGATION.MAX">
+                <source>AGGREGATION.MAX</source>
+                <target><![CDATA[Max]]></target>
+            </trans-unit>
+            <trans-unit id="AGGREGATION.MIN">
+                <source>AGGREGATION.MIN</source>
+                <target><![CDATA[Min]]></target>
+            </trans-unit>
+            <trans-unit id="AGGREGATION.STDDEV">
+                <source>AGGREGATION.STDDEV</source>
+                <target><![CDATA[Std Dev]]></target>
+            </trans-unit>
+            <trans-unit id="AGGREGATION.VARIANCE">
+                <source>AGGREGATION.VARIANCE</source>
+                <target><![CDATA[Variance]]></target>
+            </trans-unit>
+            <trans-unit id="DATE_FUNCTIONS">
+                <source>DATE_FUNCTIONS</source>
+                <target><![CDATA[Date Functions]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DAY_NAME_OF_WEEK">
+                <source>DATE.DAY_NAME_OF_WEEK</source>
+                <target><![CDATA[Day Name]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.MONTH_NAME_OF_YEAR">
+                <source>DATE.MONTH_NAME_OF_YEAR</source>
+                <target><![CDATA[Month Name]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.MONTH_NAME_OF_YEAR_COMMA_YEAR">
+                <source>DATE.MONTH_NAME_OF_YEAR_COMMA_YEAR</source>
+                <target><![CDATA[Month Name, Year]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DATE_OF_FIRST_DAY_OF_WEEK">
+                <source>DATE.DATE_OF_FIRST_DAY_OF_WEEK</source>
+                <target><![CDATA[First Date of Week]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DATE_OF_FIRST_DAY_OF_MONTH">
+                <source>DATE.DATE_OF_FIRST_DAY_OF_MONTH</source>
+                <target><![CDATA[First Date of Month]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DATE_OF_FIRST_DAY_OF_YEAR">
+                <source>DATE.DATE_OF_FIRST_DAY_OF_YEAR</source>
+                <target><![CDATA[Fisrt Date of Year]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_0_TO_SUNDAY_6">
+                <source>DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_0_TO_SUNDAY_6</source>
+                <target><![CDATA[Day Number of Week (M(0)-S(6))]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_1_TO_SUNDAY_7">
+                <source>DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_1_TO_SUNDAY_7</source>
+                <target><![CDATA[Day Number of Week (M(1)-S(7))]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DAY_NUMBER_OF_WEEK_SUNDAY_TO_SATURDAY">
+                <source>DATE.DAY_NUMBER_OF_WEEK_SUNDAY_TO_SATURDAY</source>
+                <target><![CDATA[Day Number of Week (S(0)-S(6))]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DAY_NUMBER_OF_MONTH">
+                <source>DATE.DAY_NUMBER_OF_MONTH</source>
+                <target><![CDATA[Day Number of Month]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.DAY_NUMBER_OF_YEAR">
+                <source>DATE.DAY_NUMBER_OF_YEAR</source>
+                <target><![CDATA[Day Number of Year]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.WEEK_NUMBER_OF_MONTH">
+                <source>DATE.WEEK_NUMBER_OF_MONTH</source>
+                <target><![CDATA[Week Number of Month]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.WEEK_NUMBER_OF_YEAR">
+                <source>DATE.WEEK_NUMBER_OF_YEAR</source>
+                <target><![CDATA[Week Number of Year]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.MONTH_NUMBER_OF_YEAR">
+                <source>DATE.MONTH_NUMBER_OF_YEAR</source>
+                <target><![CDATA[Month Number]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.YEAR_NUMBER">
+                <source>DATE.YEAR_NUMBER</source>
+                <target><![CDATA[Year]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.YEAR_MONTH_NUMBERS">
+                <source>DATE.YEAR_MONTH_NUMBERS</source>
+                <target><![CDATA[YearMonth Numbers]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.YEAR_MONTH_DAY_NUMBERS">
+                <source>DATE.YEAR_MONTH_DAY_NUMBERS</source>
+                <target><![CDATA[YearMonthDay Numbers]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.QUANTITY_OF_DAYS_TO_CURRENT_DAY">
+                <source>DATE.QUANTITY_OF_DAYS_TO_CURRENT_DAY</source>
+                <target><![CDATA[Difference in Days to Today]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.QUANTITY_OF_WEEKS_TO_CURRENT_WEEK">
+                <source>DATE.QUANTITY_OF_WEEKS_TO_CURRENT_WEEK</source>
+                <target><![CDATA[Difference in Weeks to Current Week]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.QUANTITY_OF_MONTHS_TO_CURRENT_MONTH">
+                <source>DATE.QUANTITY_OF_MONTHS_TO_CURRENT_MONTH</source>
+                <target><![CDATA[Difference in Months to Current Month]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.QUANTITY_OF_YEARS_TO_CURRENT_YEAR">
+                <source>DATE.QUANTITY_OF_YEARS_TO_CURRENT_YEAR</source>
+                <target><![CDATA[Difference in Years to Current Year]]></target>
+            </trans-unit>
+            <trans-unit id="NUMBER_FORMATS">
+                <source>NUMBER_FORMATS</source>
+                <target><![CDATA[Number Formats]]></target>
+            </trans-unit>
+            <trans-unit id="NUMBER.TO_INTEGER_###0">
+                <source>NUMBER.TO_INTEGER_###0</source>
+                <target><![CDATA[###0 (ex: 123456)]]></target>
+            </trans-unit>
+            <trans-unit id="NUMBER.TO_INTEGER_#_##0">
+                <source>NUMBER.TO_INTEGER_#_##0</source>
+                <target><![CDATA[# ##0 (ex: 123 456)]]></target>
+            </trans-unit>
+            <trans-unit id="NUMBER.TO_INTEGER_#,##0">
+                <source>NUMBER.TO_INTEGER_#,##0</source>
+                <target><![CDATA[#,##0 (ex: 123,456)]]></target>
+            </trans-unit>
+            <trans-unit id="NUMBER.TO_FLOAT_###0.##">
+                <source>NUMBER.TO_FLOAT_###0.##</source>
+                <target><![CDATA[###0.## (ex: 1234.56)]]></target>
+            </trans-unit>
+            <trans-unit id="NUMBER.TO_FLOAT_#_##0.##">
+                <source>NUMBER.TO_FLOAT_#_##0.##</source>
+                <target><![CDATA[# ##0.## (ex: 1 234.56)]]></target>
+            </trans-unit>
+            <trans-unit id="NUMBER.TO_FLOAT_#,##0.##">
+                <source>NUMBER.TO_FLOAT_#,##0.##</source>
+                <target><![CDATA[#,##0.## (ex: 1,234.56)]]></target>
+            </trans-unit>
+            <trans-unit id="DATE_FORMATS">
+                <source>DATE_FORMATS</source>
+                <target><![CDATA[Date Formats]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.TO_DATE_Y-m-d">
+                <source>DATE.TO_DATE_Y-m-d</source>
+                <target><![CDATA[Y-m-d (ex: 2000-01-01)]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.TO_DATE_d/m/Y">
+                <source>DATE.TO_DATE_d/m/Y</source>
+                <target><![CDATA[d/m/Y (ex: 01/01/2000)]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY_OPERATORS">
+                <source>UNARY_OPERATORS</source>
+                <target><![CDATA[Unary Operators]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_TRUE">
+                <source>UNARY.IS_TRUE</source>
+                <target><![CDATA[Is True]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_NOT_TRUE">
+                <source>UNARY.IS_NOT_TRUE</source>
+                <target><![CDATA[Is Not True]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_FALSE">
+                <source>UNARY.IS_FALSE</source>
+                <target><![CDATA[Is False]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_NOT_FALSE">
+                <source>UNARY.IS_NOT_FALSE</source>
+                <target><![CDATA[Is Not False]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_NULL">
+                <source>UNARY.IS_NULL</source>
+                <target><![CDATA[Is Null]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_NOT_NULL">
+                <source>UNARY.IS_NOT_NULL</source>
+                <target><![CDATA[Is Not Null]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_EMPTY">
+                <source>UNARY.IS_EMPTY</source>
+                <target><![CDATA[Is Empty]]></target>
+            </trans-unit>
+            <trans-unit id="UNARY.IS_NOT_EMPTY">
+                <source>UNARY.IS_NOT_EMPTY</source>
+                <target><![CDATA[Is Not Empty]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY_OPERATORS">
+                <source>BINARY_OPERATORS</source>
+                <target><![CDATA[Binary Operators]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.EQUAL">
+                <source>BINARY.EQUAL</source>
+                <target><![CDATA[=]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.NOT_EQUAL">
+                <source>BINARY.NOT_EQUAL</source>
+                <target><![CDATA[<>]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.LESS_THAN">
+                <source>BINARY.LESS_THAN</source>
+                <target><![CDATA[<]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.LESS_OR_EQUAL">
+                <source>BINARY.LESS_OR_EQUAL</source>
+                <target><![CDATA[<=]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.GREATER_THAN">
+                <source>BINARY.GREATER_THAN</source>
+                <target><![CDATA[>]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.GREATER_OR_EQUAL">
+                <source>BINARY.GREATER_OR_EQUAL</source>
+                <target><![CDATA[>=]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.CONTAINS">
+                <source>BINARY.CONTAINS</source>
+                <target><![CDATA[Contains]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.NOT_CONTAINS">
+                <source>BINARY.NOT_CONTAINS</source>
+                <target><![CDATA[Not Contains]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.STARTS_WITH">
+                <source>BINARY.STARTS_WITH</source>
+                <target><![CDATA[Starts With]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.NOT_STARTS_WITH">
+                <source>BINARY.NOT_STARTS_WITH</source>
+                <target><![CDATA[Not Starts With]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.ENDS_WITH">
+                <source>BINARY.ENDS_WITH</source>
+                <target><![CDATA[Ends With]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.NOT_ENDS_WITH">
+                <source>BINARY.NOT_ENDS_WITH</source>
+                <target><![CDATA[Not Ends With]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.IN">
+                <source>BINARY.IN</source>
+                <target><![CDATA[In]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.NOT_IN">
+                <source>BINARY.NOT_IN</source>
+                <target><![CDATA[Not In]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.BETWEEN">
+                <source>BINARY.BETWEEN</source>
+                <target><![CDATA[Between]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.NOT_BETWEEN">
+                <source>BINARY.NOT_BETWEEN</source>
+                <target><![CDATA[Not Between]]></target>
+            </trans-unit>
+            <trans-unit id="FIXED">
+                <source>FIXED</source>
+                <target><![CDATA[Fixed Value]]></target>
+            </trans-unit>
+            <trans-unit id="DYNAMIC">
+                <source>DYNAMIC</source>
+                <target><![CDATA[Dynamic Value]]></target>
+            </trans-unit>
+            <trans-unit id="FIELD">
+                <source>FIELD</source>
+                <target><![CDATA[Field Value]]></target>
+            </trans-unit>
+            <trans-unit id="DATE">
+                <source>DATE</source>
+                <target><![CDATA[Date]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.CURRENT_DAY">
+                <source>DATE.CURRENT_DAY</source>
+                <target><![CDATA[Today]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.CURRENT_WEEK_FIRST_DATE">
+                <source>DATE.CURRENT_WEEK_FIRST_DATE</source>
+                <target><![CDATA[First Date of Current Week]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.CURRENT_MONTH_FIRST_DATE">
+                <source>DATE.CURRENT_MONTH_FIRST_DATE</source>
+                <target><![CDATA[First Date of Current Month]]></target>
+            </trans-unit>
+            <trans-unit id="DATE.CURRENT_YEAR_FIRST_DATE">
+                <source>DATE.CURRENT_YEAR_FIRST_DATE</source>
+                <target><![CDATA[First Date of Current Year]]></target>
+            </trans-unit>
+            <trans-unit id="ASC">
+                <source>ASC</source>
+                <target><![CDATA[Asc]]></target>
+            </trans-unit>
+            <trans-unit id="DESC">
+                <source>DESC</source>
+                <target><![CDATA[Desc]]></target>
+            </trans-unit>
+            <trans-unit id="link_action_execute">
+                <source>link_action_execute</source>
+                <target><![CDATA[Execute]]></target>
+            </trans-unit>
+
+            <trans-unit id="">
+                <source></source>
+                <target><![CDATA[]]></target>
+            </trans-unit>
+
+
         </body>
     </file>
 </xliff>

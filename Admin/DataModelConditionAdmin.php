@@ -113,9 +113,11 @@ class DataModelConditionAdmin extends BaseResourceAdmin
                 'required' => false,
                 'attr' => array(
                     //'class' => 'col-md-12',
+                    'placeholder' => '------------ Select a function ------------',
                     'data-ctype' => 'datamodel-condition-function'
                 ),
-                "multiple" => false, "expanded" => false, 'required' => false
+                "multiple" => false, "expanded" => false, 'required' => false,
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('operator', 'choice', array(
                 'choices' => $util_manager->getConditionalOperatorsChoices(),
@@ -124,6 +126,7 @@ class DataModelConditionAdmin extends BaseResourceAdmin
                     //'class' => 'col-md-12',
                     'data-ctype' => 'datamodel-condition-operator'
                 ),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('compareToType', 'choice', array(
                 'choices' => $util_manager->getConditionalCompareToTypeChoices(),
@@ -131,6 +134,7 @@ class DataModelConditionAdmin extends BaseResourceAdmin
                     //'class' => 'col-md-12',
                     'data-ctype' => 'datamodel-condition-comparetotype'),
                 'required' => false, 'expanded' => false, 'multiple' => false,
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('compareToFixedValue', null, array(
                 'required' => false,
@@ -144,9 +148,11 @@ class DataModelConditionAdmin extends BaseResourceAdmin
                 'choices' => $util_manager->getFieldFunctionsChoices(),
                 'attr' => array(
                     // 'class' => 'col-md-12',
+                    'placeholder' => '------------ Select a function ------------',
                     'data-ctype' => 'datamodel-condition-comparetofunction'
                 ),
-                "multiple" => false, "expanded" => false, 'required' => false
+                "multiple" => false, "expanded" => false, 'required' => false,
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('compareToDynamicValue', 'choice', array(
                 'choices' => $util_manager->getComparablesDynamicValuesChoices(),
@@ -155,8 +161,10 @@ class DataModelConditionAdmin extends BaseResourceAdmin
                 'disabled' => false, //($object != null && ($object->getValueType() != 'dynamic' || $object->getOperator() == null || split('_', $object->getOperator())[1] == 'UNARY')),
                 'attr' => array(
                     //'class' => 'col-md-12',
+                    'placeholder' => '------------ Select a value ------------',
                     'data-ctype' => 'datamodel-condition-comparetodynamic'
                 ),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('compareToField', 'entity', array(
                     'class' => $metadata_field_manager->getResourceClassShortcut(),

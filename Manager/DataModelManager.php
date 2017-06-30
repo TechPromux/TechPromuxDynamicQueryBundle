@@ -660,7 +660,8 @@ class DataModelManager extends BaseResourceManager
             $queryBuilder->addOrderBy($detail_sql_alias, $order);
         }
         foreach ($orders as $or) {
-           // $queryBuilder->add('orderBy', $or);
+            $parts = explode(' ', $or);
+            $queryBuilder->addOrderBy($parts[0], $parts[1]);
         }
 
         return $queryBuilder;

@@ -43,7 +43,7 @@
         {% endfor %}
     </tr>
     </thead>
-    {% for row in data.result %}
+    {% for row in data.data %}
         <tr>
             <td>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage + loop.index }}</td>
             {% for detail in data.details %}

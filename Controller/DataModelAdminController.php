@@ -74,7 +74,6 @@ class DataModelAdminController extends CRUDController
         dump($queryBuilder->getSQL());
 
 
-
         // get results
 
         $paginator = $manager->paginatorFromQueryBuilder($queryBuilder, $request);
@@ -88,13 +87,13 @@ class DataModelAdminController extends CRUDController
         $data = array(
             'details' => $details_descriptions,
             'paginator' => $paginator,
-            'result' => $currentPageResults,
+            'data' => $currentPageResults,
         );
 
         $filter = array(
             'details' => $details_descriptions,
             'form' => $filter_form->createView(),
-            'data' =>$filter_data
+            'data' => !is_null($filter_data) ? $filter_data : array('_sort_by' => '', '_sort_order' => '')
         );
 
         $helpers = array(
@@ -106,7 +105,6 @@ class DataModelAdminController extends CRUDController
         dump($data);
         dump($filter);
         dump($helpers);
-
 
 
         return $this->render("TechPromuxDynamicQueryBundle:Admin:DataModel/execute.html.twig", array(

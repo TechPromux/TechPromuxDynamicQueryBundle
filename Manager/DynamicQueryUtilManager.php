@@ -275,7 +275,7 @@ class DynamicQueryUtilManager extends BaseManager
 
             if ($f->getId() != '') {
 
-                $group_name = $f->getGroupName() . ' FUNCTIONS';
+                $group_name = $f->getGroupName() . '_FUNCTIONS';
 
                 if (!isset($functions_choices[$group_name])) {
                     $functions_choices[$group_name] = array();
@@ -310,9 +310,10 @@ class DynamicQueryUtilManager extends BaseManager
     {
         $formats = array(
             '' => new BlankValueFormatType(),
-            'NUMBER.TO_INTEGER_###0' => new ToInteger_X_XX0ValueFormatType(),
+            'NUMBER.TO_INTEGER_###0' => new ToInteger_XXX0ValueFormatType(),
             'NUMBER.TO_INTEGER_#_##0' => new ToInteger_X_XX0ValueFormatType(),
             'NUMBER.TO_INTEGER_#,##0' => new ToInteger_XcXX0ValueFormatType(),
+
             'NUMBER.TO_FLOAT_###0.##' => new ToFloat_XXX0pXXValueFormatType(),
             'NUMBER.TO_FLOAT_#_##0.##' => new ToFloat_X_XX0pXXValueFormatType(),
             'NUMBER.TO_FLOAT_#,##0.##' => new ToFloat_XcXX0pXXValueFormatType(),
@@ -339,7 +340,7 @@ class DynamicQueryUtilManager extends BaseManager
 
             if ($f->getId() != '') {
 
-                $group_name = $f->getGroupName() . ' FORMATS';
+                $group_name = $f->getGroupName() . '_FORMATS';
 
                 if (!isset($formats_choices[$group_name])) {
                     $formats_choices[$group_name] = array();
@@ -501,7 +502,7 @@ class DynamicQueryUtilManager extends BaseManager
 
             if ($type == null || $op->getIsAllowedForValueType($type) || $op->getIsAllowedForValueType($type_category)) {
 
-                $group_name = $op->getGroupName() . ' OPERATORS';
+                $group_name = $op->getGroupName() . '_OPERATORS';
 
                 if (!isset($operator_choices[$group_name])) {
                     $operator_choices[$group_name] = array();
@@ -540,17 +541,17 @@ class DynamicQueryUtilManager extends BaseManager
             'groups' => array(
                 'DATE' => array(
                     'id' => 'DATE',
-                    'title' => $this->trans('DATE')
+                    'title' => ('DATE')
                 ),
                 'USER' => array(
                     'id' => 'USER',
-                    'title' => $this->trans('USER')
+                    'title' => ('USER')
                 )
             ),
             'values' => array(
                 'DATE.CURRENT_DAY' => array(
                     'id' => 'DATE.CURRENT_DAY',
-                    'title' => $this->trans('DATE (FROM CURRENT DAY)'),
+                    'title' => ('DATE (FROM CURRENT DAY)'),
                     'type' => 'DATE',
                     'return' => 'date',
                     'function' => function () {
@@ -560,7 +561,7 @@ class DynamicQueryUtilManager extends BaseManager
                 ),
                 'DATE.CURRENT_WEEK_FIRST_DATE' => array(
                     'id' => 'DATE.CURRENT_WEEK_FIRST_DATE',
-                    'title' => $this->trans('FIRST DATE (FROM CURRENT WEEK)'),
+                    'title' => ('FIRST DATE (FROM CURRENT WEEK)'),
                     'type' => 'DATE',
                     'return' => 'date',
                     'function' => function () {
@@ -570,7 +571,7 @@ class DynamicQueryUtilManager extends BaseManager
                 ),
                 'DATE.CURRENT_MONTH_FIRST_DATE' => array(
                     'id' => 'DATE.CURRENT_MONTH_FIRST_DATE',
-                    'title' => $this->trans('FIRST DATE (FROM CURRENT MONTH)'),
+                    'title' => ('FIRST DATE (FROM CURRENT MONTH)'),
                     'type' => 'DATE',
                     'return' => 'date',
                     'function' => function () {
@@ -580,7 +581,7 @@ class DynamicQueryUtilManager extends BaseManager
                 ),
                 'DATE.CURRENT_YEAR_FIRST_DATE' => array(
                     'id' => 'DATE.CURRENT_YEAR_FIRST_DATE',
-                    'title' => $this->trans('FIRST DATE (FROM CURRENT YEAR)'),
+                    'title' => ('FIRST DATE (FROM CURRENT YEAR)'),
                     'type' => 'DATE',
                     'return' => 'date',
                     'function' => function () {

@@ -96,6 +96,7 @@ class DataModelOrderAdmin extends BaseResourceAdmin
                 'choices' => $datamodel_manager->getDynamicQueryUtilManager()->getFieldFunctionsChoices(),
                 'required' => false,
                 'attr' => array('data-ctype' => 'datamodel-order-function'),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('type', 'choice', array(
                 'choices' => $datamodel_manager->getDynamicQueryUtilManager()->getOrderTypesChoices(),
@@ -103,9 +104,8 @@ class DataModelOrderAdmin extends BaseResourceAdmin
                 'expanded' => false,
                 'multiple' => false,
                 'attr' => array('data-ctype' => 'datamodel-order-type'),
-            ))
-
-        ;
+                'translation_domain' => $this->getResourceManager()->getBundleName()
+            ));
     }
 
     public function validate(\Sonata\CoreBundle\Validator\ErrorElement $errorElement, $object)
@@ -116,12 +116,6 @@ class DataModelOrderAdmin extends BaseResourceAdmin
 
         $errorElement
             ->with('field')
-            ->assertNotBlank()
-            ->end()
-            ->with('title')
-            ->assertNotBlank()
-            ->end()
-            ->with('abbreviation')
             ->assertNotBlank()
             ->end();
     }

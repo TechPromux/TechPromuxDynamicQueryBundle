@@ -97,6 +97,7 @@ class DataModelGroupAdmin extends BaseResourceAdmin
                 'choices' => $datamodel_manager->getDynamicQueryUtilManager()->getFieldFunctionsChoices(),
                 'required' => false,
                 'attr' => array('data-ctype' => 'datamodel-group-function'),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
             ));
     }
 
@@ -108,12 +109,6 @@ class DataModelGroupAdmin extends BaseResourceAdmin
 
         $errorElement
             ->with('field')
-            ->assertNotBlank()
-            ->end()
-            ->with('title')
-            ->assertNotBlank()
-            ->end()
-            ->with('abbreviation')
             ->assertNotBlank()
             ->end();
     }
