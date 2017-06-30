@@ -20,7 +20,7 @@ class JoinTypeCompilerPass implements CompilerPassInterface
         );
 
         $taggedServicesIds = $container->findTaggedServiceIds(
-            'techpromux_dynamic_query.type.join'
+            'techpromux_dynamic_query.type.table_relation'
         );
 
         foreach ($taggedServicesIds as $id => $tags) {

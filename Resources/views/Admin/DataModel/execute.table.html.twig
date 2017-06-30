@@ -1,48 +1,66 @@
-<table class="table table-bordered table-hover table-striped" id="tpx-dq-query-table-{{object.id}}">
+<table id="datamodel-table-{{ object.id }}" class="table table-bordered table-hover table-striped">
     <thead>
-        <tr>
-            <th>#</th>
-            <!-- -->{% for d in public_fields_descriptions %}
-            <!-- --><th title="{{ d.title }}" style="text-align: center;">
-
-    <div class="btn-group">
-        <span aria-expanded="false" type="button" class="dropdown-toggle" data-toggle="dropdown">
-            <a href="#sort-by-{{ d.abbreviation }}" class="table-column-header-{{object.id}}">
-                {{ d.title }}
-                <i class="fa fa-sort-{{d.id}}-asc fa-sort-amount-asc hide"></i>
-                <i class="fa fa-sort-{{d.id}}-desc fa-sort-amount-desc hide"></i>
-            </a>
-        </span>
-        <ul class="dropdown-menu dropdown-menu-{% if (loop.index0>=loop.revindex0)%}right{%else%}left{%endif%}" role="menu">
-            <li>
-                <a class="table-column-arrow-order-by-{{object.id}} table-column-arrow-order-by-{{d.id}}-asc" data-sort-by="{{d.id}}" data-sort-order="ASC" href="#sort-asc-by-{{ d.abbreviation }}" >
-                    <i class="fa fa-sort-amount-asc"></i> {{'ASC Order' | trans({},'TechPromuxDynamicQueryBundle')}}
-                </a>
-            </li>
-            <li>
-                <a class="table-column-arrow-order-by-{{object.id}} table-column-arrow-order-by-{{d.id}}-desc" data-sort-by="{{d.id}}" data-sort-order="DESC" href="#sort-desc-by-{{ d.abbreviation }}">
-                    <i class="fa fa-sort-amount-desc"></i> {{'DESC Order' | trans({},'TechPromuxDynamicQueryBundle')}}
-                </a>
-            </li>
-        </ul>
-    </div>   
-    <!-- --></th>
-
-<!-- -->{% endfor %}
-</tr>
-</thead>
-{% for row in result %}
     <tr>
-        <td>{{ (paginator.currentPage-1)*paginator.maxPerPage + loop.index }}</td>
-        {% for d in public_fields_descriptions %}
-            {% set format = d['format'] %}
-            {% set prefix = d['prefix'] %}
-            {% set suffix = d['suffix'] %}
-            {% set value = row[d['sql_alias']] %}
-            <td>{{ formatter_helper.formatValue(value,format,prefix,suffix) }}</td>
+        <th>#</th>
+        {% for detail in data.details %}
+            {% if (detail.classification == 'number') %}
+                {% set sort_icon_class = 'numeric' %}
+            {% elseif (detail.classification == 'string') %}
+                {% set sort_icon_class = 'alpha' %}
+            {% else %}
+                {% set sort_icon_class = 'amount' %}
+            {% endif %}
+            <th title="{{ detail.title }}" style="text-align: center;">
+                <div class="btn-group" style="width: 100%">
+                    <label aria-expanded="false" type="button" class="dropdown-toggle" data-toggle="dropdown"
+                           style="width: 100%">
+                        <span>{{ detail.title }}</span>
+                        <a href="#sort-by-{{ detail.id }}" class="datamodel-data-header-sort-icon-{{ object.id }} pull-right">
+
+                            <i class="fa fa-sort-{{ object.id }}-asc fa-sort-{{ detail.id }}-asc fa-sort-{{ sort_icon_class }}-asc"></i>
+                            <i class="fa fa-sort-{{ object.id }}-desc fa-sort-{{ detail.id }}-desc fa-sort-{{ sort_icon_class }}-desc"></i>
+                        </a>
+                    </label>
+                    <ul role="menu"
+                        class="dropdown-menu dropdown-menu-{% if (loop.index0>=loop.revindex0) %}right{% else %}left{% endif %}">
+                        <li>
+                            <a class="datamodel-data-order-by-{{ object.id }} datamodel-data-order-by-{{ detail.id }}-asc"
+                               data-sort-by="{{ detail.id }}" data-sort-order="ASC"
+                               href="#sort-asc-by-{{ detail.id }}">
+                                <i class="fa fa-sort-{{ sort_icon_class }}-asc"></i> {{ 'ASC Order' | trans({},'TechPromuxDynamicQueryBundle') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="datamodel-data-order-by-{{ object.id }} datamodel-data-order-by-{{ detail.id }}-desc"
+                               data-sort-by="{{ detail.id }}" data-sort-order="DESC"
+                               href="#sort-desc-by-{{ detail.id }}">
+                                <i class="fa fa-sort-{{ sort_icon_class }}-desc"></i> {{ 'DESC Order' | trans({},'TechPromuxDynamicQueryBundle') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </th>
         {% endfor %}
     </tr>
-{% endfor %}
+    </thead>
+    {% for row in data.result %}
+        <tr>
+            <td>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage + loop.index }}</td>
+            {% for detail in data.details %}
+                {% set format = detail.format %}
+                {% set prefix = detail.prefix %}
+                {% set suffix = detail.suffix %}
+                {% set value = row[detail.alias] %}
+                {% if (detail.classification == 'number') %}
+                    {% set text_align = 'right' %}
+                {% else %}
+                    {% set text_align = 'center' %}
+                {% endif %}
+
+                <td style="text-align: {{ text_align }};">{{ prefix }}{{ helpers.formatter.formatValue(value,format) }}{{ suffix }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
 </table>  
 
 

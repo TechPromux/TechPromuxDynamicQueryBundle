@@ -23,6 +23,7 @@ use TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata;
 use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField;
 use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation;
 use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
 
 class DataModelManager extends BaseResourceManager
 {
@@ -211,7 +212,7 @@ class DataModelManager extends BaseResourceManager
 
         $i = 100000;
         foreach ($metadata->getFields() as $field) /* @var $field MetadataField */ {
-            if ($field->getSelected()) {
+            if ($field->getEnabled()) {
                 $new_detail = $this->getDatamodelDetailManager()->createNewInstance();
                 /* @var $new_detail DataModelDetail */
                 $new_detail->setDatamodel($object);
@@ -225,8 +226,7 @@ class DataModelManager extends BaseResourceManager
                 $new_detail->setPresentationPrefix('');
                 $new_detail->setPresentationSuffix('');
 
-                $new_detail->setIsGroupedBy(false);
-                $new_detail->setIsPublic(true);
+                $new_detail->setEnabled(true);
                 $new_detail->setPosition($i++);
 
                 $this->getDatamodelDetailManager()->persist($new_detail);
@@ -295,115 +295,144 @@ class DataModelManager extends BaseResourceManager
      * @param DataModel $object
      * @return DataModel
      */
-    public function copyDataModel($object)
+    public function createCpyForDataModel($object)
     {
+        $datamodel = $this->find($object->getId());
+        /* @var $dataModel DataModel */
 
-        throw new \Exception('2'); // revisar $datamodel por datamodel
+        $duplicatedDataModel = $this->createNewInstance();
+        /* @var $duplicatedDataModel DataModel */
 
-        $datamodel = $this->findById($object->getId());
+        $duplicatedDataModel->setMetadata($datamodel->getMetadata());
 
-        $duplicatedQuery = $this->createNewEntity();
+        $duplicatedDataModel->setName($datamodel->getName() . ' (' . $this->trans('Duplicated') . ')');
+        $duplicatedDataModel->setTitle($datamodel->getTitle() . ' (' . $this->trans('Duplicated') . ')');
 
-        $duplicatedQuery->setMetadata($datamodel->getMetadata());
-        $duplicatedQuery->setTitle($datamodel->getTitle() . ' (' . $this->trans('Duplicated') . ')');
-        $duplicatedQuery->setDescription($datamodel->getDescription());
-        $duplicatedQuery->setEnabled(false);
-        $duplicatedQuery->setCode($datamodel->getCode() . '__DUPLICATED__' . (new \DateTime())->format('YmdHis'));
+        $duplicatedDataModel->setDescription($datamodel->getDescription());
+        $duplicatedDataModel->setEnabled(false);
 
         //-------------------------------------------------
 
         $details = $this->getDatamodelDetailManager()->findBy(array('datamodel' => $datamodel->getId()));
 
         foreach ($details as $dtl) {
-            $duplicatedDtl = $this->createNewDataModelDetailEntity();
+            /* @var $dtl DataModelDetail */
+            $duplicatedDtl = $this->getDatamodelDetailManager()->createNewInstance();
+            /* @var $duplicatedDtl DataModelDetail */
 
-            $duplicatedDtl->setQuery($duplicatedQuery);
-            $duplicatedDtl->setField($dtl->getField());
+            $duplicatedDtl->setDatamodel($duplicatedDataModel);
 
+            $duplicatedDtl->setName($dtl->getName());
             $duplicatedDtl->setTitle($dtl->getTitle());
-            $duplicatedDtl->setAbreviature($dtl->getAbreviature());
+
+            $duplicatedDtl->setField($dtl->getField());
             $duplicatedDtl->setFunction($dtl->getFunction());
-            $duplicatedDtl->setFormat($dtl->getFormat());
-            $duplicatedDtl->setPrefix($dtl->getPrefix());
-            $duplicatedDtl->setSuffix($dtl->getSuffix());
-            $duplicatedDtl->setIsPublic($dtl->getIsPublic());
-            $duplicatedDtl->setIsGroup($dtl->getIsGroup());
+
+            $duplicatedDtl->setAbbreviation($dtl->getAbbreviation());
+
+            $duplicatedDtl->setPresentationFormat($dtl->getPresentationFormat());
+            $duplicatedDtl->setPresentationPrefix($dtl->getPresentationPrefix());
+            $duplicatedDtl->setPresentationSuffix($dtl->getPresentationSuffix());
+
+            $duplicatedDtl->setEnabled($dtl->getEnabled());
             $duplicatedDtl->setPosition($dtl->getPosition());
 
-            parent::prePersist($duplicatedDtl);
-            $duplicatedQuery->addDetail($duplicatedDtl);
-            $this->getDoctrineEntityManager()->persist($duplicatedDtl);
+            $this->getDatamodelDetailManager()->prePersist($duplicatedDtl);
+
+            $duplicatedDataModel->addDetail($duplicatedDtl);
+
+            //$this->getDoctrineEntityManager()->persist($duplicatedDtl);
         }
 
         //-------------------------------------------------
 
-        $groups = $this->findDataModelDetailByQueryId($datamodel->getId());
-
-        foreach ($details as $dtl) {
-            $duplicatedDtl = $this->createNewDataModelDetailEntity();
-
-            $duplicatedDtl->setQuery($duplicatedQuery);
-            $duplicatedDtl->setField($dtl->getField());
-
-            $duplicatedDtl->setTitle($dtl->getTitle());
-            $duplicatedDtl->setAbreviature($dtl->getAbreviature());
-            $duplicatedDtl->setFunction($dtl->getFunction());
-            $duplicatedDtl->setFormat($dtl->getFormat());
-            $duplicatedDtl->setPrefix($dtl->getPrefix());
-            $duplicatedDtl->setSuffix($dtl->getSuffix());
-            $duplicatedDtl->setIsPublic($dtl->getIsPublic());
-            $duplicatedDtl->setIsGroup($dtl->getIsGroup());
-            $duplicatedDtl->setPosition($dtl->getPosition());
-
-            parent::prePersist($duplicatedDtl);
-            $duplicatedQuery->addDetail($duplicatedDtl);
-            $this->getDoctrineEntityManager()->persist($duplicatedDtl);
-        }
-
-        //-------------------------------------------------
-
-        $conditions = $this->findDataModelDetailConditionByQueryId($datamodel->getId());
+        $conditions = $this->getDatamodelConditionManager()->findBy(array('datamodel' => $datamodel->getId()));
 
         foreach ($conditions as $cdtn) {
-            $duplicatedCdtn = $this->createNewDataModelDetailConditionEntity();
+            /* @var $cdtn DataModelCondition */
+            $duplicatedCdtn = $this->getDatamodelConditionManager()->createNewInstance();
+            /* @var $duplicatedCdtn DataModelCondition */
 
-            $duplicatedCdtn->setQuery($duplicatedQuery);
-            $duplicatedCdtn->setDetail($details_to_duplicate[$cdtn->getDetail()->getId()]); ///// ?????
+            $duplicatedCdtn->setDatamodel($duplicatedDataModel);
+
+            $duplicatedCdtn->setName($cdtn->getName());
+            $duplicatedCdtn->setTitle($cdtn->getTitle());
+
+            $duplicatedCdtn->setField($cdtn->getField());
+            $duplicatedCdtn->setFunction($cdtn->getFunction());
 
             $duplicatedCdtn->setOperator($cdtn->getOperator());
-            $duplicatedCdtn->setValueType($cdtn->getValueType());
-            $duplicatedCdtn->setFixedValueToCompare($cdtn->getFixedValueToCompare());
-            $duplicatedCdtn->setDynamicValueToCompare($cdtn->getDynamicValueToCompare());
+
+            $duplicatedCdtn->setCompareToType($cdtn->getCompareToType());
+            $duplicatedCdtn->setCompareToFixedValue($cdtn->getCompareToFixedValue());
+            $duplicatedCdtn->setCompareToDynamicValue($cdtn->getCompareToDynamicValue());
+            $duplicatedCdtn->setCompareToField($cdtn->getCompareToField());
+            $duplicatedCdtn->setCompareToFunction($cdtn->getCompareToFunction());
+
+            $duplicatedCdtn->setEnabled($cdtn->getEnabled());
             $duplicatedCdtn->setPosition($cdtn->getPosition());
 
-            parent::prePersist($duplicatedCdtn);
-            $duplicatedQuery->addCondition($duplicatedCdtn);
-            $this->getDoctrineEntityManager()->persist($duplicatedCdtn);
+            $this->getDatamodelConditionManager()->prePersist($duplicatedCdtn);
+
+            $duplicatedDataModel->addCondition($duplicatedCdtn);
         }
 
         //-------------------------------------------------
 
-        $sorts = $this->findDataModelDetailSortByQueryId($datamodel->getId());
+        $groups = $this->getDatamodelGroupManager()->findBy(array('datamodel' => $datamodel->getId()));
 
-        foreach ($sorts as $srt) {
-            $duplicatedSrt = $this->createNewDataModelDetailSortEntity();
+        foreach ($groups as $grp) {
+            /* @var $grp DataModelGroup */
+            $duplicatedGrp = $this->getDatamodelGroupManager()->createNewInstance();
+            /* @var $duplicatedGrp DataModelGroup */
 
-            $duplicatedSrt->setQuery($duplicatedQuery);
-            $duplicatedSrt->setDetail($details_to_duplicate[$srt->getDetail()->getId()]); ///// ?????
+            $duplicatedGrp->setDatamodel($duplicatedDataModel);
 
-            $duplicatedSrt->setType($srt->getType());
-            $duplicatedSrt->setPosition($srt->getPosition());
+            $duplicatedGrp->setName($dtl->getName());
+            $duplicatedGrp->setTitle($dtl->getTitle());
 
-            parent::prePersist($duplicatedSrt);
-            $duplicatedQuery->addSort($duplicatedSrt);
-            $this->getDoctrineEntityManager()->persist($duplicatedSrt);
+            $duplicatedGrp->setField($dtl->getField());
+            $duplicatedGrp->setFunction($dtl->getFunction());
+
+            $duplicatedGrp->setEnabled($dtl->getEnabled());
+            $duplicatedGrp->setPosition($dtl->getPosition());
+
+            $this->getDatamodelGroupManager()->prePersist($duplicatedGrp);
+
+            $duplicatedDataModel->addGroup($duplicatedGrp);
         }
 
-        parent::prePersist($duplicatedQuery);
-        $this->getDoctrineEntityManager()->persist($duplicatedQuery);
-        $this->getDoctrineEntityManager()->flush($duplicatedQuery);
+        //-------------------------------------------------
 
-        return $duplicatedQuery;
+        $orders = $this->getDatamodelOrderManager()->findBy(array('datamodel' => $datamodel->getId()));
+
+        foreach ($orders as $ord) {
+            /* @var $ord DataModelOrder */
+            $duplicatedOrd = $this->getDatamodelOrderManager()->createNewInstance();
+            /* @var $duplicatedOrd DataModelOrder */
+
+            $duplicatedOrd->setDatamodel($duplicatedDataModel);
+
+            $duplicatedOrd->setName($ord->getName());
+            $duplicatedOrd->setTitle($ord->getTitle());
+
+            $duplicatedOrd->setField($ord->getField());
+            $duplicatedOrd->setFunction($ord->getFunction());
+            $duplicatedOrd->setType($ord->getType());
+
+            $duplicatedOrd->setEnabled($ord->getEnabled());
+            $duplicatedOrd->setPosition($ord->getPosition());
+
+            $this->getDatamodelOrderManager()->prePersist($duplicatedOrd);
+
+            $duplicatedDataModel->addOrder($duplicatedOrd);
+        }
+
+        //-------------------------------------------------
+
+        $duplicatedDataModel = $this->persist($duplicatedDataModel);
+
+        return $duplicatedDataModel;
     }
 
     //----------------------------------------------------------------------------------------------------------
@@ -424,7 +453,7 @@ class DataModelManager extends BaseResourceManager
 
         $added_details_sql_names_aliasses = array();
 
-        // DETAILS: SELECT PART
+        // ADD SELECT SQL PART
 
         foreach ($datamodel->getDetails() as $detail) {
             /* @var $detail DataModelDetail */
@@ -438,6 +467,8 @@ class DataModelManager extends BaseResourceManager
 
         }
 
+        // ADD GROUP BY SQL PART
+
         foreach ($datamodel->getGroups() as $group) {
             /* @var $group DataModelGroup */
             if ($group->getEnabled()) {
@@ -447,6 +478,8 @@ class DataModelManager extends BaseResourceManager
                 $queryBuilder->addGroupBy($group_sql_name);
             }
         }
+
+        // ADD ORDER BY SQL PART
 
         foreach ($datamodel->getOrders() as $order) {
             /* @var $order DataModelOrder */
@@ -459,9 +492,10 @@ class DataModelManager extends BaseResourceManager
             }
         }
 
-        // CONDITIONS: WHERE AND HAVING PARTS
+        // ADD WHERE AND HAVING SQL PARTS
 
-        $operators_options = $this->getDynamicQueryUtilManager()->getRegisteredConditionalOperators();
+        $operators = $this->getDynamicQueryUtilManager()->getRegisteredConditionalOperators();
+
         $dynamic_values_options = $this->getDynamicQueryUtilManager()->getRegisteredComparablesDynamicValues();
 
         foreach ($datamodel->getConditions() as $condition) {
@@ -488,24 +522,22 @@ class DataModelManager extends BaseResourceManager
 
                 $operator_name = $condition->getOperator();
 
-                $operator_selected_options = $operators_options['operators'][$operator_name];
+                $operator_selected = $operators[$operator_name];
+                /* @var $operator_selected BaseConditionalOperatorType */
 
                 $right_operand = null;
 
-                if ($operator_selected_options['type'] == 'BINARY') {
+                if (!$operator_selected->getIsUnary()) {
 
                     switch ($condition->getCompareToType()) {
                         case 'FIXED':
                             $value = $condition->getCompareToFixedValue();
                             $param_name = null;
 
-                            // if is multiple value???? y si $value es string y no array,
-                            // de igual manera si no es multiple y el value es un array???
-
-                            if ($operator_name == 'BINARY.IN') {
+                            if ($operator_selected->getIsForRightOperandAsArray()) {
                                 $param_name = array();
                                 foreach (explode(',', $value) as $v) {
-                                    $param_name[] = $queryBuilder->createNamedParameter($v);
+                                    $param_name[] = $queryBuilder->createNamedParameter(trim($v));
                                 }
                             } else {
                                 $param_name = $queryBuilder->createNamedParameter($value);
@@ -521,15 +553,11 @@ class DataModelManager extends BaseResourceManager
 
                             $dynamic_value = call_user_func($dynamic_value_selected_options['function']);
 
-                            // segun el operador, ver si es multiple enotnces el param_name hay que convertirlo a array
-
                             $param_name = $queryBuilder->createNamedParameter($dynamic_value);
 
                             $right_function_name = $condition->getCompareToFunction();
 
                             $right_function = $this->getDynamicQueryUtilManager()->getFieldFunctionById($right_function_name);
-
-                            // si aqui viene un param_name en forma de array y la funcion no soporta le array?
 
                             $right_operand = $right_function->getAppliedFunctionToField($param_name);
 
@@ -545,8 +573,6 @@ class DataModelManager extends BaseResourceManager
                             $right_function_name = $condition->getCompareToFunction();
 
                             $right_function = $this->getDynamicQueryUtilManager()->getFieldFunctionById($right_function_name);
-
-                            // aqui nunca vendra un array de param_name, pues es el nombre de un field
 
                             $right_operand = $right_function->getAppliedFunctionToField($right_field_name);
 
@@ -564,7 +590,7 @@ class DataModelManager extends BaseResourceManager
                     $right_operand = isset($added_details_sql_names_aliasses[$right_operand]) ? $added_details_sql_names_aliasses[$right_operand] : $right_operand;
                 }
 
-                $str_condition = call_user_func($operator_selected_options['function'], $left_operand, $right_operand);
+                $str_condition = $operator_selected->getConditionalStatement($left_operand, $right_operand);
 
                 if ($in_select_clause)
                     $queryBuilder->andWhere($str_condition);
@@ -578,6 +604,8 @@ class DataModelManager extends BaseResourceManager
         return $queryBuilder;
     }
 
+    //---------------------------------------------------------------------------------------------------------------
+
     /**
      * @param QueryBuilder $queryBuilder
      * @param array $filter_by
@@ -588,40 +616,57 @@ class DataModelManager extends BaseResourceManager
     {
         // ADD FILTER OPTIONS
 
-        // en el filter by, no es necesario el id del detail, solo el alias SQL, el operator id y el value, con eso
-        // se crea la sentencia y se inserta en el having??? solo en el having????
-
-        $operators_options = $this->getDynamicQueryUtilManager()->getRegisteredConditionalOperators();
-
         foreach ($filter_by as $fb) {
-            $datamodel_detail = $this->getDatamodelDetailManager()->find($fb['detail_id']);
-            $detail_sql_alias = $datamodel_detail->getSQLAlias();
 
-            $operator_selected_options = $operators_options['operators'][$fb['operator']];
+            $datamodel_detail = $this->getDatamodelDetailManager()->find($fb['id']);
+            /* @var $datamodel_detail DataModelDetail */
 
+            $detail_function = $this->getDynamicQueryUtilManager()->getFieldFunctionById($datamodel_detail->getFunction());
 
-            $left_operand = $detail_sql_alias;
-            $right_operand = $queryBuilder->createNamedParameter(isset($fb['value']) ? $fb['value'] : null);
+            $left_operand = '';
 
-            $str_condition = call_user_func($operator_selected_options['function'], $left_operand, $right_operand);
+            if (!$detail_function->getHasAggregation()) {
+                $left_operand = $datamodel_detail->getSqlName();
+            } else {
+                $left_operand = $datamodel_detail->getSQLAlias();
+            }
 
-            $queryBuilder->andHaving($str_condition);
+            $operator_selected = $this->getDynamicQueryUtilManager()->getConditionalOperatorById($fb['operator']);
+
+            $right_operand = null;
+
+            if (!$operator_selected->getIsUnary()) {
+                $right_operand = $queryBuilder->createNamedParameter(isset($fb['value']) ? $fb['value'] : null);
+            }
+
+            $str_condition = $operator_selected->getConditionalStatement($left_operand, $right_operand);
+
+            if (!$detail_function->getHasAggregation()) {
+                $queryBuilder->andWhere($str_condition);
+            } else {
+                $queryBuilder->andHaving($str_condition);
+            }
         }
 
         // ADD ORDER OPTIONS
 
-        // las orders, solo se necesita el alias sql y el order (pedir las orders que ya tiene, resetearlas, pasar primero estas
-        // y luego setear las que ya tenia)
+        $orders = $queryBuilder->getQueryPart('orderBy');
+        $queryBuilder->resetQueryPart('orderBy');
 
         foreach ($order_by as $ob) {
-            $datamodel_detail = $this->getDatamodelDetailManager()->find($ob['detail_id']);
+            $datamodel_detail = $this->getDatamodelDetailManager()->find($ob['id']);
             $detail_sql_alias = $datamodel_detail->getSQLAlias();
-            $order = $ob['order_asc_desc'];
+            $order = $ob['type'];
             $queryBuilder->addOrderBy($detail_sql_alias, $order);
+        }
+        foreach ($orders as $or) {
+           // $queryBuilder->add('orderBy', $or);
         }
 
         return $queryBuilder;
     }
+
+    //----------------------------------------------------------------------------
 
     public function getSQLFromDataModel($datamodel_id)
     {
@@ -643,13 +688,44 @@ class DataModelManager extends BaseResourceManager
 
     //---------------------------------------------------------------------------------------------
 
+    public function getEnabledDetailsDescriptionsFromDataModel($datamodel_id)
+    {
+
+        $details = $this->getDatamodelDetailManager()->findBy(array('datamodel' => $datamodel_id, 'enabled' => true), array('position' => 'ASC'));
+
+        $descriptions = array();
+
+        foreach ($details as $detail) {
+            /* @var $detail DataModelDetail */
+            //  if ($detail->getEnabled()) {
+
+            $descriptions[$detail->getId()] = array(
+                'id' => $detail->getId(),
+                'name' => $detail->getName(),
+                'title' => $detail->getTitle(),
+                'abbreviation' => $detail->getAbbreviation(),
+                'alias' => $detail->getSQLAlias(),
+                'format' => $detail->getPresentationFormat(),
+                'prefix' => $detail->getPresentationPrefix(),
+                'suffix' => $detail->getPresentationSuffix(),
+                'type' => $type = $this->getDynamicQueryUtilManager()->getFieldFunctionSQLType($detail->getField(), $detail->getFunction()),
+                'classification' => $this->getDynamicQueryUtilManager()->getIsNumberDatetimeOrString($type),
+            );
+            // }
+        }
+
+        return $descriptions;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     // TODO: ver para donde pasar esto que es de la vista
 
     /**
      * @return \Symfony\Component\Form\FormBuilder
      * @param DataModel $datamodel
      */
-    public function createFiltersFormForQuery(DataModel $datamodel)
+    public function createFilterFormFromDataModel(DataModel $datamodel)
     {
 
         $filters_form = $this->createFormBuilder(null, array(
@@ -658,7 +734,8 @@ class DataModelManager extends BaseResourceManager
             'widget_prefix' => 'filters_form_' . $datamodel->getId(),
         ));
 
-        $details_for_filter = $this->getDatamodelDetailManager()->descriptionForPublicDetailsFromQuery($datamodel);
+        $details = $this->getDatamodelDetailManager()
+            ->findBy(array('datamodel' => $datamodel->getId(), 'enabled' => true), array('position' => 'ASC'));
 
         $input_types_for_attr_types = array(
             'guid' => 'text',
@@ -676,34 +753,37 @@ class DataModelManager extends BaseResourceManager
         );
 
         $i = 0;
-        foreach ($details_for_filter as $detail) {
+        foreach ($details as $detail) {
+            /* @var $detail DataModelDetail */
 
-            $field_label = $detail['title'];
+            $field_label = $detail->getTitle();
+
+            $conditional_operators = $this->getDynamicQueryUtilManager()->getConditionalOperatorsChoices($detail->getSqlType());
 
             for ($j = 0; $j <= 1; $j++) {
-                $filters_form->add("id_" . ($i * 2 + $j), 'hidden', array(
+                $filters_form->add("d_" . ($i * 2 + $j) . "_id", 'hidden', array(
                     'label' => $j == 0 ? $field_label : ' ',
                     'required' => false,
-                    'empty_data' => $detail['id'],
-                    'attr' => array('value' => $detail['id'])
+                    'empty_data' => $detail->getId(),
+                    'attr' => array('value' => $detail->getId())
                 ))
-                    ->add("operator_" . ($i * 2 + $j), 'choice', array(
+                    ->add("d_" . ($i * 2 + $j) . "_operator", 'choice', array(
                         'label' => false,
                         'required' => false,
-                        'choices' => $this->getDynamicQueryUtilManager()->getConditionalOperatorsChoices($detail['type']),
+                        'choices' => $conditional_operators,
                         'multiple' => false,
                         'expanded' => false
                     ));
 
-                if (in_array($input_types_for_attr_types[$detail['type']], array('date', 'time', 'datetime'))) {
-                    $filters_form->add("value_" . ($i * 2 + $j), $input_types_for_attr_types[$detail['type']], array(
+                if ($detail->getSqlTypeCategorization() == 'datetime') {
+                    $filters_form->add("d_" . ($i * 2 + $j) . "_value", $input_types_for_attr_types[$detail->getSqlType()], array(
                         'label' => false,
                         'required' => false,
                         'widget' => 'single_text',
-                        'attr' => array('class' => $detail['type'], 'type' => $detail['type'])
+                        'attr' => array('class' => $detail->getSqlType(), 'type' => $detail->getSqlType())
                     ));
                 } else {
-                    $filters_form->add("value_" . ($i * 2 + $j), $input_types_for_attr_types[$detail['type']], array(
+                    $filters_form->add("d_" . ($i * 2 + $j) . "_value", $input_types_for_attr_types[$detail->getSqlType()], array(
                         'label' => false,
                         'required' => false,
                     ));
@@ -718,6 +798,7 @@ class DataModelManager extends BaseResourceManager
             'empty_data' => $i * 2,
             'attr' => array('value' => $i * 2)
         ));
+
         $filters_form->add("_sort_by", 'hidden', array(
             'label' => false,
             'required' => false,
@@ -746,71 +827,45 @@ class DataModelManager extends BaseResourceManager
 
     //-------------------------------------------------------------------------------------------
 
-    // TODO: ver para donde pasar esto que es de la vista
-
     /**
-     * @return array
      * @param DataModel $datamodel
-     */
-    public function getSubmittedDataFromFiltersForm(DataModel $datamodel, \Symfony\Component\HttpFoundation\Request $request)
-    {
-        $details_for_filter = $this->getDatamodelDetailManager()->descriptionForPublicDetailsFromQuery($datamodel->getId());
-
-        $details_for_filter_by_ids = array();
-
-        foreach ($details_for_filter as $dff) {
-            $details_for_filter_by_ids[$dff['id']] = $dff;
-        }
-
-        $filters_form = $this->createFiltersFormForQuery($datamodel); // pasar settings y no el response
-
-        $filters_form->handleRequest($request); // or handleRequest?
-
-        if (!$filters_form->isValid()) { // if ($request->isXmlHttpRequest())
-            //$this->throwException("ERROR!!!. Filter data isn´t valid");
-        }
-
-        $data = $filters_form->getData();
-
-        return $data;
-    }
-
-    /**
+     * @param array $filter_data
      * @return array
-     * @param DataModel $datamodel
      */
-    public function getFiltersValuesFromFiltersFormData($datamodel, \Symfony\Component\HttpFoundation\Request $request)
+    public function getFiltersValuesFromFiltersFormData($datamodel, $filter_data)
     {
-
-        $details_for_filter_by_ids = $this->getDatamodelDetailManager()->descriptionForPublicDetailsFromQuery($datamodel->getId());
-
-        $data = $this->getSubmittedDataFromFiltersForm($datamodel, $request);
-
-        $_filters_count = (int)$data['_filters_count'];
+        $_filters_count = (int)$filter_data['_filters_count'];
 
         $filter_by = array();
 
         for ($i = 0; $i < $_filters_count; $i++) {
 
-            $detail_id = $data['id_' . $i];
+            $detail_id = $filter_data['d_' . $i . '_id'];
 
-            $operator = $data['operator_' . $i];
+            $detail = $this->getDatamodelDetailManager()
+                ->findOneBy(array('id' => $detail_id, 'datamodel' => $datamodel->getId(), 'enabled' => true), array('position' => 'ASC'));
+            /* @var $detail DataModelDetail */
 
-            $value = $data['value_' . $i];
+            $operator = $filter_data['d_' . $i . '_operator'];
 
-            if (($operator != null && strpos($operator, 'UNARY') != false) || ($value != null && $value != '' && $operator != null && $operator != '')
-            ) {
-                if ($details_for_filter_by_ids[$detail_id]['type'] == 'date') {
-                    $value = $value->format('Y-m-d');
-                } else if ($details_for_filter_by_ids[$detail_id]['type'] == 'time') {
-                    $value = $value->format('H:i:s');
-                } else if ($details_for_filter_by_ids[$detail_id]['type'] == 'datetime') {
-                    $value = $value->format('Y-m-d H:i:s');
+            $value = $filter_data['d_' . $i . '_value'];
+
+            $operator_selected = $this->getDynamicQueryUtilManager()->getConditionalOperatorById($operator);
+
+            if ($operator_selected != null) {
+                if (!$operator_selected->getIsUnary() || ($value != null && $value != '')) {
+                    if ($detail->getSqlType() == 'date') {
+                        $value = $value->format('Y-m-d');
+                    } else if ($detail->getSqlType() == 'time') {
+                        $value = $value->format('H:i:s');
+                    } else if ($detail->getSqlType() == 'datetime') {
+                        $value = $value->format('Y-m-d H:i:s');
+                    }
                 }
                 $filter_by[] = array(
-                    'detail_id' => $detail_id,
+                    'id' => $detail_id,
                     'operator' => $operator,
-                    'value' => $value,
+                    'value' => "".$value,
                 );
             }
         }
@@ -819,20 +874,19 @@ class DataModelManager extends BaseResourceManager
     }
 
     /**
-     * @return array
      * @param DataModel $datamodel
+     * @param array $filter_data
+     * @return array
      */
-    public function getOrdersValuesFromFiltersFormData(DataModel $datamodel, \Symfony\Component\HttpFoundation\Request $request)
+    public function getOrdersValuesFromFiltersFormData(DataModel $datamodel, $filter_data)
     {
 
         $order_by = array();
 
-        $data = $this->getSubmittedDataFromFiltersForm($datamodel, $request);
-
-        if (!empty($data['_sort_by']) && !empty($data['_sort_order'])) {
+        if (!empty($filter_data['_sort_by'])) {
             $order_by[] = array(
-                'detail_id' => $data['_sort_by'],
-                'order_asc_desc' => $data['_sort_order']
+                'id' => $filter_data['_sort_by'],
+                'type' => isset($filter_data['_sort_order']) ? $filter_data['_sort_order'] : 'ASC'
             );
         }
 

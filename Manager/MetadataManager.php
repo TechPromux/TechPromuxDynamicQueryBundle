@@ -13,9 +13,9 @@ use TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata;
 use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField;
 use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation;
 use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable;
-use TechPromux\Bundle\DynamicQueryBundle\Type\Relation\BaseJoinType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\Relation\InnerJoinType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\Relation\LeftJoinType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\InnerJoinTableRelationType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\LeftJoinTableRelationType;
 
 class MetadataManager extends BaseResourceManager
 {
@@ -128,6 +128,7 @@ class MetadataManager extends BaseResourceManager
         $new_metadata = null;
 
         $this->executeTransaction(function () use ($manager, $object, &$new_metadata) {
+
             $metadata = $manager->find($object->getId());
             /* @var $metadata Metadata */
 
@@ -135,6 +136,7 @@ class MetadataManager extends BaseResourceManager
             /* @var $new_metadata Metadata */
 
             $new_metadata->setDataSource($metadata->getDataSource());
+
             $new_metadata->setName($metadata->getName() . '__COPY__' . (new \DateTime())->format('YmdHis'));
             $new_metadata->setTitle($metadata->getTitle() . ' (' . $manager->trans('COPY') . ')');
             $new_metadata->setDescription($metadata->getDescription());

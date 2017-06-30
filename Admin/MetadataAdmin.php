@@ -116,7 +116,17 @@ class MetadataAdmin extends BaseResourceAdmin
         $datasourceManager = $this->getResourceManager()->getDataSourceManager();
 
         $formMapper
-            ->tab('form.tab.datasource')
+            ->tab('form.tab.datasource');
+
+
+        $formMapper
+            ->with('form.group.datasource.descriptions', array("class" => "col-md-8"))
+            ->add('name')
+            ->add('title')
+            ->add('description')
+            ->end();
+
+        $formMapper
             ->with('form.group.datasource.selectdatasource', array("class" => "col-md-4"))
             ->add('datasource', 'entity',
                 array(
@@ -131,13 +141,9 @@ class MetadataAdmin extends BaseResourceAdmin
                     "multiple" => false, "expanded" => false, 'required' => true)
             )
             ->add('enabled')
-            ->end()
-            ->with('form.group.datasource.descriptions', array("class" => "col-md-8"))
-            ->add('name')
-            ->add('title')
-            ->add('description')
-            //->add('enabled')
-            ->end()
+            ->end();
+
+        $formMapper
             ->end();
 
         if ($object->getId() != null) {
@@ -223,10 +229,12 @@ class MetadataAdmin extends BaseResourceAdmin
             ->end();
 
         if ($object->getId()) {
+
             $errorElement
                 ->with('tables')
                 ->assertCount(array('min' => 1, 'minMessage' => 'You must indicate at least a TABLE or a CUSTOM QUERY'))
                 ->end();
+
             if (count($object->getTables()) > 0) {
                 $one_persisted = false;
                 foreach ($object->getTables() as $t) {
@@ -241,7 +249,7 @@ class MetadataAdmin extends BaseResourceAdmin
                     }
 
                     if (!$one_selected) {
-                        //   $errorElement->with('fields')->addViolation('You must select at least a FIELD');
+                           $errorElement->with('fields')->addViolation('You must select at least a FIELD');
                     }
                 }
             }

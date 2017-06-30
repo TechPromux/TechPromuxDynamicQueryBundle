@@ -3,28 +3,26 @@
 {% block actions %}
     {{ parent() }}
     <div class="navbar-right">
-        <ul class="nav navbar-nav">
-            <li id="tpx-dq-query-header-paginator-numbers-{{ object.id }}"
+        <ul class="nav navbar-nav" id="datamodel-table-navbar-{{ object.id }}">
+            <li id="datamodel-table-paginator-description-{{ object.id }}"
                 style="margin-top:13px; margin-bottom: 10px; margin-right: 10px; text-align: center;">
 
-                <div id="tpx-dq-table-paginator-numbers-{{ object.id }}">
-                    <h4>{% if ((paginator.currentPageResults|length)>0) %}
-                            <span><strong>{{ (paginator.currentPage-1)*paginator.maxPerPage+1 }}</strong> {{ 'to' | trans({},'TechPromuxDynamicQueryBundle') }}
-                                <strong>{{ (paginator.currentPage-1)*paginator.maxPerPage+(paginator.currentPageResults|length) }}</strong> {{ 'of' | trans({},'TechPromuxDynamicQueryBundle') }}
-                                <strong>{{ paginator.nbResults }}</strong></span>
+                <div id="datamodel-table-paginator-description-content-{{ object.id }}">
+                    <h4>{% if ((data.paginator.currentPageResults|length)>0) %}
+                            <span><strong>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage+1 }}</strong> {{ 'to' | trans({},'TechPromuxDynamicQueryBundle') }}
+                                <strong>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage+(data.paginator.currentPageResults|length) }}</strong> {{ 'of' | trans({},'TechPromuxDynamicQueryBundle') }}
+                                <strong>{{ data.paginator.nbResults }}</strong></span>
                         {% else %}
-                            <span>No results found</span>
+                            <span>{{ 'No results found' | trans({},'TechPromuxDynamicQueryBundle') }}</span>
                         {% endif %}
                     </h4>
                 </div>
             </li>
 
-            <li id="tpx-dq-query-header-paginator-links-{{ object.id }}"
+            <li id="datamodel-table-paginator-links-{{ object.id }}"
                 style="margin-top:15px; margin-bottom: 10px; text-align: center;">
 
-                <div id="tpx-dq-table-paginator-links-{{ object.id }}" style="display: inline-block;">
-                    <img src="{{ asset('bundles/techpromuxcore/img/ajax-wait.gif') }}" style="display: none;"
-                         id="execute-paginated-table-container-{{ object.id }}-ajax-wait" class="pull-left">
+                <div id="datamodel-table-paginator-links-content-{{ object.id }}" style="display: inline-block;">
                     <style>
                         .pager {
                             margin: 0px 0;
@@ -33,7 +31,7 @@
                     {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.paginator.html.twig',{
                         'admin': admin,
                         'routeParams':{'id': object.id},
-                        'paginator': paginator,
+                        'paginator': data.paginator,
                         'maxPaginatorLinks': 3,
                         'paginator_container_class':'pager pull-right',
                         'currentClass':'active',
@@ -53,14 +51,15 @@
                 </div>
 
             </li>
-            <li>
-                <div style="text-align: center; margin-top:13px; margin-left: 10px;">
-                    <a href="#tpx-dq-query-filters-form-modal-{{ object.id }}" data-toggle="modal">
+            <li id="datamodel-filters-{{ object.id }}">
+                <div id="datamodel-filters-content-{{ object.id }}" style="text-align: center; margin-top:13px; margin-left: 10px;" >
+                    <a href="#datamodel-filters-modal-{{ object.id }}" data-toggle="modal">
                         <button type="button" class="btn btn-default"
                                 title="{{ 'execute.label_filter'|trans({},admin.getResourceManager().getBundleName()) }}">
                             <i class="glyphicon glyphicon-filter"></i>
                         </button>
                     </a>
+                    {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.filters.html.twig') }}
                 </div>
             </li>
         </ul>
@@ -69,25 +68,45 @@
 {% endblock %}
 
 {% block show %}
-    <div id="tpx-dq-query-container-{{ object.id }}" class="box box-primary">
-
-        <div id="tpx-dq-query-table-container-{{ object.id }}" class="box-body table-responsive no-padding">
+    <div id="datamodel-data-{{ object.id }}" class="box box-primary">
+        <div id="datamodel-data-content-{{ object.id }}" class="box-body table-responsive no-padding">
             {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.table.html.twig') }}
         </div>
-
-        <div id="tpx-dq-query-panel-extras-{{ object.id }}">
-
-            <!-- FILTERS FORM MODAL -->
-
-            {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.filters-form-modal.html.twig') }}
-
-        </div>
-
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script>
+
+        // linking paginator links with filters form submit action
+
+        $(document).on('click', '#datamodel-table-paginator-links-{{ object.id }} .pager a', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $("#datamodel-filters-form-{{ object.id }}").attr("action", $(this).attr("href"));
+            $("#datamodel-filters-form-{{ object.id }}").trigger('submit');
+        });
+
+        // linking table header order arrows with filters form submit action
+
+        $(document).on('click', '#datamodel-table-{{ object.id }} a.datamodel-data-order-by-{{ object.id }}', function (event) {
+
+            $("#datamodel-filters-form-{{ object.id }} #form__sort_by").val($(this).attr('data-sort-by'));
+            $("#datamodel-filters-form-{{ object.id }} #form__sort_order").val($(this).attr('data-sort-order'));
+
+            $("#datamodel-filters-form-{{ object.id }}").trigger('submit');
+        });
+
+        $(document).on('click', '#datamodel-filters-{{ object.id }} button[type="reset"]', function (event) {
+            $("#datamodel-filters-form-{{ object.id }} input").val('').trigger('change');
+            $("#datamodel-filters-form-{{ object.id }} select").val('').trigger('change');
+            $("#datamodel-filters-form-{{ object.id }} textarea").val('').trigger('change');
+            $("#datamodel-filters-form-{{ object.id }}").trigger('submit');
+        });
+
+    </script>
 
     <script>
 
@@ -97,60 +116,46 @@
 
             // customize filter form fields
 
-            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > label').css({'text-align': 'right'});
-            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > div.select2-container').addClass('col-lg-5').css({width: '40%'});
-            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > input.form-control').addClass('col-lg-6').css({width: '50%'});
+            $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group > label').css({'text-align': 'right'});
+            $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > div.select2-container').addClass('col-lg-5').css({width: '40%'});
+            $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > input.form-control').addClass('col-lg-6').css({width: '50%'});
 
-            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group input.date').datetimepicker({
+            $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group input.date').datetimepicker({
                 useSeconds: true,
                 pickDate: true,
                 pickTime: false,
                 format: 'YYYY-MM-DD',
                 locale: '{{ (locale is defined)?locale:'en' }}'
             });
-            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group input.time').datetimepicker({
+            $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group input.time').datetimepicker({
                 useSeconds: true,
                 pickDate: false,
                 pickTime: true,
                 format: 'HH:mm:ss',
                 locale: '{{ (locale is defined)?locale:'en' }}'
             });
-            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group input.datetime').datetimepicker({
+            $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group input.datetime').datetimepicker({
                 useSeconds: true,
                 pickDate: true,
                 pickTime: true,
                 format: 'YYYY-MM-DD HH:mm:ss',
                 locale: '{{ (locale is defined)?locale:'en' }}'
             });
-            $('#tpx-dq-query-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > div.col-lg-6 input').first().focus();
+            $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > div.col-lg-6 input').first().focus();
+
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ object.id }}-asc').css({'opacity':'0.3'});
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ object.id }}-desc').css({'opacity':'0.3'}).hide();
+
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-asc').hide();
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-desc').hide();
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').show().css({'opacity':'1.0'});;
+
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-order-by-{{  filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').parent().addClass('active');
+
+            $("#datamodel-filters-form-{{ object.id }} #form__sort_by").val('{{ filter.data._sort_by }}');
+            $("#datamodel-filters-form-{{ object.id }} #form__sort_order").val('{{ filter.data._sort_order | lower }}');
 
         });
-
-    </script>
-
-    <script>
-
-        // linking paginator links with filters form submit action
-
-        $(document).on('click', '#tpx-dq-table-paginator-links-{{ object.id }} .pager a', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            $("#tpx-dq-query-filters-form-{{ object.id }}").attr("action", $(this).attr("href"));
-            $("#tpx-dq-query-filters-form-{{ object.id }}").trigger('submit');
-        });
-
-        // linking table header order arrows with filters form submit action
-
-        $(document).on('click', '#tpx-dq-query-table-{{ object.id }} a.table-column-arrow-order-by-{{ object.id }}', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            $("#tpx-dq-query-filters-form-{{ object.id }} #form__sort_by").val($(this).attr('data-sort-by'));
-            $("#tpx-dq-query-filters-form-{{ object.id }} #form__sort_order").val($(this).attr('data-sort-order'));
-
-            $("#tpx-dq-query-filters-form-{{ object.id }}").trigger('submit');
-        });
-
 
     </script>
 

@@ -1,0 +1,40 @@
+<div id="datamodel-filters-modal-{{object.id}}" style="display: none;" class="modal fade modal-overflow" tabindex="-1" role="dialog" aria-labelledby="datamodel-filters-modal-title-{{object.id}}" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" style="z-index: 1500">
+
+        <div class="modal-content" style="border-radius: 0px; height: 100%; padding: 0px;" data-spy="scroll" data-target="#datamodel-filters-modal-body-{{object.id}}">
+
+            <div id="datamodel-filters-modal-header-{{object.id}}" class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="datamodel-filters-modal-title-{{object.id}}">{{'Filter Result from' | trans({},'TechPromuxDynamicQueryBundle')}} "{{ object.title }}"</h4>
+            </div>
+
+            <div id="datamodel-filters-modal-body-{{object.id}}" class="modal-body" style="min-height: 380px; max-height: 450px; overflow: auto !important;">
+                <form id="datamodel-filters-form-{{object.id}}" method="post" action="{{admin.generateObjectUrl('execute', object)}}" autocomplete="off">
+                    <fieldset>
+                        {% for field in 0..(filter.form._filters_count.vars.attr.value-1) %}
+                            <div class="form-group row">
+                                {{ form_label(filter.form['d_'~loop.index0~'_id']) }}
+                                <div class="col-lg-9">
+                                    {{ form_widget(filter.form['d_'~loop.index0~'_id']) }}
+                                    {{ form_widget(filter.form['d_'~loop.index0~'_operator']) }}
+                                    {{ form_widget(filter.form['d_'~loop.index0~'_value']) }}
+                                </div>
+
+                            </div>     
+                        {% endfor%}    
+                        {{ form_rest(filter.form) }}
+                    </fieldset>    
+                </form>
+            </div>
+
+            <div id="datamodel-filters-modal-footer-{{object.id}}" class="modal-footer">
+                <span class="hide error-message"><b class="error danger" style="color:red;">{{'ERROR!!!. Filter data isn´t valid. Please, verify inserted values.' | trans({},'TechPromuxDynamicQueryBundle')}}</b></span>
+                <button type="submit" class="btn btn-primary" form="datamodel-filters-form-{{object.id}}">{{'Filter' | trans({},'TechPromuxDynamicQueryBundle')}}</button>
+                <button type="reset" class="btn btn-info" form="datamodel-filters-form-{{object.id}}">{{'Reset' | trans({},'TechPromuxDynamicQueryBundle')}}</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

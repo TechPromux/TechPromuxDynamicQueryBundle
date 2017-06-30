@@ -20,9 +20,9 @@ class DataModelAdminController extends CRUDController
             throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
-        $this->admin->checkAccess('duplicate', $object);
+        $this->admin->checkAccess('copy', $object);
 
-        $duplicatedQuery = $this->admin->getManager()->duplicateQuery($object);
+        $duplicatedDataModel = $this->admin->getResourceManager()->createCpyForDataModel($object);
 
         $this->addFlash('sonata_flash_success', 'Duplicated successfully');
 
@@ -47,44 +47,75 @@ class DataModelAdminController extends CRUDController
         $manager = $this->admin->getResourceManager();
         /* @var $manager DataModelManager */
 
-        $filter_by = $manager->getFiltersValuesFromFiltersFormData($object, $request);
-
-        $order_by = $manager->getOrdersValuesFromFiltersFormData($object, $request);
-
         $datamodel = $object;
 
         $queryBuilder = $manager->getQueryBuilderFromDataModel($datamodel);
 
+        dump($queryBuilder);
+
+        // apply filters and orders options from request
+
+        $filter_form = $manager->createFilterFormFromDataModel($object);
+
+        $filter_form->handleRequest($request); // or handleRequest?
+
+        $filter_data = $filter_form->getData();
+
+        dump($filter_data);
+
+        $filter_by = $manager->getFiltersValuesFromFiltersFormData($object, $filter_data);
+
+        $order_by = $manager->getOrdersValuesFromFiltersFormData($object, $filter_data);
+
+        //
         $queryBuilder = $manager->appendFilters($queryBuilder, $filter_by, $order_by);
+
+        dump($queryBuilder);
+        dump($queryBuilder->getSQL());
+
+
+
+        // get results
 
         $paginator = $manager->paginatorFromQueryBuilder($queryBuilder, $request);
 
         $currentPageResults = $paginator->getCurrentPageResults();
 
-        dump($queryBuilder);
+        // preparing render data
 
-        //throw 1;
+        $details_descriptions = $manager->getEnabledDetailsDescriptionsFromDataModel($object->getId());
 
-        dump($queryBuilder->getSQL());
-
-        //throw 2;
-
-        dump($currentPageResults);
-
-        //throw 3;
-
-        $filter_form = $manager->createFiltersFormForQuery($object);
-
-        return $this->render($request->isXmlHttpRequest() ? "TechPromuxDynamicQueryBundle:Admin:DataModel/execute.table.html.twig" : "TechPromuxDynamicQueryBundle:Admin:DataModel/execute.html.twig", array(
-            'action' => 'execute',
-            'object' => $object,
+        $data = array(
+            'details' => $details_descriptions,
             'paginator' => $paginator,
             'result' => $currentPageResults,
-            'public_fields_descriptions' => $manager->getDatamodelDetailManager()->descriptionForPublicDetailsFromQuery($object->getId()),
-            'filters_form' => $filter_form->createView(),
-            'details_for_filter' => $manager->getDatamodelDetailManager()->descriptionForPublicDetailsFromQuery($object),
-            'formatter_helper' => $manager->getDynamicQueryUtilManager(),
-            'locale' => $manager->localeFromAuthenticatedUser()
+        );
+
+        $filter = array(
+            'details' => $details_descriptions,
+            'form' => $filter_form->createView(),
+            'data' =>$filter_data
+        );
+
+        $helpers = array(
+            'formatter' => $manager->getDynamicQueryUtilManager(),
+            'locale' => $manager->localeFromAuthenticatedUser(),
+            'manager' => $manager,
+        );
+
+        dump($data);
+        dump($filter);
+        dump($helpers);
+
+
+
+        return $this->render("TechPromuxDynamicQueryBundle:Admin:DataModel/execute.html.twig", array(
+            'action' => 'execute',
+            'object' => $object,
+            'data' => $data,
+            'filter' => $filter,
+            'helpers' => $helpers,
+
         ), null, $request);
     }
 

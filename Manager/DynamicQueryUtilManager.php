@@ -10,35 +10,72 @@ namespace TechPromux\Bundle\DynamicQueryBundle\Manager;
 
 
 use TechPromux\Bundle\BaseBundle\Manager\BaseManager;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition;
 use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\MinFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BlankFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\AvgFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\CountFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\MaxFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\StddevFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\SumFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\VarianceFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfMonthFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfWeekFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfYearFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNameOfWeekFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfMonthFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfWeekFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfYearFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNameOfYearFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNumberOfYearFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfDaysToCurrentDayFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfMonthsToCurrentMonthFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfWeeksToCurrentWeekFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfYearsToCurrentYearFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\WeekNumberOfMonthFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\WeekNumberOfYearFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthDayNumbersFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthNumbersFunction;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearNumberFunction;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\BetweenConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\ContainsConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\EndsWithConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\EqualConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\GreaterOrEqualConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\GreaterThanConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\InConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\LessOrEqualConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\LessThanConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotBetweenConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotContainsConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotEndsWithConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotEqualConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotInConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotStartsWithConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\StartsWithConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsEmptyConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsFalseConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotEmptyConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotFalseConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotNullConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotTrueConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNullConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsTrueConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\MinFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BlankFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\AvgFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\CountFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\MaxFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\StddevFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\SumFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\VarianceFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfMonthFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfWeekFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfYearFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNameOfWeekFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfMonthFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfWeekForMonday0ToSunday6FieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfWeekForMonday1ToSunday7FieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfWeekForSunday0ToSaturday6FieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfYearFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNameOfYearCommaYearFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNameOfYearFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNumberOfYearFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfDaysToCurrentDayFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfMonthsToCurrentMonthFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfWeeksToCurrentWeekFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfYearsToCurrentYearFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\WeekNumberOfMonthFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\WeekNumberOfYearFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthDayNumbersFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthNumbersFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearNumberFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\BlankValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Date\ToDatedmYValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Date\ToDateYmdValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_X_XX0pXXValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_XcXX0pXXValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_XXX0pXXValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_X_XX0ValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_XcXX0ValueFormatType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_XXX0ValueFormatType;
 
 
 class DynamicQueryUtilManager extends BaseManager
@@ -140,10 +177,25 @@ class DynamicQueryUtilManager extends BaseManager
         return $choices;
     }
 
-    public function getNumericAlphaDatetimeCategorization($type)
+    public function getIsNumberDatetimeOrString($type)
     {
-        //TODO pedir a la function
-        return in_array($type, array('integer', 'smallint', 'bigint', 'decimal', 'float', 'double')) ? 'numeric' : (in_array($type, array('date', 'time', 'datetime')) ? 'datetime' : 'alpha');
+        switch ($type) {
+            case null:
+                return null;
+            case 'integer':
+            case 'smallint':
+            case 'bigint':
+            case 'decimal':
+            case 'float':
+            case 'double':
+                return 'number';
+            case 'date':
+            case  'time':
+            case  'datetime':
+                return 'datetime';
+            default:
+                return 'string';
+        }
     }
 
 
@@ -160,42 +212,45 @@ class DynamicQueryUtilManager extends BaseManager
         $functions = array(
             // null function
 
-            '' => new BlankFunction(),
+            '' => new BlankFieldFunctionType(),
 
             // Aggregation functions
 
-            'AGGREGATION.COUNT' => new CountFunction(),
-            'AGGREGATION.SUM' => new SumFunction(),
-            'AGGREGATION.AVG' => new AvgFunction(),
-            'AGGREGATION.MAX' => new MaxFunction(),
-            'AGGREGATION.MIN' => new MinFunction(),
-            'AGGREGATION.STDDEV' => new StddevFunction(),
-            'AGGREGATION.VARIANCE' => new VarianceFunction(),
+            'AGGREGATION.COUNT' => new CountFieldFunctionType(),
+            'AGGREGATION.SUM' => new SumFieldFunctionType(),
+            'AGGREGATION.AVG' => new AvgFieldFunctionType(),
+            'AGGREGATION.MAX' => new MaxFieldFunctionType(),
+            'AGGREGATION.MIN' => new MinFieldFunctionType(),
+            'AGGREGATION.STDDEV' => new StddevFieldFunctionType(),
+            'AGGREGATION.VARIANCE' => new VarianceFieldFunctionType(),
 
             // Date functions
 
-            'DATE.DAY_NAME_OF_WEEK' => new DayNameOfWeekFunction(),
-            'DATE.MONTH_NAME_OF_WEEK' => new MonthNameOfYearFunction(),
+            'DATE.DAY_NAME_OF_WEEK' => new DayNameOfWeekFieldFunctionType(),
+            'DATE.MONTH_NAME_OF_YEAR' => new MonthNameOfYearFieldFunctionType(),
+            'DATE.MONTH_NAME_OF_YEAR_COMMA_YEAR' => new MonthNameOfYearCommaYearFieldFunctionType(),
 
-            'DATE.DATE_OF_FIRST_DAY_OF_WEEK' => new DateOfFirstDayOfWeekFunction(),
-            'DATE.DATE_OF_FIRST_DAY_OF_MONTH' => new DateOfFirstDayOfMonthFunction(),
-            'DATE.DATE_OF_FIRST_DAY_OF_YEAR' => new DateOfFirstDayOfYearFunction(),
+            'DATE.DATE_OF_FIRST_DAY_OF_WEEK' => new DateOfFirstDayOfWeekFieldFunctionType(),
+            'DATE.DATE_OF_FIRST_DAY_OF_MONTH' => new DateOfFirstDayOfMonthFieldFunctionType(),
+            'DATE.DATE_OF_FIRST_DAY_OF_YEAR' => new DateOfFirstDayOfYearFieldFunctionType(),
 
-            'DATE.DAY_NUMBER_OF_WEEK' => new DayNumberOfWeekFunction(),
-            'DATE.DAY_NUMBER_OF_MONTH' => new DayNumberOfMonthFunction(),
-            'DATE.DAY_NUMBER_OF_YEAR' => new DayNumberOfYearFunction(),
-            'DATE.WEEK_NUMBER_OF_MONTH' => new WeekNumberOfMonthFunction(),
-            'DATE.WEEK_NUMBER_OF_YEAR' => new WeekNumberOfYearFunction(),
-            'DATE.MONTH_NUMBER_OF_YEAR' => new MonthNumberOfYearFunction(),
-            'DATE.YEAR_NUMBER' => new YearNumberFunction(),
+            'DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_0_TO_SUNDAY_6' => new DayNumberOfWeekForMonday0ToSunday6FieldFunctionType(),
+            'DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_1_TO_SUNDAY_7' => new DayNumberOfWeekForMonday1ToSunday7FieldFunctionType(),
+            'DATE.DAY_NUMBER_OF_WEEK_FOR_SUNDAY_0_TO_SATURDAY_6' => new DayNumberOfWeekForSunday0ToSaturday6FieldFunctionType(),
+            'DATE.DAY_NUMBER_OF_MONTH' => new DayNumberOfMonthFieldFunctionType(),
+            'DATE.DAY_NUMBER_OF_YEAR' => new DayNumberOfYearFieldFunctionType(),
+            'DATE.WEEK_NUMBER_OF_MONTH' => new WeekNumberOfMonthFieldFunctionType(),
+            'DATE.WEEK_NUMBER_OF_YEAR' => new WeekNumberOfYearFieldFunctionType(),
+            'DATE.MONTH_NUMBER_OF_YEAR' => new MonthNumberOfYearFieldFunctionType(),
+            'DATE.YEAR_NUMBER' => new YearNumberFieldFunctionType(),
 
-            'DATE.YEAR_MONTH_NUMBERS' => new YearMonthNumbersFunction(),
-            'DATE.YEAR_MONTH_DAY_NUMBERS' => new YearMonthDayNumbersFunction(),
+            'DATE.YEAR_MONTH_NUMBERS' => new YearMonthNumbersFieldFunctionType(),
+            'DATE.YEAR_MONTH_DAY_NUMBERS' => new YearMonthDayNumbersFieldFunctionType(),
 
-            'DATE.QUANTITY_OF_DAYS_TO_CURRENT_DAY' => new QuantityOfDaysToCurrentDayFunction(),
-            'DATE.QUANTITY_OF_WEEKS_TO_CURRENT_WEEK' => new QuantityOfWeeksToCurrentWeekFunction(),
-            'DATE.QUANTITY_OF_MONTHS_TO_CURRENT_MONTH' => new QuantityOfMonthsToCurrentMonthFunction(),
-            'DATE.QUANTITY_OF_YEARS_TO_CURRENT_YEAR' => new QuantityOfYearsToCurrentYearFunction(),
+            'DATE.QUANTITY_OF_DAYS_TO_CURRENT_DAY' => new QuantityOfDaysToCurrentDayFieldFunctionType(),
+            'DATE.QUANTITY_OF_WEEKS_TO_CURRENT_WEEK' => new QuantityOfWeeksToCurrentWeekFieldFunctionType(),
+            'DATE.QUANTITY_OF_MONTHS_TO_CURRENT_MONTH' => new QuantityOfMonthsToCurrentMonthFieldFunctionType(),
+            'DATE.QUANTITY_OF_YEARS_TO_CURRENT_YEAR' => new QuantityOfYearsToCurrentYearFieldFunctionType(),
 
             // Time functions
 
@@ -211,13 +266,12 @@ class DynamicQueryUtilManager extends BaseManager
      */
     public function getFieldFunctionsChoices()
     {
-
         $functions = $this->getRegisteredFieldFunctions();
 
         $functions_choices = array();
 
         foreach ($functions as $f) {
-            /* @var $f BaseFieldFunction */
+            /* @var $f BaseFieldFunctionType */
 
             if ($f->getId() != '') {
 
@@ -236,7 +290,7 @@ class DynamicQueryUtilManager extends BaseManager
 
     /**
      * @param string $function
-     * @return BaseFieldFunction
+     * @return BaseFieldFunctionType
      */
     public function getFieldFunctionById($function)
     {
@@ -249,218 +303,77 @@ class DynamicQueryUtilManager extends BaseManager
 
     //-------------------------------------------------------------------------------------------------
 
-    public function getRegisteredFormatPatterns()
+    /**
+     * @return array
+     */
+    public function getRegisteredValuesFormats()
     {
+        $formats = array(
+            '' => new BlankValueFormatType(),
+            'NUMBER.TO_INTEGER_###0' => new ToInteger_X_XX0ValueFormatType(),
+            'NUMBER.TO_INTEGER_#_##0' => new ToInteger_X_XX0ValueFormatType(),
+            'NUMBER.TO_INTEGER_#,##0' => new ToInteger_XcXX0ValueFormatType(),
+            'NUMBER.TO_FLOAT_###0.##' => new ToFloat_XXX0pXXValueFormatType(),
+            'NUMBER.TO_FLOAT_#_##0.##' => new ToFloat_X_XX0pXXValueFormatType(),
+            'NUMBER.TO_FLOAT_#,##0.##' => new ToFloat_XcXX0pXXValueFormatType(),
 
-        $patterns_options = array(
-            'groups' => array(
-                'NUMBER' => array(
-                    'id' => 'NUMBER',
-                    'title' => $this->trans('NUMBER')
-                ),
-                'DATE' => array(
-                    'id' => 'DATE',
-                    'title' => $this->trans('DATE')
-                ),
-                /*
-                  'TIME' => array(
-                  'id' => 'TIME',
-                  'title' => $this->trans('TIME')
-                  ),
-                 */
-            ),
-            'patterns' => array(
-                '' => array(
-                    'id' => '',
-                    'title' => $this->trans('NONE'),
-                    'type' => '',
-                    'return' => '',
-                    'function' => function ($value, $prefix = '', $suffix = '', $forjs = false) {
-                        return $prefix . $value . $suffix;
-                    }
-                ),
-                'NUMBER_INTEGER_###0' => array(
-                    'id' => 'NUMBER_INTEGER_###0',
-                    'title' => $this->trans('###0'),
-                    'type' => 'NUMBER',
-                    'return' => 'integer',
-                    'function' => function ($value, $prefix = '', $suffix = '', $forjs = false) {
-                        $thousand_separator = '';
-                        $decimal_pointer = '.';
-                        $decimal_digist = 0;
-                        $formatted_value = number_format((int)$value, $decimal_digist, $decimal_pointer, $thousand_separator);
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'NUMBER_INTEGER_#_##0' => array(
-                    'id' => 'NUMBER_INTEGER_#_##0',
-                    'title' => $this->trans('# ##0'),
-                    'type' => 'NUMBER',
-                    'return' => 'integer',
-                    'function' => function ($value, $prefix = '', $suffix = '', $forjs = false) {
-                        $thousand_separator = $forjs ? '' : ' ';
-                        $decimal_pointer = '.';
-                        $decimal_digist = 0;
-                        $formatted_value = number_format((int)$value, $decimal_digist, $decimal_pointer, $thousand_separator);
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'NUMBER_INTEGER_#,##0' => array(
-                    'id' => 'NUMBER_INTEGER_#,##0',
-                    'title' => $this->trans('#,##0'),
-                    'type' => 'NUMBER',
-                    'return' => 'integer',
-                    'function' => function ($value, $prefix = '', $suffix = '', $forjs = false) {
-                        $thousand_separator = $forjs ? '' : ',';
-                        $decimal_pointer = '.';
-                        $decimal_digist = 0;
-                        $formatted_value = number_format((int)$value, $decimal_digist, $decimal_pointer, $thousand_separator);
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'NUMBER_FLOAT_###0.##' => array(
-                    'id' => 'NUMBER_FLOAT_###0.##',
-                    'title' => $this->trans('###0.##'),
-                    'type' => 'NUMBER',
-                    'return' => 'integer',
-                    'function' => function ($value, $prefix = '', $suffix = '', $forjs = false) {
-                        $thousand_separator = $forjs ? '' : '';
-                        $decimal_pointer = '.';
-                        $decimal_digist = 2;
-                        $formatted_value = number_format((float)$value, $decimal_digist, $decimal_pointer, $thousand_separator);
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'NUMBER_FLOAT_#_##0.##' => array(
-                    'id' => 'NUMBER_FLOAT_#_##0.##',
-                    'title' => $this->trans('# ##0.##'),
-                    'type' => 'NUMBER',
-                    'return' => 'integer',
-                    'function' => function ($value, $prefix = '', $suffix = '', $forjs = false) {
-                        $thousand_separator = $forjs ? '' : ' ';
-                        $decimal_pointer = '.';
-                        $decimal_digist = 2;
-                        $formatted_value = number_format((float)$value, $decimal_digist, $decimal_pointer, $thousand_separator);
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'NUMBER_FLOAT_#,##0.##' => array(
-                    'id' => 'NUMBER_FLOAT_#,##0.##',
-                    'title' => $this->trans('#,##0.##'),
-                    'type' => 'NUMBER',
-                    'return' => 'integer',
-                    'function' => function ($value, $prefix = '', $suffix = '', $forjs = false) {
-                        $thousand_separator = $forjs ? '' : ',';
-                        $decimal_pointer = '.';
-                        $decimal_digist = 2;
-                        $formatted_value = number_format((float)$value, $decimal_digist, $decimal_pointer, $thousand_separator);
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'DATE_Y-m-d' => array(
-                    'id' => 'DATE_Y-m-d',
-                    'title' => $this->trans('Y-m-d'),
-                    'type' => 'DATE',
-                    'return' => 'date',
-                    'function' => function ($value, $prefix, $suffix) {
-                        $formatted_value = (\DateTime::createFromFormat('Y-m-d', $value) ?
-                            \DateTime::createFromFormat('Y-m-d', $value)
-                            : \DateTime::createFromFormat('Y-m-d H:i:s', $value))
-                            ->format('Y-m-d');
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'DATE_d/m/Y' => array(
-                    'id' => 'DATE_d/m/Y',
-                    'title' => $this->trans('d/m/Y'),
-                    'type' => 'DATE',
-                    'return' => 'date',
-                    'function' => function ($value, $prefix, $suffix) {
-                        $formatted_value = (\DateTime::createFromFormat('Y-m-d', $value) ?
-                            \DateTime::createFromFormat('Y-m-d', $value)
-                            : \DateTime::createFromFormat('Y-m-d H:i:s', $value))
-                            ->format('d/m/Y');
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'DATE_week_day_name' => array(
-                    'id' => 'DATE_week_day_name',
-                    'title' => $this->trans('Week day name'),
-                    'type' => 'DATE',
-                    'return' => 'string',
-                    'function' => function ($value, $prefix, $suffix) {
+            'DATE.TO_DATE_Y-m-d' => new ToDateYmdValueFormatType(),
+            'DATE.TO_DATE_d/m/Y' => new ToDatedmYValueFormatType(),
 
-                        $days_names = [
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                            'Saturday',
-                        ];
-
-                        $formatted_value = (\DateTime::createFromFormat('Y-m-d', $value) ?
-                            \DateTime::createFromFormat('Y-m-d', $value)
-                            : \DateTime::createFromFormat('Y-m-d H:i:s', $value))
-                            ->format('w');
-                        $formatted_value = $this->trans($days_names[$formatted_value]);
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-                'DATE_month_name_comma_year' => array(
-                    'id' => 'DATE_month_name_comma_year',
-                    'title' => $this->trans('Month name, Year'),
-                    'type' => 'DATE',
-                    'return' => 'string',
-                    'function' => function ($value, $prefix, $suffix) {
-                        $month_value = (\DateTime::createFromFormat('Y-m-d', $value) ?
-                            \DateTime::createFromFormat('Y-m-d', $value)
-                            : \DateTime::createFromFormat('Y-m-d H:i:s', $value))
-                            ->format('F');
-                        $year_value = (\DateTime::createFromFormat('Y-m-d', $value) ?
-                            \DateTime::createFromFormat('Y-m-d', $value)
-                            : \DateTime::createFromFormat('Y-m-d H:i:s', $value))
-                            ->format('Y');
-                        $formatted_value = $this->trans($month_value) . ', ' . $year_value;
-                        return $prefix . $formatted_value . $suffix;
-                    }
-                ),
-            )
         );
 
-        return $patterns_options;
+        return $formats;
     }
 
-    public function getFormatPatternsChoices()
+    /**
+     * @return array
+     */
+    public function getValuesFormatsChoices()
     {
+        $formats = $this->getRegisteredValuesFormats();
 
-        $patterns_options = $this->getRegisteredFormatPatterns();
+        $formats_choices = array();
 
-        $patterns_choices = array();
+        foreach ($formats as $f) {
+            /* @var $f BaseValueFormatType */
 
-        foreach ($patterns_options['groups'] as $g) {
-            $patterns_choices[$g['title']] = array();
-        }
-        foreach ($patterns_options['patterns'] as $op) {
-            if ($op['type'] != '') {
-                $group_title = $patterns_options['groups'][$op['type']]['id'];
-                $patterns_choices[$group_title][$op['id']] = $op['id'];
+            if ($f->getId() != '') {
+
+                $group_name = $f->getGroupName() . ' FORMATS';
+
+                if (!isset($formats_choices[$group_name])) {
+                    $formats_choices[$group_name] = array();
+                }
+
+                $formats_choices[$group_name][$f->getId()] = $f->getId();
             }
         }
 
-        return $patterns_choices;
+        return $formats_choices;
     }
 
-    public function formatValue($value, $pattern = '', $prefix = '', $suffix = '', $forjs = false)
+    /**
+     * @param string $function
+     * @return BaseValueFormatType
+     */
+    public function getValueFormatById($format)
     {
-        $all_patterns_options = $this->getRegisteredFormatPatterns();
-        $pattern_option = $all_patterns_options['patterns'][$pattern];
+        $all_formats = $this->getRegisteredValuesFormats();
+
+        $format = $all_formats[$format != null ? $format : ''];
+
+        return $format;
+    }
+
+    public function formatValue($value, $pattern = '')
+    {
+        $format = $this->getValueFormatById($pattern);
+
         try {
-            $formatted_value = call_user_func($pattern_option['function'], $value, $prefix, $suffix, $forjs);
+            $formatted_value = $format->getFormattedValue($value);
             return $formatted_value;
         } catch (\Exception $ex) {
-            return '-ERROR!-';
+            return '-- ERROR!!! --';
         }
     }
 
@@ -529,289 +442,93 @@ class DynamicQueryUtilManager extends BaseManager
 
     public function getRegisteredConditionalOperators()
     {
-        $operators_options = array(
-            'groups' => array(
-                'BINARY' => array(
-                    'id' => 'BINARY',
-                    'title' => $this->trans('BINARY OPERATORS')
-                ),
-                'UNARY' => array(
-                    'id' => 'UNARY',
-                    'title' => $this->trans('UNARY OPERATORS')
-                ),
-            ),
-            'operators' => array(
-                'UNARY.IS_TRUE' => array(
-                    'id' => 'UNARY.IS_TRUE',
-                    'title' => $this->trans('IS TRUE'),
-                    'type' => 'UNARY',
-                    'allow' => array('boolean'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' IS TRUE';
-                        return $str_condition;
-                    }
-                ),
-                'UNARY.IS_NOT_TRUE' => array(
-                    'id' => 'UNARY.IS_NOT_TRUE',
-                    'title' => $this->trans('IS NOT TRUE'),
-                    'type' => 'UNARY',
-                    'allow' => array('boolean'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' IS NOT TRUE';
-                        return $str_condition;
-                    }
-                ),
-                'UNARY.IS_FALSE' => array(
-                    'id' => 'UNARY.IS_FALSE',
-                    'title' => $this->trans('IS FALSE'),
-                    'type' => 'UNARY',
-                    'allow' => array('boolean'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' IS FALSE';
-                        return $str_condition;
-                    }
-                ),
-                'UNARY.IS_NOT_FALSE' => array(
-                    'id' => 'UNARY.IS_NOT_FALSE',
-                    'title' => $this->trans('IS NOT FALSE'),
-                    'type' => 'UNARY',
-                    'allow' => array('boolean'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' IS NOT FALSE';
-                        return $str_condition;
-                    }
-                ),
-                'UNARY.IS_NULL' => array(
-                    'id' => 'UNARY.IS_NULL',
-                    'title' => $this->trans('IS NULL'),
-                    'type' => 'UNARY',
-                    'allow' => array('all', 'numeric', 'alpha', 'datetime'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' IS NULL';
-                        return $str_condition;
-                    }
-                ),
-                'UNARY.IS_NOT_NULL' => array(
-                    'id' => 'UNARY.IS_NOT_NULL',
-                    'title' => $this->trans('IS NOT NULL'),
-                    'type' => 'UNARY',
-                    'allow' => array('all', 'numeric', 'alpha', 'datetime'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' IS NOT NULL';
-                        return $str_condition;
-                    }
-                ),
-                'UNARY.IS_EMPTY' => array(
-                    'id' => 'UNARY.IS_EMPTY',
-                    'title' => $this->trans('IS EMPTY'),
-                    'type' => 'UNARY',
-                    'allow' => array('string', 'text', 'guid', 'alpha'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' = ' . "''";
-                        return $str_condition;
-                    }
-                ),
-                'UNARY.IS_NOT_EMPTY' => array(
-                    'id' => 'UNARY.IS_NOT_EMPTY',
-                    'title' => $this->trans('IS NOT EMPTY'),
-                    'type' => 'UNARY',
-                    'allow' => array('string', 'text', 'guid', 'alpha'),
-                    'function' => function ($left_operand, $right_operand = null) {
-                        $str_condition = $left_operand . ' <> ' . "''";
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.EQUAL' => array(
-                    'id' => 'BINARY.EQUAL',
-                    'title' => $this->trans('EQUAL'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' = ' . $right_operand;
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.NOT_EQUAL' => array(
-                    'id' => 'BINARY.NOT_EQUAL',
-                    'title' => $this->trans('NOT EQUAL'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' <> ' . $right_operand;
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.GREATER_THAN' => array(
-                    'id' => 'BINARY.GREATER_THAN',
-                    'title' => $this->trans('GREATER THAN'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' > ' . $right_operand;
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.GREATER_OR_EQUAL' => array(
-                    'id' => 'BINARY.GREATER_OR_EQUAL',
-                    'title' => $this->trans('GREATER OR EQUAL'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' >= ' . $right_operand;
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.LESS_THAN' => array(
-                    'id' => 'BINARY.LESS_THAN',
-                    'title' => $this->trans('LESS THAN'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' < ' . $right_operand;
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.LESS_OR_EQUAL' => array(
-                    'id' => 'BINARY.LESS_OR_EQUAL',
-                    'title' => $this->trans('LESS OR EQUAL'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' <= ' . $right_operand;
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.LIKE' => array(
-                    'id' => 'BINARY.LIKE',
-                    'title' => $this->trans('LIKE'),
-                    'type' => 'BINARY',
-                    'allow' => array('guid', 'string', 'text', 'alpha'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' LIKE \'%' . $right_operand . '%\'';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.NOT_LIKE' => array(
-                    'id' => 'BINARY.NOT_LIKE',
-                    'title' => $this->trans('NOT LIKE'),
-                    'type' => 'BINARY',
-                    'allow' => array('guid', 'string', 'text', 'alpha'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' NOT LIKE \'%' . $right_operand . '%\'';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.BEGIN' => array(
-                    'id' => 'BINARY.BEGIN',
-                    'title' => $this->trans('BEGIN WITH'),
-                    'type' => 'BINARY',
-                    'allow' => array('guid', 'string', 'text', 'alpha'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' LIKE \'' . $right_operand . '%\'';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.NOT_BEGIN' => array(
-                    'id' => 'BINARY.NOT_BEGIN',
-                    'title' => $this->trans('NOT BEGIN WITH'),
-                    'type' => 'BINARY',
-                    'allow' => array('guid', 'string', 'text', 'alpha'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' NOT LIKE \'' . $right_operand . '%\'';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.END' => array(
-                    'id' => 'BINARY.END',
-                    'title' => $this->trans('END WITH'),
-                    'type' => 'BINARY',
-                    'allow' => array('guid', 'string', 'text', 'alpha'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' LIKE \'%' . $right_operand . '\'';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.NOT_END' => array(
-                    'id' => 'BINARY.NOT_END',
-                    'title' => $this->trans('NOT END WITH'),
-                    'type' => 'BINARY',
-                    'allow' => array('guid', 'string', 'text', 'alpha'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' NOT LIKE \'%' . $right_operand . '\'';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.IN' => array(
-                    'id' => 'BINARY.IN',
-                    'title' => $this->trans('IN'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' IN (' . implode(',', $right_operand) . ')';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.NOT_IN' => array(
-                    'id' => 'BINARY.NOT_IN',
-                    'title' => $this->trans('NOT IN'),
-                    'type' => 'BINARY',
-                    'allow' => array('all', 'alpha', 'numeric', 'datetime'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' NOT IN (' . implode(',', $right_operand) . ')';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.BETWEEN' => array(
-                    'id' => 'BINARY.BETWEEN',
-                    'title' => $this->trans('BETWEEN'),
-                    'type' => 'BINARY',
-                    'allow' => array('integer', 'smallint', 'bigint', 'decimal', 'float', 'numeric'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' BETWEEN (' . implode(',', $right_operand) . ')';
-                        return $str_condition;
-                    }
-                ),
-                'BINARY.NOT_BETWEEN' => array(
-                    'id' => 'BINARY.NOT_BETWEEN',
-                    'title' => $this->trans('NOT BETWEEN'),
-                    'type' => 'BINARY',
-                    'allow' => array('integer', 'smallint', 'bigint', 'decimal', 'float', 'numeric'),
-                    'function' => function ($left_operand, $right_operand) {
-                        $str_condition = $left_operand . ' NOT BETWEEN (' . implode(',', $right_operand) . ')';
-                        return $str_condition;
-                    }
-                ),
-            )
+        $operators = array(
+            'UNARY.IS_TRUE' => new IsTrueConditionalOperatorType(),
+            'UNARY.IS_NOT_TRUE' => new IsNotTrueConditionalOperatorType(),
+
+            'UNARY.IS_FALSE' => new IsFalseConditionalOperatorType(),
+            'UNARY.IS_NOT_FALSE' => new IsNotFalseConditionalOperatorType(),
+
+            'UNARY.IS_NULL' => new IsNullConditionalOperatorType(),
+            'UNARY.IS_NOT_NULL' => new IsNotNullConditionalOperatorType(),
+
+            'UNARY.IS_EMPTY' => new IsEmptyConditionalOperatorType(),
+            'UNARY.IS_NOT_EMPTY' => new IsNotEmptyConditionalOperatorType(),
+
+            'BINARY.EQUAL' => new EqualConditionalOperatorType(),
+            'BINARY.NOT_EQUAL' => new NotEqualConditionalOperatorType(),
+
+            'BINARY.LESS_THAN' => new LessThanConditionalOperatorType(),
+            'BINARY.LESS_OR_EQUAL' => new LessOrEqualConditionalOperatorType(),
+
+            'BINARY.GREATER_THAN' => new GreaterThanConditionalOperatorType(),
+            'BINARY.GREATER_OR_EQUAL' => new GreaterOrEqualConditionalOperatorType(),
+
+            'BINARY.CONTAINS' => new ContainsConditionalOperatorType(),
+            'BINARY.NOT_CONTAINS' => new NotContainsConditionalOperatorType(),
+
+            'BINARY.STARTS_WITH' => new StartsWithConditionalOperatorType(),
+            'BINARY.NOT_STARTS_WITH' => new NotStartsWithConditionalOperatorType(),
+
+            'BINARY.ENDS_WITH' => new EndsWithConditionalOperatorType(),
+            'BINARY.NOT_ENDS_WITH' => new NotEndsWithConditionalOperatorType(),
+
+            'BINARY.IN' => new InConditionalOperatorType(),
+            'BINARY.NOT_IN' => new NotInConditionalOperatorType(),
+            'BINARY.BETWEEN' => new BetweenConditionalOperatorType(),
+            'BINARY.NOT_BETWEEN' => new NotBetweenConditionalOperatorType(),
+
         );
 
-        return $operators_options;
+        return $operators;
     }
 
+    /**
+     * @param string $type
+     * @return array
+     */
     public function getConditionalOperatorsChoices($type = null)
     {
 
-        $operators_options = $this->getRegisteredConditionalOperators();
+        $operators = $this->getRegisteredConditionalOperators();
 
         $operator_choices = array();
 
-        foreach ($operators_options['groups'] as $g) {
-            $operator_choices[$g['title']] = array();
-        }
-        foreach ($operators_options['operators'] as $op) {
-            $types_allowed = $op['allow'];
-            // esto es para los filtros, para que se puedan cargar los operadores permitidos solo segun el tipo de cada campo en el filtro
-            // es mejor que los operadores tengan un metodo que se le pase el tipo y ellos digan si lo soportan o no
-            if ($type == null || $type == '' ||
-                in_array('all', $types_allowed)
-                || in_array($type, $types_allowed)
-                || in_array($this->getNumericAlphaDatetimeCategorization($type), $types_allowed)
-            ) {
-                $group_title = $operators_options['groups'][$op['type']]['id'];
-                $operator_choices[$group_title][$op['id']] = $op['id'];
+        foreach ($operators as $op) {
+            /* @var $op BaseConditionalOperatorType */
+
+            $type_category = $this->getIsNumberDatetimeOrString($type);
+
+            if ($type == null || $op->getIsAllowedForValueType($type) || $op->getIsAllowedForValueType($type_category)) {
+
+                $group_name = $op->getGroupName() . ' OPERATORS';
+
+                if (!isset($operator_choices[$group_name])) {
+                    $operator_choices[$group_name] = array();
+                }
+
+                $operator_choices[$group_name][$op->getId()] = $op->getId();
+
             }
         }
 
         return $operator_choices;
+    }
+
+    /**
+     * @param string $operator
+     * @return BaseConditionalOperatorType
+     */
+    public function getConditionalOperatorById($operator)
+    {
+        if ($operator == null)
+            return null;
+
+        $all_operators = $this->getRegisteredConditionalOperators();
+
+        $operator = $all_operators[$operator];
+
+        return $operator;
     }
 
     //-----------------------------------------------------------------------------------------

@@ -18,8 +18,9 @@ class DataSourceAdminController extends CRUDController
 
         $this->admin->preUpdate($object);
         $this->admin->update($object);
+        $this->admin->postUpdate($object);
 
-        $this->addFlash('sonata_flash_success', $this->admin->trans('DataSource Information reloaded successfully'));
+        $this->addFlash('sonata_flash_success', $this->trans('DataSource Information reloaded successfully'));
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }

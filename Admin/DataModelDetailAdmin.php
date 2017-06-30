@@ -99,7 +99,7 @@ class DataModelDetailAdmin extends BaseResourceAdmin
                 'attr' => array('data-ctype' => 'datamodel-detail-function'),
             ))
             ->add('presentationFormat', 'choice', array(
-                'choices' => $util_manager->getFormatPatternsChoices(),
+                'choices' => $util_manager->getValuesFormatsChoices(),
                 'required' => false,
                 'attr' => array('data-ctype' => 'datamodel-detail-format'),
             ))
@@ -108,21 +108,18 @@ class DataModelDetailAdmin extends BaseResourceAdmin
             ))
             ->add('abbreviation', null, array(
                 'attr' => array(
-                    'style' => 'width:60px',
                     'data-ctype' => 'datamodel-detail-abbreviation'),
             ))
             ->add('presentationPrefix', null, array(
                 'required' => false,
                 'trim' => false,
                 'attr' => array(
-                    'style' => 'width:60px',
                     'data-ctype' => 'datamodel-detail-prefix'),
             ))
             ->add('presentationSuffix', null, array(
                 'required' => false,
                 'trim' => false,
                 'attr' => array(
-                    'style' => 'width:60px',
                     'data-ctype' => 'datamodel-detail-suffix'),
             ))
 

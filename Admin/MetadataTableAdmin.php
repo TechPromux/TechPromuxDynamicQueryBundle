@@ -50,8 +50,6 @@ class MetadataTableAdmin extends BaseResourceAdmin
 
         parent::configureFormFields($formMapper);
 
-        // ver el problema de cuando viene nuevo
-
         $object = $this->getSubject();
 
         $metadata = $this->getParentFieldDescription()->getAdmin()->getSubject();
@@ -68,9 +66,11 @@ class MetadataTableAdmin extends BaseResourceAdmin
 
         $formMapper
             ->add('position', 'hidden', array(
-                'attr' => array('data-ctype' => 'metadata-table-position-field',
+                'attr' => array('data-ctype' => 'metadata-table-position',
                 )
-            ))
+            ));
+
+        $formMapper
             ->add('type', 'sonata_type_choice_field_mask',
                 array(
                     "choices" => $this->getResourceManager()->getMetadataManager()->getDynamicQueryUtilManager()->getMetadataTableTypesChoices(),
@@ -81,14 +81,10 @@ class MetadataTableAdmin extends BaseResourceAdmin
                     "expanded" => false,
                     "multiple" => false,
                     'required' => true,
-                    'attr' => array('data-ctype' => 'metadata-table-type-field')
+                    'attr' => array('data-ctype' => 'metadata-table-type')
                 )
-            )
-            ->add('title', null, array(
-                    'required' => true,
-                    'attr' => array('data-ctype' => 'metadata-table-title-field')
-                )
-            )
+            );
+        $formMapper
             ->add('tableName', 'choice', array(
                     "choices" => $tables_names,
                     "expanded" => false,
@@ -96,19 +92,29 @@ class MetadataTableAdmin extends BaseResourceAdmin
                     'required' => false,
                     'attr' => array(
                         'style' => 'width: 100%',
-                        'data-ctype' => 'metadata-table-name-field',
-                        'data-last-value' => ($object == null || $object->getId() == null || $object->getType() == 'query') ? $table_name_first : $object->getTableName()
+                        'data-ctype' => 'metadata-table-name',
+                        'data-last-value' => ($object == null || $object->getType() == 'query') ? $table_name_first : $object->getTableName()
                     )
                 )
-            )
+            );
+
+        $formMapper
             ->add('customQuery', null, array(
                     'required' => false,
                     'attr' => array(
                         'style' => 'width: 100%',
-                        'data-ctype' => 'metadata-table-query-field'
+                        'data-ctype' => 'metadata-table-query'
                     )
                 )
             );
+
+        $formMapper
+            ->add('title', null, array(
+                    'required' => true,
+                    'attr' => array('data-ctype' => 'metadata-table-title')
+                )
+            );
+
     }
 
     public function validate(\Sonata\CoreBundle\Validator\ErrorElement $errorElement, $object)
