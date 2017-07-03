@@ -107,6 +107,15 @@
         // general options and configurations
 
         $(document).ready(function () {
+
+            var first_children = $('nav.navbar ul.nav.navbar-nav.navbar-right').children();
+            $('nav.navbar ul.nav.navbar-nav.navbar-right').append(
+                $('nav.navbar div.navbar-left ul.nav.navbar-nav li')
+            ).append(first_children);
+            var execute_link = $('nav.navbar ul.nav.navbar-nav.navbar-right li a[href="{{ admin.generateObjectUrl('execute',object) }}"]');
+            $(execute_link).html('<i class="fa fa-table" aria-hidden="true"></i>'+$(execute_link).html());
+            $(execute_link).parent().removeClass('first').removeClass('last');
+
             $('.sidebar-toggle').trigger('click');
 
         });
@@ -144,11 +153,11 @@
 
             $details_first = false;
 
-            $('#field_widget_{{ form.vars.id }}_details').append( $('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_details') );
+            $('#field_widget_{{ form.vars.id }}_details').append($('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_details'));
 
-            $('#field_widget_div_{{ form.vars.id }}_details').append( $('#field_widget_{{ form.vars.id }}_details table') );
+            $('#field_widget_div_{{ form.vars.id }}_details').append($('#field_widget_{{ form.vars.id }}_details table'));
 
-            $('#field_widget_div_{{ form.vars.id }}_details').addClass('box-body table-responsive no-padding').css({'margin-bottom':'10px'});
+            $('#field_widget_div_{{ form.vars.id }}_details').addClass('box-body table-responsive no-padding').css({'margin-bottom': '10px'});
 
         });
 
@@ -169,11 +178,11 @@
 
         $(document).on('sonata.add_element', '#field_container_{{ form.vars.id }}_groups', function () {
 
-            $('#field_widget_{{ form.vars.id }}_groups').append( $('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_groups') );
+            $('#field_widget_{{ form.vars.id }}_groups').append($('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_groups'));
 
-            $('#field_widget_div_{{ form.vars.id }}_groups').append( $('#field_widget_{{ form.vars.id }}_groups table') );
+            $('#field_widget_div_{{ form.vars.id }}_groups').append($('#field_widget_{{ form.vars.id }}_groups table'));
 
-            $('#field_widget_div_{{ form.vars.id }}_groups').addClass('box-body table-responsive no-padding').css({'margin-bottom':'10px'});
+            $('#field_widget_div_{{ form.vars.id }}_groups').addClass('box-body table-responsive no-padding').css({'margin-bottom': '10px'});
 
         });
 
@@ -327,11 +336,11 @@
 
             $('#field_container_{{ form.vars.id }}_conditions').addClass('box-body table-responsive no-padding');
 
-            $('#field_widget_{{ form.vars.id }}_conditions').append( $('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_conditions') );
+            $('#field_widget_{{ form.vars.id }}_conditions').append($('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_conditions'));
 
-            $('#field_widget_div_{{ form.vars.id }}_conditions').append( $('#field_widget_{{ form.vars.id }}_conditions table') );
+            $('#field_widget_div_{{ form.vars.id }}_conditions').append($('#field_widget_{{ form.vars.id }}_conditions table'));
 
-            $('#field_widget_div_{{ form.vars.id }}_conditions').addClass('box-body table-responsive no-padding').css({'margin-bottom':'10px'});
+            $('#field_widget_div_{{ form.vars.id }}_conditions').addClass('box-body table-responsive no-padding').css({'margin-bottom': '10px'});
 
         });
 
@@ -352,11 +361,11 @@
 
             $('#field_container_{{ form.vars.id }}_orders div.checkbox label span.control-label__text').remove();
 
-            $('#field_widget_{{ form.vars.id }}_orders').append( $('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_orders') );
+            $('#field_widget_{{ form.vars.id }}_orders').append($('<div></div>').attr('id', 'field_widget_div_{{ form.vars.id }}_orders'));
 
-            $('#field_widget_div_{{ form.vars.id }}_orders').append( $('#field_widget_{{ form.vars.id }}_orders table') );
+            $('#field_widget_div_{{ form.vars.id }}_orders').append($('#field_widget_{{ form.vars.id }}_orders table'));
 
-            $('#field_widget_div_{{ form.vars.id }}_orders').addClass('box-body table-responsive no-padding').css({'margin-bottom':'10px'});
+            $('#field_widget_div_{{ form.vars.id }}_orders').addClass('box-body table-responsive no-padding').css({'margin-bottom': '10px'});
 
 
         });

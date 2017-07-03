@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 
-class JoinTypeCompilerPass implements CompilerPassInterface
+class TableRelationTypeCompilerPass implements CompilerPassInterface
 {
 
     public function process(ContainerBuilder $container)
@@ -26,7 +26,7 @@ class JoinTypeCompilerPass implements CompilerPassInterface
         foreach ($taggedServicesIds as $id => $tags) {
             //$type = $container->getDefinition($id);
             $managerDefinition->addMethodCall(
-                    'addTableJoinType', array(new \Symfony\Component\DependencyInjection\Reference($id)));
+                    'addTableRelationType', array(new \Symfony\Component\DependencyInjection\Reference($id)));
 
         }
     }

@@ -36,6 +36,12 @@ use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotNul
 use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotTrueConditionalOperatorType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNullConditionalOperatorType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsTrueConditionalOperatorType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\CurrentDayDynamicValueType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentMonthDynamicValueType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentWeekM1S7DynamicValueType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentWeekS1S7DynamicValueType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentYearDynamicValueType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\MinFieldFunctionType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BlankFieldFunctionType;
@@ -66,6 +72,7 @@ use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\WeekNumberOfYea
 use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthDayNumbersFieldFunctionType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthNumbersFieldFunctionType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearNumberFieldFunctionType;
+use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\BlankValueFormatType;
 use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Date\ToDatedmYValueFormatType;
@@ -106,50 +113,50 @@ class DynamicQueryUtilManager extends BaseManager
 
     //----------------------------------------------------------------------------------------------
 
-    protected $join_types_options = array();
+    protected $table_relation_types = array();
 
     /**
-     * @param BaseJoinType $relation_type
-     * @return array
+     * @param BaseTableRelationType $table_relation_type
+     * @return $this
      */
-    public function addTableJoinType($relation_type)
+    public function addTableRelationType($table_relation_type)
     {
-        $this->join_types_options[$relation_type->getId()] = $relation_type;
-        return $this->join_types_options;
+        $this->table_relation_types[$table_relation_type->getId()] = $table_relation_type;
+        return $this;
     }
 
     /**
      *
      * @return array
      */
-    public function getRegisteredRelationJoinTypes()
+    public function getRegisteredTableRelationTypes()
     {
-        return $this->join_types_options;
+        return $this->table_relation_types;
     }
 
     /**
      *
      * @return array
      */
-    public function getRelationJoinTypesChoices()
+    public function getTableRelationTypesChoices()
     {
 
-        $join_types_choices = array();
+        $table_relation_types_choices = array();
 
-        foreach ($this->join_types_options as $jto) {
+        foreach ($this->table_relation_types as $jto) {
             /* @var $jto BaseJoinType */
-            $join_types_choices[$jto->getId()] = $jto->getId();
+            $table_relation_types_choices[$jto->getId()] = $jto->getId();
         }
-        return $join_types_choices;
+        return $table_relation_types_choices;
     }
 
     /**
-     * @param $type
-     * @return mixed
+     * @param string $id
+     * @return BaseTableRelationType
      */
-    public function getRelationJoinTypeById($type)
+    public function getTableRelationTypeById($id)
     {
-        return $this->join_types_options[$type];
+        return $this->table_relation_types[$id];
     }
 
     //-------------------------------------------------------------------------------
@@ -289,14 +296,14 @@ class DynamicQueryUtilManager extends BaseManager
     }
 
     /**
-     * @param string $function
+     * @param string $id
      * @return BaseFieldFunctionType
      */
-    public function getFieldFunctionById($function)
+    public function getFieldFunctionById($id)
     {
         $all_functions = $this->getRegisteredFieldFunctions();
 
-        $function = $all_functions[$function != null ? $function : ''];
+        $function = $all_functions[$id != null ? $id : ''];
 
         return $function;
     }
@@ -354,14 +361,14 @@ class DynamicQueryUtilManager extends BaseManager
     }
 
     /**
-     * @param string $function
+     * @param string $id
      * @return BaseValueFormatType
      */
-    public function getValueFormatById($format)
+    public function getValueFormatById($id)
     {
         $all_formats = $this->getRegisteredValuesFormats();
 
-        $format = $all_formats[$format != null ? $format : ''];
+        $format = $all_formats[$id != null ? $id : ''];
 
         return $format;
     }
@@ -517,101 +524,72 @@ class DynamicQueryUtilManager extends BaseManager
     }
 
     /**
-     * @param string $operator
+     * @param string $id
      * @return BaseConditionalOperatorType
      */
-    public function getConditionalOperatorById($operator)
+    public function getConditionalOperatorById($id)
     {
-        if ($operator == null)
+        if ($id == null)
             return null;
 
         $all_operators = $this->getRegisteredConditionalOperators();
 
-        $operator = $all_operators[$operator];
+        $operator = $all_operators[$id];
 
         return $operator;
     }
 
     //-----------------------------------------------------------------------------------------
 
-    public function getRegisteredComparablesDynamicValues()
+    public function getRegisteredDynamicValues()
     {
 
-        $operators_options = array(
-            'groups' => array(
-                'DATE' => array(
-                    'id' => 'DATE',
-                    'title' => ('DATE')
-                ),
-                'USER' => array(
-                    'id' => 'USER',
-                    'title' => ('USER')
-                )
-            ),
-            'values' => array(
-                'DATE.CURRENT_DAY' => array(
-                    'id' => 'DATE.CURRENT_DAY',
-                    'title' => ('DATE (FROM CURRENT DAY)'),
-                    'type' => 'DATE',
-                    'return' => 'date',
-                    'function' => function () {
-                        $right_operand = date("Y-m-d");
-                        return $right_operand;
-                    }
-                ),
-                'DATE.CURRENT_WEEK_FIRST_DATE' => array(
-                    'id' => 'DATE.CURRENT_WEEK_FIRST_DATE',
-                    'title' => ('FIRST DATE (FROM CURRENT WEEK)'),
-                    'type' => 'DATE',
-                    'return' => 'date',
-                    'function' => function () {
-                        $right_operand = date("Y-m-d", strtotime(date("Y-m-d")) - (3600 * 24) * (date("w") - 1));
-                        return $right_operand;
-                    }
-                ),
-                'DATE.CURRENT_MONTH_FIRST_DATE' => array(
-                    'id' => 'DATE.CURRENT_MONTH_FIRST_DATE',
-                    'title' => ('FIRST DATE (FROM CURRENT MONTH)'),
-                    'type' => 'DATE',
-                    'return' => 'date',
-                    'function' => function () {
-                        $right_operand = date("Y-m-01");
-                        return $right_operand;
-                    }
-                ),
-                'DATE.CURRENT_YEAR_FIRST_DATE' => array(
-                    'id' => 'DATE.CURRENT_YEAR_FIRST_DATE',
-                    'title' => ('FIRST DATE (FROM CURRENT YEAR)'),
-                    'type' => 'DATE',
-                    'return' => 'date',
-                    'function' => function () {
-                        $right_operand = date("Y-01-01");
-                        return $right_operand;
-                    }
-                ),
-            )
+        $dynamic_values = array(
+            'DATE.CURRENT_DAY' => new CurrentDayDynamicValueType(),
+            'DATE.FIRST_DATE_OF_CURRENT_WEEK_M1S7' => new FirstDayOfCurrentWeekM1S7DynamicValueType(),
+            'DATE.FIRST_DATE_OF_CURRENT_WEEK_S1S7' => new FirstDayOfCurrentWeekS1S7DynamicValueType(),
+            'DATE.FIRST_DATE_OF_CURRENT_MONTH' => new FirstDayOfCurrentMonthDynamicValueType(),
+            'DATE.FIRST_DATE_OF_CURRENT_YEAR' => new FirstDayOfCurrentYearDynamicValueType(),
         );
 
-        return $operators_options;
+        return $dynamic_values;
     }
 
-    public function getComparablesDynamicValuesChoices()
+    /**
+     * @return array
+     */
+    public function getDynamicValuesChoices()
     {
 
-        $values_options = $this->getRegisteredComparablesDynamicValues();
+        $values = $this->getRegisteredDynamicValues();
 
         $values_choices = array();
 
-        foreach ($values_options['groups'] as $g) {
-            $values_choices[$g['title']] = array();
-        }
-        foreach ($values_options['values'] as $op) {
-            $group_title = $values_options['groups'][$op['type']]['id'];
-            $values_choices[$group_title][$op['id']] = $op['id'];
+        foreach ($values as $dv) {
+            /* @var $dv BaseDynamicValueType */
+            $group_title = $dv->getGroupName();
+            $values_choices[$group_title][$dv->getId()] = $dv->getId();
         }
 
         return $values_choices;
     }
+
+    /**
+     * @param string $id
+     * @return BaseDynamicValueType
+     */
+    public function getDynamicValueById($id)
+    {
+        if ($id == null)
+            return null;
+
+        $all_values = $this->getRegisteredDynamicValues();
+
+        $value = $all_values[$id];
+
+        return $value;
+    }
+
 
     //---------------------------------------------------------------------------------------------
 

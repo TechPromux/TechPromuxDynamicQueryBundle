@@ -1,5 +1,13 @@
 {% extends "SonataAdminBundle:CRUD:show.html.twig" %}
 
+{% block title %}
+    {{ object.title }}
+{% endblock %}
+
+{% block navbar_title %}
+    <h4><b>{{ object.title }}</b></h4>
+{% endblock %}
+
 {% block actions %}
     {{ parent() }}
     <div class="navbar-right">

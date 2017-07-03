@@ -496,7 +496,7 @@ class DataModelManager extends BaseResourceManager
 
         $operators = $this->getDynamicQueryUtilManager()->getRegisteredConditionalOperators();
 
-        $dynamic_values_options = $this->getDynamicQueryUtilManager()->getRegisteredComparablesDynamicValues();
+        $dynamic_values_options = $this->getDynamicQueryUtilManager()->getRegisteredDynamicValues();
 
         foreach ($datamodel->getConditions() as $condition) {
             /* @var $condition DataModelCondition */
@@ -549,9 +549,9 @@ class DataModelManager extends BaseResourceManager
 
                             $dynamic_value_id = $condition->getCompareToDynamicValue();
 
-                            $dynamic_value_selected_options = $dynamic_values_options['values'][$dynamic_value_id];
+                            $dynamic_value_selected = $this->getDynamicQueryUtilManager()->getDynamicValueById($dynamic_value_id);
 
-                            $dynamic_value = call_user_func($dynamic_value_selected_options['function']);
+                            $dynamic_value = $dynamic_value_selected->getDynamicValue();
 
                             $param_name = $queryBuilder->createNamedParameter($dynamic_value);
 

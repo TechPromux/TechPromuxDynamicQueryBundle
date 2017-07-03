@@ -419,7 +419,7 @@ class MetadataManager extends BaseResourceManager
                 $added_tables_ids_aliasses[$left_table->getId()] = $left_table;
             }
 
-            $join_type_options = $this->getDynamicQueryUtilManager()->getRegisteredRelationJoinTypes();
+            $join_type_options = $this->getDynamicQueryUtilManager()->getRegisteredTableRelationTypes();
             $join_type_options_selected = $join_type_options[$join_type];
             $join_type_options_selected->appendToQuery($queryBuilder, $relation);
 
