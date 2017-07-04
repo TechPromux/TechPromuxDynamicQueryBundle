@@ -38,8 +38,8 @@
 
                 for (var i = 0; i < all_positions.length; i++) {
                     $(all_positions[i]).val(i);
-                    $(all_positions[i]).parent().append('<a class="' + entity_name + '-' + property_name + '-' + position_name + '-arrow-up-down btn" href="#' + entity_name + '-' + property_name + '-' + position_name + '-up" data-ctype="up" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-up"></span></a>');
-                    $(all_positions[i]).parent().append('<a class="' + entity_name + '-' + property_name + '-' + position_name + '-arrow-up-down btn" href="#' + entity_name + '-' + property_name + '-' + position_name + '-down" data-ctype="down" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-down"></span></a>');
+                    $(all_positions[i]).parent().append('<a class="' + entity_name + '-' + property_name + '-' + position_name + '-arrow-up-down col-xs-6 btn" href="#' + entity_name + '-' + property_name + '-' + position_name + '-up" data-ctype="up" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-up"></span></a>');
+                    $(all_positions[i]).parent().append('<a class="' + entity_name + '-' + property_name + '-' + position_name + '-arrow-up-down col-xs-6 btn" href="#' + entity_name + '-' + property_name + '-' + position_name + '-down" data-ctype="down" data-cpos="' + i + '" style="padding:5px 5px;"><span class="glyphicon glyphicon-arrow-down"></span></a>');
                 }
                 $($('a.' + entity_name + '-' + property_name + '-' + position_name + '-arrow-up-down[data-ctype="up"]')[0]).addClass('disabled');
                 $($('a.' + entity_name + '-' + property_name + '-' + position_name + '-arrow-up-down[data-ctype="down"]')[all_positions.length - 1]).addClass('disabled');
