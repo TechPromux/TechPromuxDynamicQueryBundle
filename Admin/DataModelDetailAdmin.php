@@ -14,16 +14,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelDetailManager;
 
 class DataModelDetailAdmin extends BaseResourceAdmin
 {
-
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.datamodel_detail';
-    }
-
     /**
      * @return DataModelDetailManager
      */
@@ -65,7 +55,7 @@ class DataModelDetailAdmin extends BaseResourceAdmin
 
         $datamodel_manager = $this->getResourceManager()->getDatamodelManager();
 
-        $util_manager = $this->getResourceManager()->getDatamodelManager()->getDynamicQueryUtilManager();
+        $util_dynamic_query_manager = $this->getResourceManager()->getDatamodelManager()->getUtilDynamicQueryManager();
 
         $metadata_field_manager = $datamodel_manager->getMetadataManager()->getMetadataFieldManager();
 
@@ -90,23 +80,30 @@ class DataModelDetailAdmin extends BaseResourceAdmin
                     },
                     'choice_label' => 'title',
                     'group_by' => 'table.title',
-                    'attr' => array('data-ctype' => 'datamodel-detail-field'),
+                    'attr' => array(
+                        'class' => 'col-md-12',
+                        'style' => 'padding-left: 0px; padding-right:0px',
+                        'data-ctype' => 'datamodel-detail-field'),
                     "multiple" => false, "expanded" => false, 'required' => true,
                 )
             )
             ->add('function', 'choice', array(
-                'choices' => $util_manager->getFieldFunctionsChoices(),
+                'choices' => $util_dynamic_query_manager->getFieldFunctionsChoices(),
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => '------------ Select a function ------------',
+                    'class' => 'col-md-12',
+                    'style' => 'padding-left: 0px; padding-right:0px',
+                    'placeholder' => 'datamodel.field.function.placeholder',
                     'data-ctype' => 'datamodel-detail-function'),
                 'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('presentationFormat', 'choice', array(
-                'choices' => $util_manager->getValuesFormatsChoices(),
+                'choices' => $util_dynamic_query_manager->getValueFormatsChoices(),
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => '-------- Select a format --------',
+                    'class' => 'col-md-12',
+                    'style' => 'padding-left: 0px; padding-right:0px',
+                    'placeholder' => 'datamodel.field.format.placeholder',
                     'data-ctype' => 'datamodel-detail-format'),
                 'translation_domain' => $this->getResourceManager()->getBundleName()
             ))

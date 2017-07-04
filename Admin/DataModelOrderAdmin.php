@@ -16,16 +16,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelOrderManager;
 
 class DataModelOrderAdmin extends BaseResourceAdmin
 {
-
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.datamodel_order';
-    }
-
     /**
      * @return DataModelOrderManager
      */
@@ -89,21 +79,32 @@ class DataModelOrderAdmin extends BaseResourceAdmin
                     },
                     'choice_label' => 'title',
                     'group_by' => 'table.title',
-                    'attr' => array('data-ctype' => 'datamodel-order-field'),
+                    'attr' => array(
+                        'class' => 'col-md-12',
+                        'style' => 'padding-left: 0px; padding-right:0px',
+                        'data-ctype' => 'datamodel-order-field'),
                     "multiple" => false, "expanded" => false, 'required' => true)
             )
             ->add('function', 'choice', array(
-                'choices' => $datamodel_manager->getDynamicQueryUtilManager()->getFieldFunctionsChoices(),
+                'choices' => $datamodel_manager->getUtilDynamicQueryManager()->getFieldFunctionsChoices(),
                 'required' => false,
-                'attr' => array('data-ctype' => 'datamodel-order-function'),
+                'attr' => array(
+                    'class' => 'col-md-12',
+                    'style' => 'padding-left: 0px; padding-right:0px',
+                    'placeholder' => 'datamodel.field.function.placeholder',
+                    'data-ctype' => 'datamodel-order-function'
+                ),
                 'translation_domain' => $this->getResourceManager()->getBundleName()
             ))
             ->add('type', 'choice', array(
-                'choices' => $datamodel_manager->getDynamicQueryUtilManager()->getOrderTypesChoices(),
+                'choices' => $datamodel_manager->getUtilDynamicQueryManager()->getOrderTypesChoices(),
                 'required' => true,
                 'expanded' => false,
                 'multiple' => false,
-                'attr' => array('data-ctype' => 'datamodel-order-type'),
+                'attr' => array(
+                    'class' => 'col-md-12',
+                    'style' => 'padding-left: 0px; padding-right:0px',
+                    'data-ctype' => 'datamodel-order-type'),
                 'translation_domain' => $this->getResourceManager()->getBundleName()
             ));
     }

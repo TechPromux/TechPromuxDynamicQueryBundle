@@ -14,15 +14,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataRelationManager;
 class MetadataRelationAdmin extends BaseResourceAdmin
 {
 
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.metadata_relation';
-    }
-
     protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection)
     {
         $collection->clearExcept(array('create', 'edit', 'delete'));
@@ -86,7 +77,7 @@ class MetadataRelationAdmin extends BaseResourceAdmin
                     'data-ctype' => 'metadata-relation-leftcolumn'),
             ))
             ->add('joinType', 'choice', array(
-                "choices" => $this->getResourceManager()->getMetadataManager()->getDynamicQueryUtilManager()->getTableRelationTypesChoices(),
+                "choices" => $this->getResourceManager()->getMetadataManager()->getUtilDynamicQueryManager()->getTableRelationTypesChoices(),
                 "expanded" => false,
                 "multiple" => false,
                 'required' => true,

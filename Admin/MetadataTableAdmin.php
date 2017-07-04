@@ -14,17 +14,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataTableManager;
 
 class MetadataTableAdmin extends BaseResourceAdmin
 {
-
-
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.metadata_table';
-    }
-
     /**
      *
      * @return MetadataTableManager
@@ -73,7 +62,7 @@ class MetadataTableAdmin extends BaseResourceAdmin
         $formMapper
             ->add('type', 'sonata_type_choice_field_mask',
                 array(
-                    "choices" => $this->getResourceManager()->getMetadataManager()->getDynamicQueryUtilManager()->getMetadataTableTypesChoices(),
+                    "choices" => $this->getResourceManager()->getMetadataManager()->getUtilDynamicQueryManager()->getMetadataTableTypesChoices(),
                     'map' => array(
                         'table' => array('tableName', 'title'),
                         'query' => array('customQuery'),

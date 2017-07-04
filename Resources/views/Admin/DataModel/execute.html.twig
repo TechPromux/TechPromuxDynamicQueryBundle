@@ -17,11 +17,11 @@
 
                 <div id="datamodel-table-paginator-description-content-{{ object.id }}">
                     <h4>{% if ((data.paginator.currentPageResults|length)>0) %}
-                            <span><strong>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage+1 }}</strong> {{ 'to' | trans({},'TechPromuxDynamicQueryBundle') }}
-                                <strong>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage+(data.paginator.currentPageResults|length) }}</strong> {{ 'of' | trans({},'TechPromuxDynamicQueryBundle') }}
+                            <span><strong>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage+1 }}</strong> {{ 'to' | trans({},admin.getResourceManager().getBundleName()) }}
+                                <strong>{{ (data.paginator.currentPage-1)*data.paginator.maxPerPage+(data.paginator.currentPageResults|length) }}</strong> {{ 'of' | trans({},admin.getResourceManager().getBundleName()) }}
                                 <strong>{{ data.paginator.nbResults }}</strong></span>
                         {% else %}
-                            <span>{{ 'No results found' | trans({},'TechPromuxDynamicQueryBundle') }}</span>
+                            <span>{{ 'No results found' | trans({},admin.getResourceManager().getBundleName()) }}</span>
                         {% endif %}
                     </h4>
                 </div>
@@ -36,7 +36,7 @@
                             margin: 0px 0;
                         }
                     </style>
-                    {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.paginator.html.twig',{
+                    {{ include(admin.getResourceManager().getBundleName()~':Admin:DataModel/execute.paginator.html.twig',{
                         'admin': admin,
                         'routeParams':{'id': object.id},
                         'paginator': data.paginator,
@@ -60,14 +60,15 @@
 
             </li>
             <li id="datamodel-filters-{{ object.id }}">
-                <div id="datamodel-filters-content-{{ object.id }}" style="text-align: center; margin-top:13px; margin-left: 10px;" >
+                <div id="datamodel-filters-content-{{ object.id }}"
+                     style="text-align: center; margin-top:13px; margin-left: 10px;">
                     <a href="#datamodel-filters-modal-{{ object.id }}" data-toggle="modal">
                         <button type="button" class="btn btn-default"
                                 title="{{ 'execute.label_filter'|trans({},admin.getResourceManager().getBundleName()) }}">
                             <i class="glyphicon glyphicon-filter"></i>
                         </button>
                     </a>
-                    {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.filters.html.twig') }}
+                    {{ include(admin.getResourceManager().getBundleName()~':Admin:DataModel/execute.filters.html.twig') }}
                 </div>
             </li>
         </ul>
@@ -78,7 +79,7 @@
 {% block show %}
     <div id="datamodel-data-{{ object.id }}" class="box box-primary">
         <div id="datamodel-data-content-{{ object.id }}" class="box-body table-responsive no-padding">
-            {{ include('TechPromuxDynamicQueryBundle:Admin:DataModel/execute.table.html.twig') }}
+            {{ include(admin.getResourceManager().getBundleName()~':Admin:DataModel/execute.table.html.twig') }}
         </div>
     </div>
 {% endblock %}
@@ -151,14 +152,15 @@
             });
             $('#datamodel-filters-form-{{ object.id }} fieldset > div.form-group > div.col-lg-9 > div.col-lg-6 input').first().focus();
 
-            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ object.id }}-asc').css({'opacity':'0.3'});
-            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ object.id }}-desc').css({'opacity':'0.3'}).hide();
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ object.id }}-asc').css({'opacity': '0.3'});
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ object.id }}-desc').css({'opacity': '0.3'}).hide();
 
             $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-asc').hide();
             $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-desc').hide();
-            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').show().css({'opacity':'1.0'});;
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').show().css({'opacity': '1.0'});
+            ;
 
-            $('#datamodel-table-{{ object.id }} a.datamodel-data-order-by-{{  filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').parent().addClass('active');
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-order-by-{{ filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').parent().addClass('active');
 
             $("#datamodel-filters-form-{{ object.id }} #form__sort_by").val('{{ filter.data._sort_by }}');
             $("#datamodel-filters-form-{{ object.id }} #form__sort_order").val('{{ filter.data._sort_order | lower }}');

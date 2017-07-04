@@ -1,0 +1,151 @@
+services:
+    # Field Function Types Services
+
+    techpromux_dynamic_query.type.field_function.blank:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BlankFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.aggregation.sum:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\SumFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.aggregation.count:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\CountFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.aggregation.avg:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\AvgFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.aggregation.min:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\MinFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.aggregation.max:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\MaxFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.aggregation.stddev:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\StddevFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.aggregation.variance:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation\VarianceFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+
+
+    techpromux_dynamic_query.type.field_function.date.DayNameOfWeek:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNameOfWeekFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DayNumberOfWeekForMonday0ToSunday6:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfWeekForMonday0ToSunday6FieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DayNumberOfWeekForMonday1ToSunday7:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfWeekForMonday1ToSunday7FieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DayNumberOfWeekForSunday0ToSaturday6:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfWeekForSunday0ToSaturday6FieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DayNumberOfMonth:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfMonthFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DayNumberOfYear:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DayNumberOfYearFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.WeekNumberOfMonth:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\WeekNumberOfMonthFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.WeekNumberOfYear:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\WeekNumberOfYearFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.MonthNameOfYear:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNameOfYearFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.MonthNumberOfYear:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNumberOfYearFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.MonthNameOfYearCommaYear:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\MonthNameOfYearCommaYearFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.YearMonthDayNumbers:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthDayNumbersFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.YearMonthNumbers:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearMonthNumbersFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.YearNumber:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\YearNumberFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DateOfFirstDayOfWeek:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfWeekFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DateOfFirstDayOfMonth:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfMonthFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.DateOfFirstDayOfYear:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\DateOfFirstDayOfYearFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+
+    techpromux_dynamic_query.type.field_function.date.QuantityOfDaysToCurrentDay:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfDaysToCurrentDayFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.QuantityOfWeeksToCurrentWeek:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfWeeksToCurrentWeekFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.QuantityOfMonthsToCurrentMonth:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfMonthsToCurrentMonthFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+
+    techpromux_dynamic_query.type.field_function.date.QuantityOfYearsToCurrentYear:
+        class: TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date\QuantityOfYearsToCurrentYearFieldFunctionType
+        tags:
+            - { name: techpromux_dynamic_query.type.field_function}
+

@@ -1,5 +1,9 @@
 imports:
-    - { resource: 'services_types_table_relation.yml'}
+    - { resource: 'services_types_conditional_operators.yml'}
+    - { resource: 'services_types_dynamic_values.yml'}
+    - { resource: 'services_types_field_functions.yml'}
+    - { resource: 'services_types_table_relations.yml'}
+    - { resource: 'services_types_value_formats.yml'}
     - { resource: 'services_managers.yml'}
     - { resource: 'services_admins.yml'}
 

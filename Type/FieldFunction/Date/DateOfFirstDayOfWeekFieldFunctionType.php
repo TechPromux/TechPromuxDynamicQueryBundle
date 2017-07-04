@@ -12,7 +12,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionTyp
 
 class DateOfFirstDayOfWeekFieldFunctionType implements BaseFieldFunctionType
 {
-
     /**
      * @return string
      */

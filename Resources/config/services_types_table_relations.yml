@@ -1,8 +1,4 @@
 services:
-#    tech_promux_dynamic_query.example:
-#        class: TechPromux\Bundle\DynamicQueryBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-
     # Table Relations Types Services
 
     techpromux_dynamic_query.type.table_relation.inner:

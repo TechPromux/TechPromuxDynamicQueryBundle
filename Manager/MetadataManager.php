@@ -52,25 +52,25 @@ class MetadataManager extends BaseResourceManager
     //-------------------------------------------------------------------------------------
 
     /**
-     * @var DynamicQueryUtilManager
+     * @var UtilDynamicQueryManager
      */
-    protected $util_manager;
+    protected $util_dynamic_query_manager;
 
     /**
-     * @return DynamicQueryUtilManager
+     * @return UtilDynamicQueryManager
      */
-    public function getDynamicQueryUtilManager()
+    public function getUtilDynamicQueryManager()
     {
-        return $this->util_manager;
+        return $this->util_dynamic_query_manager;
     }
 
     /**
-     * @param DynamicQueryUtilManager $util_manager
+     * @param UtilDynamicQueryManager $util_dynamic_query_manager
      * @return DataModelManager
      */
-    public function setDynamicQueryUtilManager($util_manager)
+    public function setUtilDynamicQueryManager($util_dynamic_query_manager)
     {
-        $this->util_manager = $util_manager;
+        $this->util_dynamic_query_manager = $util_dynamic_query_manager;
         return $this;
     }
 
@@ -419,7 +419,7 @@ class MetadataManager extends BaseResourceManager
                 $added_tables_ids_aliasses[$left_table->getId()] = $left_table;
             }
 
-            $join_type_options = $this->getDynamicQueryUtilManager()->getRegisteredTableRelationTypes();
+            $join_type_options = $this->getUtilDynamicQueryManager()->getRegisteredTableRelationTypes();
             $join_type_options_selected = $join_type_options[$join_type];
             $join_type_options_selected->appendToQuery($queryBuilder, $relation);
 

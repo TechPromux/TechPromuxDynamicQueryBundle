@@ -33,11 +33,6 @@ class DataModelAdmin extends BaseResourceAdmin
     }
     //----------------------------------------------------------------------------------
 
-    protected $datagridValues = array(
-        '_sort_by' => 'title',
-        '_sort_order' => 'ASC',
-    );
-
     protected $accessMapping = array(
         'copy' => 'COPY',
         'execute' => 'EXECUTE',

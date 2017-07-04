@@ -14,16 +14,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\DataSourceManager;
 
 class DataSourceAdmin extends BaseResourceAdmin
 {
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.datasource';
-    }
-
-    //----------------------------------------------------------------------------------
 
     protected $accessMapping = array(
         'reload' => 'EDIT',
@@ -101,7 +91,7 @@ class DataSourceAdmin extends BaseResourceAdmin
                 'header_style' => 'width: 100px',
             ))
             ->add('driverType', 'choice', array(
-                'choices' => $this->getResourceManager()->getDynamicQueryUtilManager()->getDriverTypesChoices(),
+                'choices' => $this->getResourceManager()->getUtilDynamicQueryManager()->getDriverTypesChoices(),
                 'row_align' => 'center',
                 'header_style' => 'width: 100px',
             ))
@@ -165,7 +155,7 @@ class DataSourceAdmin extends BaseResourceAdmin
             ->end()
             ->with('form.group.datasource.parameters', array("class" => "col-md-5"))
             ->add('driverType', 'choice', array(
-                'choices' => $this->getResourceManager()->getDynamicQueryUtilManager()->getDriverTypesChoices(),
+                'choices' => $this->getResourceManager()->getUtilDynamicQueryManager()->getDriverTypesChoices(),
                 'required' => true,
                 'translation_domain' => $this->getResourceManager()->getBundleName()
             ))

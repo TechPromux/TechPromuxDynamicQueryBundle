@@ -15,7 +15,8 @@
                     <label aria-expanded="false" type="button" class="dropdown-toggle" data-toggle="dropdown"
                            style="width: 100%">
                         <span>{{ detail.title }}</span>
-                        <a href="#sort-by-{{ detail.id }}" class="datamodel-data-header-sort-icon-{{ object.id }} pull-right">
+                        <a href="#sort-by-{{ detail.id }}"
+                           class="datamodel-data-header-sort-icon-{{ object.id }} pull-right">
 
                             <i class="fa fa-sort-{{ object.id }}-asc fa-sort-{{ detail.id }}-asc fa-sort-{{ sort_icon_class }}-asc"></i>
                             <i class="fa fa-sort-{{ object.id }}-desc fa-sort-{{ detail.id }}-desc fa-sort-{{ sort_icon_class }}-desc"></i>
@@ -27,14 +28,14 @@
                             <a class="datamodel-data-order-by-{{ object.id }} datamodel-data-order-by-{{ detail.id }}-asc"
                                data-sort-by="{{ detail.id }}" data-sort-order="ASC"
                                href="#sort-asc-by-{{ detail.id }}">
-                                <i class="fa fa-sort-{{ sort_icon_class }}-asc"></i> {{ 'ASC Order' | trans({},'TechPromuxDynamicQueryBundle') }}
+                                <i class="fa fa-sort-{{ sort_icon_class }}-asc"></i> {{ 'datamodel.execute.paginator.order.asc' | trans({},admin.getResourceManager().getBundleName()) }}
                             </a>
                         </li>
                         <li>
                             <a class="datamodel-data-order-by-{{ object.id }} datamodel-data-order-by-{{ detail.id }}-desc"
                                data-sort-by="{{ detail.id }}" data-sort-order="DESC"
                                href="#sort-desc-by-{{ detail.id }}">
-                                <i class="fa fa-sort-{{ sort_icon_class }}-desc"></i> {{ 'DESC Order' | trans({},'TechPromuxDynamicQueryBundle') }}
+                                <i class="fa fa-sort-{{ sort_icon_class }}-desc"></i> {{ 'datamodel.execute.paginator.order.desc' | trans({},admin.getResourceManager().getBundleName()) }}
                             </a>
                         </li>
                     </ul>

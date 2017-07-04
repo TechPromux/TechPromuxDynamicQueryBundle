@@ -8,7 +8,7 @@ services:
             - { name: techpromux.entity_manager}
         calls:
             - [ setServiceContainer,['@service_container']]
-            - [ setDynamicQueryUtilManager,['@techpromux_dynamic_query.manager.dynamic_query_util']]
+            - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.dynamic_query_util']]
 
     techpromux_dynamic_query.manager.metadata:
         class: TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataManager
@@ -17,7 +17,7 @@ services:
             - { name: techpromux.entity_manager}
         calls:
             - [ setServiceContainer,['@service_container']]
-            - [ setDynamicQueryUtilManager,['@techpromux_dynamic_query.manager.dynamic_query_util']]
+            - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.dynamic_query_util']]
 
     techpromux_dynamic_query.manager.metadata_table:
         class: TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataTableManager
@@ -58,7 +58,7 @@ services:
             - [ setDatamodelGroupManager,['@techpromux_dynamic_query.manager.datamodel_group']]
             - [ setDatamodelConditionManager,['@techpromux_dynamic_query.manager.datamodel_condition']]
             - [ setDatamodelOrderManager,['@techpromux_dynamic_query.manager.datamodel_order']]
-            - [ setDynamicQueryUtilManager,['@techpromux_dynamic_query.manager.dynamic_query_util']]
+            - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.dynamic_query_util']]
 
     techpromux_dynamic_query.manager.datamodel_detail:
         class: TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelDetailManager
@@ -97,7 +97,7 @@ services:
             - [ setDataModelManager,['@techpromux_dynamic_query.manager.datamodel']]
 
     techpromux_dynamic_query.manager.dynamic_query_util:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\DynamicQueryUtilManager
+        class: TechPromux\Bundle\DynamicQueryBundle\Manager\UtilDynamicQueryManager
         arguments: [~]
         tags:
             - { name: techpromux.entity_manager}

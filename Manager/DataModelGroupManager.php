@@ -88,7 +88,7 @@ class DataModelGroupManager extends BaseResourceManager
      */
     protected function prePersistUpdate($object)
     {
-        $sql_name = $this->getDatamodelManager()->getDynamicQueryUtilManager()->getFieldFunctionSQLName($object->getField(), $object->getFunction());
+        $sql_name = $this->getDatamodelManager()->getUtilDynamicQueryManager()->getFieldFunctionSQLName($object->getField(), $object->getFunction());
 
         $object->setName($sql_name);
         $object->setSqlName($sql_name);

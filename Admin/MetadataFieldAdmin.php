@@ -12,16 +12,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataFieldManager;
 
 class MetadataFieldAdmin extends BaseResourceAdmin
 {
-
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.metadata_field';
-    }
-
     /**
      * @return MetadataFieldManager
      */
@@ -65,7 +55,7 @@ class MetadataFieldAdmin extends BaseResourceAdmin
                     'data-ctype' => 'metadata-field-title-field'
                 )))
             ->add('type', 'choice', array(
-                    "choices" => $this->getResourceManager()->getMetadataManager()->getDynamicQueryUtilManager()->getFieldTypesChoices(),
+                    "choices" => $this->getResourceManager()->getMetadataManager()->getUtilDynamicQueryManager()->getFieldTypesChoices(),
                     "expanded" => false,
                     "multiple" => false,
                     'required' => true,

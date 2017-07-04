@@ -85,9 +85,9 @@ class DataModelManager extends BaseResourceManager
     protected $datamodel_order_manager;
 
     /**
-     * @var DynamicQueryUtilManager
+     * @var UtilDynamicQueryManager
      */
-    protected $util_manager;
+    protected $util_dynamic_query_manager;
 
     /**
      * @return MetadataManager
@@ -180,20 +180,20 @@ class DataModelManager extends BaseResourceManager
     }
 
     /**
-     * @return DynamicQueryUtilManager
+     * @return UtilDynamicQueryManager
      */
-    public function getDynamicQueryUtilManager()
+    public function getUtilDynamicQueryManager()
     {
-        return $this->util_manager;
+        return $this->util_dynamic_query_manager;
     }
 
     /**
-     * @param DynamicQueryUtilManager $util_manager
+     * @param UtilDynamicQueryManager $util_dynamic_query_manager
      * @return DataModelManager
      */
-    public function setDynamicQueryUtilManager($util_manager)
+    public function setUtilDynamicQueryManager($util_dynamic_query_manager)
     {
-        $this->util_manager = $util_manager;
+        $this->util_dynamic_query_manager = $util_dynamic_query_manager;
         return $this;
     }
 
@@ -494,9 +494,9 @@ class DataModelManager extends BaseResourceManager
 
         // ADD WHERE AND HAVING SQL PARTS
 
-        $operators = $this->getDynamicQueryUtilManager()->getRegisteredConditionalOperators();
+        $operators = $this->getUtilDynamicQueryManager()->getRegisteredConditionalOperators();
 
-        $dynamic_values_options = $this->getDynamicQueryUtilManager()->getRegisteredDynamicValues();
+        $dynamic_values_options = $this->getUtilDynamicQueryManager()->getRegisteredDynamicValues();
 
         foreach ($datamodel->getConditions() as $condition) {
             /* @var $condition DataModelCondition */
@@ -510,11 +510,11 @@ class DataModelManager extends BaseResourceManager
 
                 $left_function_name = $condition->getFunction();
 
-                $left_function = $this->getDynamicQueryUtilManager()->getFieldFunctionById($left_function_name);
+                $left_function = $this->getUtilDynamicQueryManager()->getFieldFunctionById($left_function_name);
 
                 $left_operand = $condition_left_sql_name;
 
-                if ($left_function->getHasAggregation()) {
+                if ($left_function != null && $left_function->getHasAggregation()) {
                     $in_select_clause = false;
                 }
 
@@ -549,7 +549,7 @@ class DataModelManager extends BaseResourceManager
 
                             $dynamic_value_id = $condition->getCompareToDynamicValue();
 
-                            $dynamic_value_selected = $this->getDynamicQueryUtilManager()->getDynamicValueById($dynamic_value_id);
+                            $dynamic_value_selected = $this->getUtilDynamicQueryManager()->getDynamicValueById($dynamic_value_id);
 
                             $dynamic_value = $dynamic_value_selected->getDynamicValue();
 
@@ -557,13 +557,19 @@ class DataModelManager extends BaseResourceManager
 
                             $right_function_name = $condition->getCompareToFunction();
 
-                            $right_function = $this->getDynamicQueryUtilManager()->getFieldFunctionById($right_function_name);
+                            $right_function = $this->getUtilDynamicQueryManager()->getFieldFunctionById($right_function_name);
 
-                            $right_operand = $right_function->getAppliedFunctionToField($param_name);
+                            if ($right_function != null) {
+                                $right_operand = $right_function->getAppliedFunctionToField($param_name);
 
-                            if ($right_function->getHasAggregation()) {
-                                $in_select_clause = false;
+                                if ($right_function->getHasAggregation()) {
+                                    $in_select_clause = false;
+                                }
+
+                            } else {
+                                $right_operand = $param_name;
                             }
+
 
                             break;
                         case 'FIELD':
@@ -572,12 +578,17 @@ class DataModelManager extends BaseResourceManager
 
                             $right_function_name = $condition->getCompareToFunction();
 
-                            $right_function = $this->getDynamicQueryUtilManager()->getFieldFunctionById($right_function_name);
+                            $right_function = $this->getUtilDynamicQueryManager()->getFieldFunctionById($right_function_name);
 
-                            $right_operand = $right_function->getAppliedFunctionToField($right_field_name);
+                            if ($right_function != null) {
+                                $right_operand = $right_function->getAppliedFunctionToField($right_field_name);
 
-                            if ($right_function->getHasAggregation()) {
-                                $in_select_clause = false;
+                                if ($right_function->getHasAggregation()) {
+                                    $in_select_clause = false;
+                                }
+
+                            } else {
+                                $right_operand = $right_field_name;
                             }
 
                             break;
@@ -621,7 +632,7 @@ class DataModelManager extends BaseResourceManager
             $datamodel_detail = $this->getDatamodelDetailManager()->find($fb['id']);
             /* @var $datamodel_detail DataModelDetail */
 
-            $detail_function = $this->getDynamicQueryUtilManager()->getFieldFunctionById($datamodel_detail->getFunction());
+            $detail_function = $this->getUtilDynamicQueryManager()->getFieldFunctionById($datamodel_detail->getFunction());
 
             $left_operand = '';
 
@@ -631,7 +642,7 @@ class DataModelManager extends BaseResourceManager
                 $left_operand = $datamodel_detail->getSQLAlias();
             }
 
-            $operator_selected = $this->getDynamicQueryUtilManager()->getConditionalOperatorById($fb['operator']);
+            $operator_selected = $this->getUtilDynamicQueryManager()->getConditionalOperatorById($fb['operator']);
 
             $right_operand = null;
 
@@ -709,8 +720,8 @@ class DataModelManager extends BaseResourceManager
                 'format' => $detail->getPresentationFormat(),
                 'prefix' => $detail->getPresentationPrefix(),
                 'suffix' => $detail->getPresentationSuffix(),
-                'type' => $type = $this->getDynamicQueryUtilManager()->getFieldFunctionSQLType($detail->getField(), $detail->getFunction()),
-                'classification' => $this->getDynamicQueryUtilManager()->getIsNumberDatetimeOrString($type),
+                'type' => $type = $this->getUtilDynamicQueryManager()->getFieldFunctionSQLType($detail->getField(), $detail->getFunction()),
+                'classification' => $this->getUtilDynamicQueryManager()->getIsNumberDatetimeOrString($type),
             );
             // }
         }
@@ -759,7 +770,7 @@ class DataModelManager extends BaseResourceManager
 
             $field_label = $detail->getTitle();
 
-            $conditional_operators = $this->getDynamicQueryUtilManager()->getConditionalOperatorsChoices($detail->getSqlType());
+            $conditional_operators = $this->getUtilDynamicQueryManager()->getConditionalOperatorsChoices($detail->getSqlType());
 
             for ($j = 0; $j <= 1; $j++) {
                 $filters_form->add("d_" . ($i * 2 + $j) . "_id", 'hidden', array(
@@ -773,7 +784,8 @@ class DataModelManager extends BaseResourceManager
                         'required' => false,
                         'choices' => $conditional_operators,
                         'multiple' => false,
-                        'expanded' => false
+                        'expanded' => false,
+                        'translation_domain' => $this->getBundleName()
                     ));
 
                 if ($detail->getSqlTypeCategorization() == 'datetime') {
@@ -851,7 +863,7 @@ class DataModelManager extends BaseResourceManager
 
             $value = $filter_data['d_' . $i . '_value'];
 
-            $operator_selected = $this->getDynamicQueryUtilManager()->getConditionalOperatorById($operator);
+            $operator_selected = $this->getUtilDynamicQueryManager()->getConditionalOperatorById($operator);
 
             if ($operator_selected != null) {
                 if (!$operator_selected->getIsUnary() || ($value != null && $value != '')) {
@@ -866,7 +878,7 @@ class DataModelManager extends BaseResourceManager
                 $filter_by[] = array(
                     'id' => $detail_id,
                     'operator' => $operator,
-                    'value' => "".$value,
+                    'value' => "" . $value,
                 );
             }
         }

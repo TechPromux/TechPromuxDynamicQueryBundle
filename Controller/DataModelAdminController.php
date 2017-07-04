@@ -97,7 +97,7 @@ class DataModelAdminController extends CRUDController
         );
 
         $helpers = array(
-            'formatter' => $manager->getDynamicQueryUtilManager(),
+            'formatter' => $manager->getUtilDynamicQueryManager(),
             'locale' => $manager->localeFromAuthenticatedUser(),
             'manager' => $manager,
         );

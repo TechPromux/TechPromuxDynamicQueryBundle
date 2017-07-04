@@ -16,16 +16,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelOrderManager;
 
 class DataModelGroupAdmin extends BaseResourceAdmin
 {
-
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.datamodel_group';
-    }
-
     /**
      * @return DataModelOrderManager
      */
@@ -90,13 +80,20 @@ class DataModelGroupAdmin extends BaseResourceAdmin
                     },
                     'choice_label' => 'title',
                     'group_by' => 'table.title',
-                    'attr' => array('data-ctype' => 'datamodel-group-field'),
+                    'attr' => array(
+                        'class' => 'col-md-12',
+                        'style' => 'padding-left: 0px; padding-right:0px',
+                        'data-ctype' => 'datamodel-group-field'),
                     "multiple" => false, "expanded" => false, 'required' => true)
             )
             ->add('function', 'choice', array(
-                'choices' => $datamodel_manager->getDynamicQueryUtilManager()->getFieldFunctionsChoices(),
+                'choices' => $datamodel_manager->getUtilDynamicQueryManager()->getFieldFunctionsChoices(),
                 'required' => false,
-                'attr' => array('data-ctype' => 'datamodel-group-function'),
+                'attr' => array(
+                    'class' => 'col-md-12',
+                    'style' => 'padding-left: 0px; padding-right:0px',
+                    'placeholder' => 'datamodel.field.function.placeholder',
+                    'data-ctype' => 'datamodel-group-function'),
                 'translation_domain' => $this->getResourceManager()->getBundleName()
             ));
     }

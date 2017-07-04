@@ -13,15 +13,6 @@ use TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataManager;
 
 class MetadataAdmin extends BaseResourceAdmin
 {
-
-    protected $datagridValues = array(
-        '_sort_by' => 'title',
-        '_sort_order' => 'ASC',
-    );
-    protected $accessMapping = array(
-        'copy' => 'COPY',
-    );
-
     //protected $parentAssociationMapping = 'datasource';
 
     /**
@@ -31,6 +22,14 @@ class MetadataAdmin extends BaseResourceAdmin
     {
         return parent::getResourceManager();
     }
+
+    //----------------------------------------------------------------------------
+
+    protected $accessMapping = array(
+        'copy' => 'COPY',
+    );
+
+    //----------------------------------------------------------------------------
 
     protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection)
     {
@@ -260,14 +259,5 @@ class MetadataAdmin extends BaseResourceAdmin
                 }
             }
         }
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getResourceManagerID()
-    {
-        return 'techpromux_dynamic_query.manager.metadata';
     }
 }

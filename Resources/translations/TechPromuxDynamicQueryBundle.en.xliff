@@ -284,15 +284,15 @@
             </trans-unit>
             <trans-unit id="DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_0_TO_SUNDAY_6">
                 <source>DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_0_TO_SUNDAY_6</source>
-                <target><![CDATA[Day Number of Week (M(0)-S(6))]]></target>
+                <target><![CDATA[Day Number of Week (Monday(0) to Sunday(6))]]></target>
             </trans-unit>
             <trans-unit id="DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_1_TO_SUNDAY_7">
                 <source>DATE.DAY_NUMBER_OF_WEEK_FOR_MONDAY_1_TO_SUNDAY_7</source>
-                <target><![CDATA[Day Number of Week (M(1)-S(7))]]></target>
+                <target><![CDATA[Day Number of Week (Monday(1) to Sunday(7))]]></target>
             </trans-unit>
             <trans-unit id="DATE.DAY_NUMBER_OF_WEEK_SUNDAY_TO_SATURDAY">
                 <source>DATE.DAY_NUMBER_OF_WEEK_SUNDAY_TO_SATURDAY</source>
-                <target><![CDATA[Day Number of Week (S(0)-S(6))]]></target>
+                <target><![CDATA[Day Number of Week (Sunday(0) to Saturday(6))]]></target>
             </trans-unit>
             <trans-unit id="DATE.DAY_NUMBER_OF_MONTH">
                 <source>DATE.DAY_NUMBER_OF_MONTH</source>
@@ -428,7 +428,7 @@
             </trans-unit>
             <trans-unit id="BINARY.NOT_EQUAL">
                 <source>BINARY.NOT_EQUAL</source>
-                <target><![CDATA[<>]]></target>
+                <target><![CDATA[! =]]></target>
             </trans-unit>
             <trans-unit id="BINARY.LESS_THAN">
                 <source>BINARY.LESS_THAN</source>
@@ -436,7 +436,7 @@
             </trans-unit>
             <trans-unit id="BINARY.LESS_OR_EQUAL">
                 <source>BINARY.LESS_OR_EQUAL</source>
-                <target><![CDATA[<=]]></target>
+                <target><![CDATA[< =]]></target>
             </trans-unit>
             <trans-unit id="BINARY.GREATER_THAN">
                 <source>BINARY.GREATER_THAN</source>
@@ -444,7 +444,7 @@
             </trans-unit>
             <trans-unit id="BINARY.GREATER_OR_EQUAL">
                 <source>BINARY.GREATER_OR_EQUAL</source>
-                <target><![CDATA[>=]]></target>
+                <target><![CDATA[> =]]></target>
             </trans-unit>
             <trans-unit id="BINARY.CONTAINS">
                 <source>BINARY.CONTAINS</source>
@@ -485,6 +485,14 @@
             <trans-unit id="BINARY.NOT_BETWEEN">
                 <source>BINARY.NOT_BETWEEN</source>
                 <target><![CDATA[Not Between]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.LIKE">
+                <source>BINARY.LIKE</source>
+                <target><![CDATA[Like]]></target>
+            </trans-unit>
+            <trans-unit id="BINARY.NOT_LIKE">
+                <source>BINARY.NOT_LIKE</source>
+                <target><![CDATA[Not Like]]></target>
             </trans-unit>
             <trans-unit id="FIXED">
                 <source>FIXED</source>
@@ -530,12 +538,92 @@
                 <source>link_action_execute</source>
                 <target><![CDATA[Execute]]></target>
             </trans-unit>
+            <trans-unit id="datamodel.field.function.placeholder">
+                <source>datamodel.field.function.placeholder</source>
+                <target><![CDATA[----------------------- Select Function -----------------------]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.field.format.placeholder">
+                <source>datamodel.field.format.placeholder</source>
+                <target><![CDATA[--------- Select Format ---------]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.field.compareto.placeholder">
+                <source>datamodel.field.compareto.placeholder</source>
+                <target><![CDATA[--- Select Type ---]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.field.dynamicvalue.placeholder">
+                <source>datamodel.field.dynamicvalue.placeholder</source>
+                <target><![CDATA[--------------- Select Value ---------------]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.field.field.placeholder">
+                <source>datamodel.field.field.placeholder</source>
+                <target><![CDATA[--------------- Select Field ---------------]]></target>
+            </trans-unit>
+
+            <trans-unit id="datamodel.execute.paginator.gotofirstpage">
+                <source>datamodel.execute.paginator.gotofirstpage</source>
+                <target><![CDATA[Go to first page]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.paginator.gotopreviouspage">
+                <source>datamodel.execute.paginator.gotopreviouspage</source>
+                <target><![CDATA[Go to previous page]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.paginator.gotopage">
+                <source>datamodel.execute.paginator.gotopage</source>
+                <target><![CDATA[Go to page]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.paginator.gotonextpage">
+                <source>datamodel.execute.paginator.gotonextpage</source>
+                <target><![CDATA[Go to next page]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.paginator.gotolastpage">
+                <source>datamodel.execute.paginator.gotolastpage</source>
+                <target><![CDATA[Go to last page]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.paginator.order.asc">
+                <source>datamodel.execute.paginator.order.asc</source>
+                <target><![CDATA[ASC Order]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.paginator.order.desc">
+                <source>datamodel.execute.paginator.order.desc</source>
+                <target><![CDATA[DESC Order]]></target>
+            </trans-unit>
+            <trans-unit id="execute.label_filter">
+                <source>execute.label_filter</source>
+                <target><![CDATA[Execute]]></target>
+            </trans-unit>
+            <trans-unit id="to">
+                <source>to</source>
+                <target><![CDATA[to]]></target>
+            </trans-unit>
+            <trans-unit id="of">
+                <source>of</source>
+                <target><![CDATA[of]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.filter.title">
+                <source>datamodel.execute.filter.title</source>
+                <target><![CDATA[Filter Result from]]></target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_data_model_execute">
+                <source>breadcrumb.link_data_model_execute</source>
+                <target><![CDATA[Execute]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.filter.error.msg">
+                <source>datamodel.execute.filter.error.msg</source>
+                <target><![CDATA[ERROR!!!. Filter data isn´t valid. Please, verify inserted values.]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.filter.button.submit">
+                <source>datamodel.execute.filter.button.submit</source>
+                <target><![CDATA[Filter]]></target>
+            </trans-unit>
+            <trans-unit id="datamodel.execute.filter.button.reset">
+                <source>datamodel.execute.filter.button.reset</source>
+                <target><![CDATA[Reset]]></target>
+            </trans-unit>
 
             <trans-unit id="">
                 <source></source>
                 <target><![CDATA[]]></target>
             </trans-unit>
-
 
         </body>
     </file>
