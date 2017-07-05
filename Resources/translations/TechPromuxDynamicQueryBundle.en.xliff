@@ -620,10 +620,192 @@
                 <target><![CDATA[Reset]]></target>
             </trans-unit>
 
-            <trans-unit id="">
-                <source></source>
-                <target><![CDATA[]]></target>
+            <trans-unit id="form.group.datasource.description">
+                <source>form.group.datasource.description</source>
+                <target><![CDATA[Description]]></target>
             </trans-unit>
+			<trans-unit id="form.group.datasource.parameters">
+                <source>form.group.datasource.parameters</source>
+                <target><![CDATA[Parameters]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_driver_type">
+                <source>form.label_driver_type</source>
+                <target><![CDATA[Driver Type]]></target>
+            </trans-unit>
+			<trans-unit id="pdo_mysql">
+                <source>pdo_mysql</source>
+                <target><![CDATA[PDO Mysql]]></target>
+            </trans-unit>
+			<trans-unit id="pdo_postgres">
+                <source>pdo_postgres</source>
+                <target><![CDATA[PDO Postgres]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_db_host">
+                <source>form.label_db_host</source>
+                <target><![CDATA[Db Host]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_db_port">
+                <source>form.label_db_port</source>
+                <target><![CDATA[Db Port]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_db_name">
+                <source>form.label_db_name</source>
+                <target><![CDATA[Db Name]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_db_user">
+                <source>form.label_db_user</source>
+                <target><![CDATA[Db User]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_plain_password">
+                <source>form.label_plain_password</source>
+                <target><![CDATA[Plain Password]]></target>
+            </trans-unit>
+			<trans-unit id="breadcrumb.link_data_source_create">
+                <source>breadcrumb.link_data_source_create</source>
+                <target><![CDATA[Data Source]]></target>
+            </trans-unit>
+			<trans-unit id="form.tab.datasource">
+                <source>form.tab.datasource</source>
+                <target><![CDATA[Data Source]]></target>
+            </trans-unit>
+			<trans-unit id="form.tab.tables">
+                <source>form.tab.tables</source>
+                <target><![CDATA[Tables]]></target>
+            </trans-unit>
+			<trans-unit id="form.tab.relations">
+                <source>form.tab.relations</source>
+                <target><![CDATA[relations]]></target>
+            </trans-unit>
+			<trans-unit id="form.tab.fields">
+                <source>form.tab.fields</source>
+                <target><![CDATA[Fields]]></target>
+            </trans-unit>
+			<trans-unit id="form.group.datasource.descriptions">
+                <source>form.group.datasource.descriptions</source>
+                <target><![CDATA[Data source Descriptions]]></target>
+            </trans-unit>
+			<trans-unit id="form.group.datasource.selectdatasource">
+                <source>form.group.datasource.selectdatasource</source>
+                <target><![CDATA[Select Data Source]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_datasource">
+                <source>form.label_datasource</source>
+                <target><![CDATA[Data Source]]></target>
+            </trans-unit>			
+			<trans-unit id="form.group.tables.selecttablesandqueries">
+                <source>form.group.tables.selecttablesandqueries</source>
+                <target><![CDATA[Select Tables and queries]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_table_name">
+                <source>form.label_table_name</source>
+                <target><![CDATA[Table Name]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_custom_query">
+                <source>form.label_custom_query</source>
+                <target><![CDATA[Custom Query]]></target>
+            </trans-unit>
+			<trans-unit id="table">
+                <source>table</source>
+                <target><![CDATA[Table]]></target>
+            </trans-unit>
+			<trans-unit id="query">
+                <source>query</source>
+                <target><![CDATA[Query]]></target>
+            </trans-unit>
+			<trans-unit id="form.group.relations.selecttablesandrelations">
+                <source>form.group.relations.selecttablesandrelations</source>
+                <target><![CDATA[Select Tables and Relations]]></target>
+            </trans-unit>
+			<trans-unit id="form.group.fields.selectfields">
+                <source>form.group.fields.selectfields</source>
+                <target><![CDATA[Select Fields]]></target>
+            </trans-unit>
+			<trans-unit id="form.label_table_with_field_names">
+                <source>form.label_table_with_field_names</source>
+                <target><![CDATA[Table with Field Names]]></target>
+            </trans-unit>
+			<trans-unit id="array">
+                <source>array</source>
+                <target><![CDATA[Array]]></target>
+            </trans-unit>
+			<trans-unit id="simple_array">
+                <source>simple_array</source>
+                <target><![CDATA[Simple Array]]></target>
+            </trans-unit>
+			<trans-unit id="json_array">
+                <source>json_array</source>
+                <target><![CDATA[Json Array]]></target>
+            </trans-unit>
+			<trans-unit id="object">
+                <source>object</source>
+                <target><![CDATA[Object]]></target>
+            </trans-unit>
+			<trans-unit id="boolean">
+                <source>boolean</source>
+                <target><![CDATA[Boolean]]></target>
+            </trans-unit>
+			<trans-unit id="integer">
+                <source>integer</source>
+                <target><![CDATA[Integer]]></target>
+            </trans-unit>
+			<trans-unit id="smallint">
+                <source>smallint</source>
+                <target><![CDATA[Smallint]]></target>
+            </trans-unit>
+			<trans-unit id="bigint">
+                <source>bigint</source>
+                <target><![CDATA[Bigint]]></target>
+            </trans-unit>
+			<trans-unit id="string">
+                <source>string</source>
+                <target><![CDATA[String]]></target>
+            </trans-unit>
+			<trans-unit id="text">
+                <source>text</source>
+                <target><![CDATA[Text]]></target>
+            </trans-unit>
+			<trans-unit id="datetime">
+                <source>datetime</source>
+                <target><![CDATA[Datetime]]></target>
+            </trans-unit>
+			<trans-unit id="datetimetz">
+                <source>datetimetz</source>
+                <target><![CDATA[Datetimetz]]></target>
+            </trans-unit>
+			<trans-unit id="date">
+                <source>date</source>
+                <target><![CDATA[Date]]></target>
+            </trans-unit>
+			<trans-unit id="time">
+                <source>time</source>
+                <target><![CDATA[Time]]></target>
+            </trans-unit>
+			<trans-unit id="decimal">
+                <source>decimal</source>
+                <target><![CDATA[Decimal]]></target>
+            </trans-unit>
+			<trans-unit id="float">
+                <source>float</source>
+                <target><![CDATA[Float]]></target>
+            </trans-unit>
+			<trans-unit id="binary">
+                <source>binary</source>
+                <target><![CDATA[Binary]]></target>
+            </trans-unit>
+			<trans-unit id="blob">
+                <source>blob</source>
+                <target><![CDATA[Blob]]></target>
+            </trans-unit>
+			<trans-unit id="guid">
+                <source>guid</source>
+                <target><![CDATA[Guid]]></target>
+            </trans-unit>
+			<trans-unit id="json">
+                <source>json</source>
+                <target><![CDATA[Json]]></target>
+            </trans-unit>
+			
+			
 
         </body>
     </file>
