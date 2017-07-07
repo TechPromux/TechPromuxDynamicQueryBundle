@@ -22,71 +22,71 @@
                 <source>list.label_db_name</source>
                 <target><![CDATA[Database]]></target>
             </trans-unit>
-			<trans-unit id="list.label_enabled">
+            <trans-unit id="list.label_enabled">
                 <source>list.label_enabled</source>
                 <target><![CDATA[Enabled]]></target>
             </trans-unit>
-			<trans-unit id="Actions">
+            <trans-unit id="Actions">
                 <source>Actions</source>
                 <target><![CDATA[Actions]]></target>
-            </trans-unit>			
-			<trans-unit id="filter.label_name">
+            </trans-unit>
+            <trans-unit id="filter.label_name">
                 <source>filter.label_name</source>
                 <target><![CDATA[Name]]></target>
-            </trans-unit>			
-			<trans-unit id="filter.label_driver_type">
+            </trans-unit>
+            <trans-unit id="filter.label_driver_type">
                 <source>filter.label_driver_type</source>
                 <target><![CDATA[Driver Type]]></target>
             </trans-unit>
-			<trans-unit id="filter.label_db_host">
+            <trans-unit id="filter.label_db_host">
                 <source>filter.label_db_host</source>
                 <target><![CDATA[Host]]></target>
             </trans-unit>
-			<trans-unit id="filter.label_db_name">
+            <trans-unit id="filter.label_db_name">
                 <source>filter.label_db_name</source>
                 <target><![CDATA[Name]]></target>
             </trans-unit>
-			<trans-unit id="breadcrumb.link_data_source_list">
+            <trans-unit id="breadcrumb.link_data_source_list">
                 <source>breadcrumb.link_data_source_list</source>
                 <target><![CDATA[Data Sources]]></target>
             </trans-unit>
-			<trans-unit id="Dynamic Queries">
+            <trans-unit id="Dynamic Queries">
                 <source>Dynamic Queries</source>
                 <target><![CDATA[Dynamic Queries]]></target>
             </trans-unit>
-			<trans-unit id="DataSource">
+            <trans-unit id="DataSource">
                 <source>DataSource</source>
                 <target><![CDATA[Data Source]]></target>
             </trans-unit>
-			<trans-unit id="Metadata">
+            <trans-unit id="Metadata">
                 <source>Metadata</source>
                 <target><![CDATA[Metadata]]></target>
             </trans-unit>
-			<trans-unit id="DataModel">
+            <trans-unit id="DataModel">
                 <source>DataModel</source>
                 <target><![CDATA[Data Model]]></target>
             </trans-unit>
-			<trans-unit id="list.label_title">
+            <trans-unit id="list.label_title">
                 <source>list.label_title</source>
                 <target><![CDATA[Title]]></target>
             </trans-unit>
-			<trans-unit id="list.label_tables">
+            <trans-unit id="list.label_tables">
                 <source>list.label_tables</source>
                 <target><![CDATA[Tables]]></target>
             </trans-unit>
-			<trans-unit id="breadcrumb.link_metadata_list">
+            <trans-unit id="breadcrumb.link_metadata_list">
                 <source>breadcrumb.link_metadata_list</source>
                 <target><![CDATA[Metadatas]]></target>
             </trans-unit>
-			<trans-unit id="list.label_metadata_datasource">
+            <trans-unit id="list.label_metadata_datasource">
                 <source>list.label_metadata_datasource</source>
                 <target><![CDATA[Data Source]]></target>
             </trans-unit>
-			<trans-unit id="list.label_metadata">
+            <trans-unit id="list.label_metadata">
                 <source>list.label_metadata</source>
                 <target><![CDATA[Metadata]]></target>
             </trans-unit>
-			<trans-unit id="filter.label_title">
+            <trans-unit id="filter.label_title">
                 <source>filter.label_title</source>
                 <target><![CDATA[Title]]></target>
             </trans-unit>
@@ -805,8 +805,6 @@
                 <target><![CDATA[Json]]></target>
             </trans-unit>
 			
-			
-
         </body>
     </file>
 </xliff>
