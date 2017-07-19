@@ -11,12 +11,12 @@ class ConditionalOperatorTypeCompilerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('techpromux_dynamic_query.manager.dynamic_query_util')) {
+        if (!$container->hasDefinition('techpromux_dynamic_query.manager.util_dynamic_query')) {
             return;
         }
 
         $managerDefinition = $container->getDefinition(
-            'techpromux_dynamic_query.manager.dynamic_query_util'
+            'techpromux_dynamic_query.manager.util_dynamic_query'
         );
 
         $taggedServicesIds = $container->findTaggedServiceIds(

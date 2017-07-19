@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use TechPromux\Bundle\BaseBundle\Entity\Resource\BaseResource;
 use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner;
 use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\HasResourceOwner;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\Owner\DynamicQueryResourceOwner;
 
 /**
  * DataSource
@@ -71,9 +70,9 @@ class DataSource extends BaseResource implements HasResourceOwner
     private $metadatas;
 
     /**
-     * @var DynamicQueryResourceOwner
+     * @var ResourceOwner
      *
-     * @ORM\ManyToOne(targetEntity="\TechPromux\Bundle\DynamicQueryBundle\Entity\Owner\DynamicQueryResourceOwner")
+     * @ORM\ManyToOne(targetEntity="TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=true)
      */
     protected $owner;
@@ -349,7 +348,7 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * Set owner
      *
-     * @param DynamicQueryResourceOwner $owner
+     * @param ResourceOwner $owner
      *
      * @return DataSource
      */
@@ -363,7 +362,7 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * Get owner
      *
-     * @return DynamicQueryResourceOwner
+     * @return ResourceOwner
      */
     public function getOwner()
     {

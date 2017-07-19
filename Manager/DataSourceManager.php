@@ -24,7 +24,7 @@ class DataSourceManager extends BaseResourceManager
     }
 
     /**
-     * Obtiene la clase de la entidad
+     * Get entity class name
      *
      * @return class
      */
@@ -34,7 +34,7 @@ class DataSourceManager extends BaseResourceManager
     }
 
     /**
-     * Obtiene el nombre corto de la entidad
+     * Get entity short name
      *
      * @return string
      */

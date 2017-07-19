@@ -38,7 +38,7 @@ class DataModelManager extends BaseResourceManager
     }
 
     /**
-     * Obtiene la clase de la entidad
+     * Get entity class name
      *
      * @return class
      */
@@ -48,7 +48,7 @@ class DataModelManager extends BaseResourceManager
     }
 
     /**
-     * Obtiene el nombre corto de la entidad
+     * Get entity short name
      *
      * @return string
      */
@@ -295,7 +295,7 @@ class DataModelManager extends BaseResourceManager
      * @param DataModel $object
      * @return DataModel
      */
-    public function createCpyForDataModel($object)
+    public function createCopyForDataModel($object)
     {
         $datamodel = $this->find($object->getId());
         /* @var $dataModel DataModel */
@@ -625,6 +625,9 @@ class DataModelManager extends BaseResourceManager
      */
     public function appendFilters($queryBuilder, $filter_by = array(), $order_by = array())
     {
+
+        // TODO tener en cuenta los parametros de tipo array
+
         // ADD FILTER OPTIONS
 
         foreach ($filter_by as $fb) {
@@ -647,7 +650,14 @@ class DataModelManager extends BaseResourceManager
             $right_operand = null;
 
             if (!$operator_selected->getIsUnary()) {
-                $right_operand = $queryBuilder->createNamedParameter(isset($fb['value']) ? $fb['value'] : null);
+                if ($operator_selected->getIsForRightOperandAsArray()) {
+                    $right_operand = array();
+                    foreach (explode(',', isset($fb['value']) ? $fb['value'] : '') as $v) {
+                        $right_operand[] = $queryBuilder->createNamedParameter(trim($v));
+                    }
+                } else {
+                    $right_operand = $queryBuilder->createNamedParameter(isset($fb['value']) ? $fb['value'] : null);
+                }
             }
 
             $str_condition = $operator_selected->getConditionalStatement($left_operand, $right_operand);
@@ -731,216 +741,25 @@ class DataModelManager extends BaseResourceManager
 
     //--------------------------------------------------------------------------------------------------------
 
-    // TODO: ver para donde pasar esto que es de la vista
-
-    /**
-     * @return \Symfony\Component\Form\FormBuilder
-     * @param DataModel $datamodel
-     */
-    public function createFilterFormFromDataModel(DataModel $datamodel)
-    {
-
-        $filters_form = $this->createFormBuilder(null, array(
-            'csrf_protection' => false,
-            'validation_groups' => array('filtering'),
-            'widget_prefix' => 'filters_form_' . $datamodel->getId(),
-        ));
-
-        $details = $this->getDatamodelDetailManager()
-            ->findBy(array('datamodel' => $datamodel->getId(), 'enabled' => true), array('position' => 'ASC'));
-
-        $input_types_for_attr_types = array(
-            'guid' => 'text',
-            'string' => 'text',
-            'text' => 'text',
-            'boolean' => 'integer',
-            'integer' => 'integer',
-            'smallint' => 'integer',
-            'bigint' => 'integer',
-            'decimal' => 'number',
-            'float' => 'number',
-            'datetime' => 'datetime',
-            'date' => 'date',
-            'time' => 'time',
-        );
-
-        $i = 0;
-        foreach ($details as $detail) {
-            /* @var $detail DataModelDetail */
-
-            $field_label = $detail->getTitle();
-
-            $conditional_operators = $this->getUtilDynamicQueryManager()->getConditionalOperatorsChoices($detail->getSqlType());
-
-            for ($j = 0; $j <= 1; $j++) {
-                $filters_form->add("d_" . ($i * 2 + $j) . "_id", 'hidden', array(
-                    'label' => $j == 0 ? $field_label : ' ',
-                    'required' => false,
-                    'empty_data' => $detail->getId(),
-                    'attr' => array('value' => $detail->getId())
-                ))
-                    ->add("d_" . ($i * 2 + $j) . "_operator", 'choice', array(
-                        'label' => false,
-                        'required' => false,
-                        'choices' => $conditional_operators,
-                        'multiple' => false,
-                        'expanded' => false,
-                        'translation_domain' => $this->getBundleName()
-                    ));
-
-                if ($detail->getSqlTypeCategorization() == 'datetime') {
-                    $filters_form->add("d_" . ($i * 2 + $j) . "_value", $input_types_for_attr_types[$detail->getSqlType()], array(
-                        'label' => false,
-                        'required' => false,
-                        'widget' => 'single_text',
-                        'attr' => array('class' => $detail->getSqlType(), 'type' => $detail->getSqlType())
-                    ));
-                } else {
-                    $filters_form->add("d_" . ($i * 2 + $j) . "_value", $input_types_for_attr_types[$detail->getSqlType()], array(
-                        'label' => false,
-                        'required' => false,
-                    ));
-                }
-            }
-            $i++;
-        }
-
-        $filters_form->add("_filters_count", 'hidden', array(
-            'label' => false,
-            'required' => false,
-            'empty_data' => $i * 2,
-            'attr' => array('value' => $i * 2)
-        ));
-
-        $filters_form->add("_sort_by", 'hidden', array(
-            'label' => false,
-            'required' => false,
-            'empty_data' => '',
-            'attr' => array('value' => '')
-        ));
-        $filters_form->add("_sort_order", 'hidden', array(
-            'label' => false,
-            'required' => false,
-            'empty_data' => '',
-            'attr' => array('value' => '')
-        ));
-        $filters_form->add("_page", 'hidden', array(
-            'label' => false,
-            'required' => false,
-            'empty_data' => 1,
-        ));
-        $filters_form->add("_items_per_page", 'hidden', array(
-            'label' => false,
-            'required' => false,
-            'empty_data' => 32,
-        ));
-
-        return $filters_form->getForm();
-    }
-
-    //-------------------------------------------------------------------------------------------
-
-    /**
-     * @param DataModel $datamodel
-     * @param array $filter_data
-     * @return array
-     */
-    public function getFiltersValuesFromFiltersFormData($datamodel, $filter_data)
-    {
-        $_filters_count = (int)$filter_data['_filters_count'];
-
-        $filter_by = array();
-
-        for ($i = 0; $i < $_filters_count; $i++) {
-
-            $detail_id = $filter_data['d_' . $i . '_id'];
-
-            $detail = $this->getDatamodelDetailManager()
-                ->findOneBy(array('id' => $detail_id, 'datamodel' => $datamodel->getId(), 'enabled' => true), array('position' => 'ASC'));
-            /* @var $detail DataModelDetail */
-
-            $operator = $filter_data['d_' . $i . '_operator'];
-
-            $value = $filter_data['d_' . $i . '_value'];
-
-            $operator_selected = $this->getUtilDynamicQueryManager()->getConditionalOperatorById($operator);
-
-            if ($operator_selected != null) {
-                if (!$operator_selected->getIsUnary() || ($value != null && $value != '')) {
-                    if ($detail->getSqlType() == 'date') {
-                        $value = $value->format('Y-m-d');
-                    } else if ($detail->getSqlType() == 'time') {
-                        $value = $value->format('H:i:s');
-                    } else if ($detail->getSqlType() == 'datetime') {
-                        $value = $value->format('Y-m-d H:i:s');
-                    }
-                }
-                $filter_by[] = array(
-                    'id' => $detail_id,
-                    'operator' => $operator,
-                    'value' => "" . $value,
-                );
-            }
-        }
-
-        return $filter_by;
-    }
-
-    /**
-     * @param DataModel $datamodel
-     * @param array $filter_data
-     * @return array
-     */
-    public function getOrdersValuesFromFiltersFormData(DataModel $datamodel, $filter_data)
-    {
-
-        $order_by = array();
-
-        if (!empty($filter_data['_sort_by'])) {
-            $order_by[] = array(
-                'id' => $filter_data['_sort_by'],
-                'type' => isset($filter_data['_sort_order']) ? $filter_data['_sort_order'] : 'ASC'
-            );
-        }
-
-        return $order_by;
-    }
-
-    //------------------------------------------------------------------------------------------------------------
-
     // TODO: Pasar para el controller, esto es de la vista, el manager solo se encarga de generar el query
     // asi como los otros metodos para las runnables query....
 
-    public function createPaginatorAdapterForQueryBuilder($queryBuilder)
+    protected function createPaginatorAdapterForQueryBuilder($queryBuilder)
     {
         return new DoctrineDbalPaginatorAdapter($queryBuilder);
     }
 
+    /**
+     * @param $queryBuilder
+     * @return mixed
+     */
     public function createPaginatorForQueryBuilder($queryBuilder)
     {
         $adapter = $this->createPaginatorAdapterForQueryBuilder($queryBuilder);
-        return new Pagerfanta($adapter);
-    }
 
-    public function paginatorFromQueryBuilder($queryBuilder, \Symfony\Component\HttpFoundation\Request $request)
-    {
-
-        $paginator = $this->createPaginatorForQueryBuilder($queryBuilder, $request);
-
-        $paginator->setMaxPerPage($request->get('items_per_page', 32));
-
-        $page = $request->get('page', 1);
-
-        $rowCount = $queryBuilder->execute()->rowCount();
-
-        if (intval($page) * $paginator->getMaxPerPage() <= $rowCount || ((intval($page) - 1) * $paginator->getMaxPerPage() < $rowCount)) {
-            $paginator->setCurrentPage($page);
-        } else {
-            $paginator->setCurrentPage(1);
-        }
+        $paginator = new Pagerfanta($adapter);
 
         return $paginator;
     }
-
 
 }

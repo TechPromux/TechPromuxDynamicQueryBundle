@@ -47,9 +47,9 @@ class Metadata extends BaseResource implements HasResourceOwner
     private $datamodels;
 
     /**
-     * @var DynamicQueryResourceOwner
+     * @var ResourceOwner
      *
-     * @ORM\ManyToOne(targetEntity="\TechPromux\Bundle\DynamicQueryBundle\Entity\Owner\DynamicQueryResourceOwner")
+     * @ORM\ManyToOne(targetEntity="TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=true)
      */
     protected $owner;
@@ -64,7 +64,7 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Set owner
      *
-     * @param DynamicQueryResourceOwner $owner
+     * @param ResourceOwner $owner
      *
      * @return DataSource
      */
@@ -78,7 +78,7 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Get owner
      *
-     * @return DynamicQueryResourceOwner
+     * @return ResourceOwner
      */
     public function getOwner()
     {

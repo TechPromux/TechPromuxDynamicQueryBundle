@@ -22,7 +22,7 @@ class DataModelAdminController extends CRUDController
 
         $this->admin->checkAccess('copy', $object);
 
-        $duplicatedDataModel = $this->admin->getResourceManager()->createCpyForDataModel($object);
+        $duplicatedDataModel = $this->admin->getResourceManager()->createCopyForDataModel($object);
 
         $this->addFlash('sonata_flash_success', 'Duplicated successfully');
 
@@ -51,7 +51,7 @@ class DataModelAdminController extends CRUDController
 
         $queryBuilder = $manager->getQueryBuilderFromDataModel($datamodel);
 
-        dump($queryBuilder);
+        //dump($queryBuilder);
 
         // apply filters and orders options from request
 
@@ -61,7 +61,7 @@ class DataModelAdminController extends CRUDController
 
         $filter_data = $filter_form->getData();
 
-        dump($filter_data);
+        //dump($filter_data);
 
         $filter_by = $manager->getFiltersValuesFromFiltersFormData($object, $filter_data);
 
@@ -70,8 +70,8 @@ class DataModelAdminController extends CRUDController
         //
         $queryBuilder = $manager->appendFilters($queryBuilder, $filter_by, $order_by);
 
-        dump($queryBuilder);
-        dump($queryBuilder->getSQL());
+        //dump($queryBuilder);
+        //dump($queryBuilder->getSQL());
 
 
         // get results
@@ -98,13 +98,13 @@ class DataModelAdminController extends CRUDController
 
         $helpers = array(
             'formatter' => $manager->getUtilDynamicQueryManager(),
-            'locale' => $manager->localeFromAuthenticatedUser(),
+            'locale' => $manager->getLocaleFromAuthenticatedUser(),
             'manager' => $manager,
         );
 
-        dump($data);
-        dump($filter);
-        dump($helpers);
+        //dump($data);
+        //dump($filter);
+        //dump($helpers);
 
 
         return $this->render("TechPromuxDynamicQueryBundle:Admin:DataModel/execute.html.twig", array(
