@@ -1,11 +1,42 @@
 {
     "name": "techpromux/dynamic-query-bundle",
-    "description": "Build your own custom queries throught dynamic configuration pages",
+    "type": "symfony-bundle",
+    "description": "Manage Dynamic Queries from Databases",
+    "keywords": ["dynamic", "query", "techpromux"],
+    "homepage": "https://github.com/TechPromux/TechPromuxDynamicQueryBundle",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Franklin Rivero Duharte",
+            "email": "frivero.duharte@gmail.com",
+            "homepage": "https://github.com/frnklnrd"
+        },
+        {
+            "name": "TechPromux",
+            "email": "techpromux@gmail.com",
+            "homepage": "https://github.com/TechPromux"
+        }
+    ],
     "require": {
-        "php": "^5.3.3 || ^7.0",
-        "techpromux/base-bundle": "dev-master",
-        "symfony/symfony": "^3.2",
-        "sonata-project/admin-bundle": "^3.1",
-	"sonata-project/doctrine-orm-admin-bundle": "^3.1"
+        "php": "^7.0",
+        "techpromux/base-bundle": "^1.0.3"
+    },
+    "autoload": {
+        "psr-4": { "TechPromux\\DynamicQueryBundle\\": "" },
+        "exclude-from-classmap": [
+            "Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": { "TechPromux\\DynamicQueryBundle\\Tests\\": "Tests/" }
+     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
+

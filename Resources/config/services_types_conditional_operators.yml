@@ -2,132 +2,132 @@ services:
     # Conditional Operator Types Services
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsTrue:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsTrueConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsTrueConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsNotTrue:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotTrueConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotTrueConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsFalse:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsFalseConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsFalseConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsNotFalse:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotFalseConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotFalseConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsNull:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNullConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNullConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsNotNull:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotNullConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotNullConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsEmpty:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsEmptyConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsEmptyConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.unary.IsNotEmpty:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotEmptyConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary\IsNotEmptyConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.Equal:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\EqualConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\EqualConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.NotEqual:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotEqualConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotEqualConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.LessThan:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\LessThanConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\LessThanConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.LessOrEqual:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\LessOrEqualConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\LessOrEqualConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.GreaterThan:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\GreaterThanConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\GreaterThanConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.GreaterOrEqual:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\GreaterOrEqualConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\GreaterOrEqualConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.Between:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\BetweenConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\BetweenConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.NotBetween:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotBetweenConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotBetweenConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.In:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\InConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\InConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.NotIn:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotInConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotInConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.Contains:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\ContainsConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\ContainsConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.NotContains:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotContainsConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotContainsConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.NotStartsWith:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotStartsWithConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotStartsWithConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.StartsWith:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\StartsWithConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\StartsWithConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.EndsWith:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\EndsWithConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\EndsWithConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.NotEndsWith:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotEndsWithConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotEndsWithConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.Like:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\LikeConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\LikeConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 
     techpromux_dynamic_query.type.conditional_operator.binary.NotLike:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotLikeConditionalOperatorType
+        class:  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary\NotLikeConditionalOperatorType
         tags:
             - { name: techpromux_dynamic_query.type.conditional_operator}
 

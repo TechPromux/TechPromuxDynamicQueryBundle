@@ -6,10 +6,12 @@
  * Time: 01:01
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Manager;
+namespace  TechPromux\DynamicQueryBundle\Manager;
 
-use TechPromux\Bundle\BaseBundle\Manager\Resource\BaseResourceManager;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataSource;
+use Doctrine\Bundle\DoctrineBundle\ConnectionFactory;
+use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use  TechPromux\BaseBundle\Manager\Security\BaseSecurityManager;
+use  TechPromux\DynamicQueryBundle\Entity\DataSource;
 
 class DataSourceManager extends BaseResourceManager
 {
@@ -68,16 +70,64 @@ class DataSourceManager extends BaseResourceManager
         return $this;
     }
 
+    /**
+     * @var BaseSecurityManager
+     */
+    private $security_manager;
+
+    /**
+     * @return BaseSecurityManager
+     */
+    public function getSecurityManager()
+    {
+        return $this->security_manager;
+    }
+
+    /**
+     * @param BaseSecurityManager $security_manager
+     * @return DataSourceManager
+     */
+    public function setSecurityManager($security_manager)
+    {
+        $this->security_manager = $security_manager;
+        return $this;
+    }
+
+
     //-----------------------------------------------------------------------------------------------
 
     /**
-     * Gets "doctrine.dbal.connection_factory" service
+     * @var ConnectionFactory
+     */
+    private $connection_factory;
+
+    /**
+     * @return ConnectionFactory
+     */
+    public function getConnectionFactory()
+    {
+        return $this->connection_factory;
+    }
+
+    /**
+     * @param ConnectionFactory $connection_factory
+     * @return DataSourceManager
+     */
+    public function setConnectionFactory($connection_factory)
+    {
+        $this->connection_factory = $connection_factory;
+        return $this;
+    }
+
+
+    /**
+     * Get default Connection Factory
      *
      * @return \Doctrine\Bundle\DoctrineBundle\ConnectionFactory
      */
     public function getDoctrineConnectionFactory()
     {
-        return $this->service_container->get('doctrine.dbal.connection_factory');
+        return $this->getConnectionFactory();
     }
 
     /**
@@ -118,7 +168,7 @@ class DataSourceManager extends BaseResourceManager
     public function createDoctrineDBALSchemaManager(\Doctrine\DBAL\Connection $connection)
     {
 
-        $em_default = $this->getDoctrineEntityManager();
+        $em_default = $this->getEntityManager();
 
         $em_new = \Doctrine\ORM\EntityManager::create($connection, $em_default->getConfiguration());
 
@@ -136,7 +186,7 @@ class DataSourceManager extends BaseResourceManager
     {
 
         $encoded_password = $datasource->getDbPassword();
-        $plain_password = $this->decodeReversibleString($encoded_password);
+        $plain_password = $this->getSecurityManager()->decodeReversibleString($encoded_password);
         $connection = $this->createDoctrineDBALConnection(
             $datasource->getDriverType(),
             $datasource->getDbHost(),
@@ -286,7 +336,7 @@ class DataSourceManager extends BaseResourceManager
      * @param DataSource $object
      * @param bool $flushed
      *
-     * @return \TechPromux\Bundle\BaseBundle\Entity\Resource\BaseResource|void
+     * @return \ TechPromux\BaseBundle\Entity\Resource\BaseResource|void
      */
     public function preUpdate($object, $flushed = true)
     {
@@ -294,13 +344,12 @@ class DataSourceManager extends BaseResourceManager
         parent::preUpdate($object);
 
         $plain_password = $object->getPlainPassword();
-        $encoded_password = $this->encodeReversibleString($plain_password);
+        $encoded_password = $this->getSecurityManager()->encodeReversibleString($plain_password);
         $object->setDbPassword($encoded_password);
 
         $metadata_information = $this->getDataSourceMetadataInformation($object);
         $object->setMetadataInfo($metadata_information);
     }
-
 
 
 }

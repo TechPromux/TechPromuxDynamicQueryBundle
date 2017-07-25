@@ -1,11 +1,11 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat;
+namespace  TechPromux\DynamicQueryBundle\Type\ValueFormat;
 
 /**
  * Interface BaseValueFormatType
  *
- * @package TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat
+ * @package  TechPromux\DynamicQueryBundle\Type\ValueFormat
  */
 interface BaseValueFormatType
 {

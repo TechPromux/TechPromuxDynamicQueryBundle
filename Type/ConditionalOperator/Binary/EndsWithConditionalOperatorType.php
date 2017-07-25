@@ -6,10 +6,10 @@
  * Time: 00:52
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Binary;
+namespace  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Binary;
 
 
-use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
 
 class EndsWithConditionalOperatorType implements BaseConditionalOperatorType
 {

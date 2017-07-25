@@ -1,11 +1,11 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue;
+namespace  TechPromux\DynamicQueryBundle\Type\DynamicValue;
 
 /**
  * Interface BaseDynamicValueType
  *
- * @package TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue
+ * @package  TechPromux\DynamicQueryBundle\Type\DynamicValue
  */
 interface BaseDynamicValueType
 {

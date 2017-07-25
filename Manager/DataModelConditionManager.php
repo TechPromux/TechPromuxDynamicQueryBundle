@@ -6,10 +6,10 @@
  * Time: 01:01
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Manager;
+namespace  TechPromux\DynamicQueryBundle\Manager;
 
-use TechPromux\Bundle\BaseBundle\Manager\Resource\BaseResourceManager;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition;
+use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use  TechPromux\DynamicQueryBundle\Entity\DataModelCondition;
 
 class DataModelConditionManager extends BaseResourceManager
 {

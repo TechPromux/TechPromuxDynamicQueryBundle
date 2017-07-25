@@ -1,10 +1,10 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Controller;
+namespace  TechPromux\DynamicQueryBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelManager;
+use  TechPromux\DynamicQueryBundle\Manager\DataModelManager;
 
 class DataModelAdminController extends CRUDController
 {

@@ -6,11 +6,11 @@
  * Time: 01:01
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Manager;
+namespace  TechPromux\DynamicQueryBundle\Manager;
 
-use TechPromux\Bundle\BaseBundle\Manager\Resource\BaseResourceManager;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField;
+use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use  TechPromux\DynamicQueryBundle\Entity\Metadata;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
 
 class MetadataFieldManager extends BaseResourceManager
 {

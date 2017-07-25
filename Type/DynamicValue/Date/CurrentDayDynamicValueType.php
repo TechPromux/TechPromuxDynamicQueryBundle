@@ -6,10 +6,10 @@
  * Time: 18:53
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date;
+namespace  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date;
 
 
-use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
+use  TechPromux\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
 
 class CurrentDayDynamicValueType implements BaseDynamicValueType
 {

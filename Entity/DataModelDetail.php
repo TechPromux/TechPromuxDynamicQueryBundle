@@ -1,9 +1,9 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Entity;
+namespace  TechPromux\DynamicQueryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\BaseResource;
+use  TechPromux\BaseBundle\Entity\Resource\BaseResource;
 
 /**
  * DataModelDetail
@@ -255,11 +255,11 @@ class DataModelDetail extends BaseResource
     /**
      * Set datamodel
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel $datamodel
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel
      *
      * @return DataModelDetail
      */
-    public function setDatamodel(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel $datamodel)
+    public function setDatamodel(\ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel)
     {
         $this->datamodel = $datamodel;
 
@@ -269,7 +269,7 @@ class DataModelDetail extends BaseResource
     /**
      * Get datamodel
      *
-     * @return \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel
+     * @return \ TechPromux\DynamicQueryBundle\Entity\DataModel
      */
     public function getDatamodel()
     {
@@ -279,11 +279,11 @@ class DataModelDetail extends BaseResource
     /**
      * Set field
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField $field
+     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataField $field
      *
      * @return DataModelDetail
      */
-    public function setField(\TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField $field)
+    public function setField(\ TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
     {
         $this->field = $field;
 
@@ -293,7 +293,7 @@ class DataModelDetail extends BaseResource
     /**
      * Get field
      *
-     * @return \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField
+     * @return \ TechPromux\DynamicQueryBundle\Entity\MetadataField
      */
     public function getField()
     {

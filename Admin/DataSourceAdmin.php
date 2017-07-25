@@ -1,6 +1,6 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Admin;
+namespace  TechPromux\DynamicQueryBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -8,9 +8,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use TechPromux\Bundle\BaseBundle\Admin\Resource\BaseResourceAdmin;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataSource;
-use TechPromux\Bundle\DynamicQueryBundle\Manager\DataSourceManager;
+use  TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
+use  TechPromux\DynamicQueryBundle\Entity\DataSource;
+use  TechPromux\DynamicQueryBundle\Manager\DataSourceManager;
 
 class DataSourceAdmin extends BaseResourceAdmin
 {
@@ -142,7 +142,7 @@ class DataSourceAdmin extends BaseResourceAdmin
 
         if (!is_null($object) && !is_null($object->getId())) {
             $encoded_password = $object->getDbPassword();
-            $plain_password = $this->getResourceManager()->decodeReversibleString($encoded_password);
+            $plain_password = $this->getResourceManager()->getSecurityManager()->decodeReversibleString($encoded_password);
             $object->setPlainPassword($plain_password);
         }
 
@@ -254,42 +254,5 @@ class DataSourceAdmin extends BaseResourceAdmin
         }
 
     }
-
-    //--------------------------------------------------------------------------------------------
-
-    protected function configureSideMenu2(\Knp\Menu\ItemInterface $menu, $action, \Sonata\AdminBundle\Admin\AdminInterface $childAdmin = null)
-    {
-
-        if (!$childAdmin && !in_array($action, array('edit'))) {
-            return;
-        }
-
-        $admin = $this->isChild() ? $this->getParent() : $this;
-
-        $id = $admin->getRequest()->get('id');
-
-        if ($admin->getRequest()->get('childId') || ($admin->getRequest()->get('id') && in_array($action, array('list')))) {
-            $menu->addChild('link_action_connection_edit', array(
-                    'uri' => $admin->generateUrl('edit', array('id' => $id))
-                )
-            );
-        }
-        if ($admin->getRequest()->get('id') && !$admin->getRequest()->get('childId') && in_array($action, array('edit'))) {
-            $menu->addChild('link_action_datasourceconnection_metadata_list', array(
-                    'uri' => $admin->generateUrl('tech_prommux_dynamic_query.admin.datasourceconnection|tech_prommux_dynamic_query.admin.datasourcemetadata.list', array('id' => $id))
-                )
-            );
-        }
-
-        if ($admin->getRequest()->get('id') && $admin->getRequest()->get('childId') && in_array($action, array('edit'))) {
-            $menu->addChild('link_action_datasourceconnection_metadata_list', array(
-                    'uri' => $this->getChild('tech_prommux_dynamic_query.admin.datasourcemetadata')->generateUrl('list', array())
-                )
-            );
-        }
-    }
-
-
-
 
 }

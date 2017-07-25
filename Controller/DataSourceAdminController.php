@@ -1,10 +1,10 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Controller;
+namespace  TechPromux\DynamicQueryBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataSource;
+use  TechPromux\DynamicQueryBundle\Entity\DataSource;
 
 class DataSourceAdminController extends CRUDController
 {

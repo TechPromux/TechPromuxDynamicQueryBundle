@@ -1,6 +1,6 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\DependencyInjection;
+namespace  TechPromux\DynamicQueryBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

@@ -2,42 +2,42 @@ services:
     # Dynamic Value Types Services
 
     techpromux_dynamic_query.type.value_format.date.ToDatedmY:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Date\ToDatedmYValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Date\ToDatedmYValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 
     techpromux_dynamic_query.type.value_format.date.ToDateYmd:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Date\ToDateYmdValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Date\ToDateYmdValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 
     techpromux_dynamic_query.type.value_format.number.ToInteger_XXX0:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_XXX0ValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_XXX0ValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 
     techpromux_dynamic_query.type.value_format.number.ToInteger_X_XX0:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_X_XX0ValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_X_XX0ValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 
     techpromux_dynamic_query.type.value_format.number.ToInteger_XcXX0:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_XcXX0ValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number\ToInteger_XcXX0ValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 
     techpromux_dynamic_query.type.value_format.number.ToFloat_XXX0pXX:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_XXX0pXXValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_XXX0pXXValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 
     techpromux_dynamic_query.type.value_format.number.ToFloat_X_XX0pXX:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_X_XX0pXXValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_X_XX0pXXValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 
     techpromux_dynamic_query.type.value_format.number.ToFloat_XcXX0pXX:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_XcXX0pXXValueFormatType
+        class:  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number\ToFloat_XcXX0pXXValueFormatType
         tags:
             - { name: techpromux_dynamic_query.type.value_format}
 

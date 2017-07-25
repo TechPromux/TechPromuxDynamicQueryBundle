@@ -1,6 +1,6 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Admin;
+namespace  TechPromux\DynamicQueryBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -8,9 +8,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use TechPromux\Bundle\BaseBundle\Admin\Resource\BaseResourceAdmin;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition;
-use TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelConditionManager;
+use  TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
+use  TechPromux\DynamicQueryBundle\Entity\DataModelCondition;
+use  TechPromux\DynamicQueryBundle\Manager\DataModelConditionManager;
 
 class DataModelConditionAdmin extends BaseResourceAdmin
 {

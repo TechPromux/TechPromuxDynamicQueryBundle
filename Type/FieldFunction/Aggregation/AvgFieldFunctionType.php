@@ -6,9 +6,9 @@
  * Time: 11:30
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Aggregation;
+namespace  TechPromux\DynamicQueryBundle\Type\FieldFunction\Aggregation;
 
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
+use  TechPromux\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
 
 class AvgFieldFunctionType implements BaseFieldFunctionType
 {

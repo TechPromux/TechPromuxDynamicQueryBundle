@@ -6,16 +6,18 @@
  * Time: 01:01
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Manager;
+namespace  TechPromux\DynamicQueryBundle\Manager;
 
-use TechPromux\Bundle\BaseBundle\Manager\Resource\BaseResourceManager;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable;
-use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\InnerJoinTableRelationType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\LeftJoinTableRelationType;
+use  TechPromux\BaseBundle\Manager\Owner\BaseResourceOwnerManager;
+use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use  TechPromux\DynamicQueryBundle\Entity\DataSource;
+use  TechPromux\DynamicQueryBundle\Entity\Metadata;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataTable;
+use  TechPromux\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
+use  TechPromux\DynamicQueryBundle\Type\TableRelation\InnerJoinTableRelationType;
+use  TechPromux\DynamicQueryBundle\Type\TableRelation\LeftJoinTableRelationType;
 
 class MetadataManager extends BaseResourceManager
 {
@@ -77,42 +79,97 @@ class MetadataManager extends BaseResourceManager
     //-------------------------------------------------------------------------------------
 
     /**
-     * @return object|DataSourceManager
+     * @var DataSourceManager
+     */
+    private $data_source_manager;
+
+    /**
+     * @return DataSourceManager
      */
     public function getDataSourceManager()
     {
-        // TODO: replace with services injection
-
-        return $this->getServiceContainer()->get('techpromux_dynamic_query.manager.datasource');
+        return $this->data_source_manager;
     }
 
     /**
-     * @return object|MetadataTableManager
+     * @param DataSourceManager $data_source_manager
+     * @return MetadataManager
+     */
+    public function setDataSourceManager($data_source_manager)
+    {
+        $this->data_source_manager = $data_source_manager;
+        return $this;
+    }
+
+    /**
+     * @var MetadataTableManager
+     */
+    private $metadata_table_manager;
+
+    /**
+     * @return MetadataTableManager
      */
     public function getMetadataTableManager()
     {
-        // TODO: replace with services injection
-        // TODO create property and set it by container configuration
-        return $this->getServiceContainer()->get('techpromux_dynamic_query.manager.metadata_table');
+        return $this->metadata_table_manager;
     }
 
     /**
-     * @return object|MetadataFieldManager
+     * @param MetadataTableManager $metadata_table_manager
+     * @return MetadataManager
+     */
+    public function setMetadataTableManager($metadata_table_manager)
+    {
+        $this->metadata_table_manager = $metadata_table_manager;
+        return $this;
+    }
+
+    /**
+     * @var MetadataFieldManager
+     */
+    private $metadata_field_manager;
+
+    /**
+     * @return MetadataFieldManager
      */
     public function getMetadataFieldManager()
     {
-        // TODO create property and set it by container configuration
-        return $this->getServiceContainer()->get('techpromux_dynamic_query.manager.metadata_field');
+        return $this->metadata_field_manager;
     }
 
     /**
-     * @return object|MetadataRelationManager
+     * @param MetadataFieldManager $metadata_field_manager
+     * @return MetadataManager
+     */
+    public function setMetadataFieldManager($metadata_field_manager)
+    {
+        $this->metadata_field_manager = $metadata_field_manager;
+        return $this;
+    }
+
+    /**
+     * @var MetadataRelationManager
+     */
+    private $metadata_relation_manager;
+
+    /**
+     * @return MetadataRelationManager
      */
     public function getMetadataRelationManager()
     {
-        // TODO create property and set it by container configuration
-        return $this->getServiceContainer()->get('techpromux_dynamic_query.manager.metadata_relation');
+        return $this->metadata_relation_manager;
     }
+
+    /**
+     * @param MetadataRelationManager $metadata_relation_manager
+     * @return MetadataManager
+     */
+    public function setMetadataRelationManager($metadata_relation_manager)
+    {
+        $this->metadata_relation_manager = $metadata_relation_manager;
+        return $this;
+    }
+
 
     //--------------------------------------------------------------------------------
 

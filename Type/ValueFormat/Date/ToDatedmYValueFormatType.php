@@ -7,10 +7,10 @@
  * Time: 23:37
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Date;
+namespace  TechPromux\DynamicQueryBundle\Type\ValueFormat\Date;
 
 
-use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
+use  TechPromux\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
 
 class ToDatedmYValueFormatType implements BaseValueFormatType
 {

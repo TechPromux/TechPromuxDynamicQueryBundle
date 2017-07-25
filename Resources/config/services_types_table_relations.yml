@@ -2,12 +2,12 @@ services:
     # Table Relations Types Services
 
     techpromux_dynamic_query.type.table_relation.inner:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\InnerJoinTableRelationType
+        class:  TechPromux\DynamicQueryBundle\Type\TableRelation\InnerJoinTableRelationType
         tags:
             - { name: techpromux_dynamic_query.type.table_relation}
 
     techpromux_dynamic_query.type.table_relation.left:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\LeftJoinTableRelationType
+        class:  TechPromux\DynamicQueryBundle\Type\TableRelation\LeftJoinTableRelationType
         tags:
             - { name: techpromux_dynamic_query.type.table_relation}
 

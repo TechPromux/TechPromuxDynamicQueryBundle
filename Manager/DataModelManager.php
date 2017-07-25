@@ -6,24 +6,24 @@
  * Time: 01:01
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Manager;
+namespace  TechPromux\DynamicQueryBundle\Manager;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Pagerfanta\Pagerfanta;
-use TechPromux\Bundle\BaseBundle\Manager\Adapter\Paginator\DoctrineDbalPaginatorAdapter;
-use TechPromux\Bundle\BaseBundle\Manager\Resource\BaseResourceManager;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelDetail;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelGroup;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelOrder;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataSource;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable;
-use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use  TechPromux\BaseBundle\Manager\Adapter\Paginator\DoctrineDbalPaginatorAdapter;
+use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use  TechPromux\DynamicQueryBundle\Entity\DataModel;
+use  TechPromux\DynamicQueryBundle\Entity\DataModelCondition;
+use  TechPromux\DynamicQueryBundle\Entity\DataModelDetail;
+use  TechPromux\DynamicQueryBundle\Entity\DataModelGroup;
+use  TechPromux\DynamicQueryBundle\Entity\DataModelOrder;
+use  TechPromux\DynamicQueryBundle\Entity\DataSource;
+use  TechPromux\DynamicQueryBundle\Entity\Metadata;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataTable;
+use  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
 
 class DataModelManager extends BaseResourceManager
 {
@@ -341,7 +341,7 @@ class DataModelManager extends BaseResourceManager
 
             $duplicatedDataModel->addDetail($duplicatedDtl);
 
-            //$this->getDoctrineEntityManager()->persist($duplicatedDtl);
+            //$this->getEntityManager()->persist($duplicatedDtl);
         }
 
         //-------------------------------------------------

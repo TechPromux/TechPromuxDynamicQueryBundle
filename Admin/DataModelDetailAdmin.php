@@ -1,16 +1,16 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Admin;
+namespace  TechPromux\DynamicQueryBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use TechPromux\Bundle\BaseBundle\Admin\Resource\BaseResourceAdmin;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelDetail;
-use TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelDetailManager;
+use  TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
+use  TechPromux\DynamicQueryBundle\Entity\DataModel;
+use  TechPromux\DynamicQueryBundle\Entity\DataModelDetail;
+use  TechPromux\DynamicQueryBundle\Manager\DataModelDetailManager;
 
 class DataModelDetailAdmin extends BaseResourceAdmin
 {

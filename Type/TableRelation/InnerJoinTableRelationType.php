@@ -6,11 +6,11 @@
  * Time: 12:31
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation;
+namespace  TechPromux\DynamicQueryBundle\Type\TableRelation;
 
 
 use Doctrine\ORM\QueryBuilder;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
 
 class InnerJoinTableRelationType implements BaseTableRelationType
 {

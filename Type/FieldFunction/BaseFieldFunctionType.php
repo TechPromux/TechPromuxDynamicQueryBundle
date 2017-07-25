@@ -1,11 +1,11 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction;
+namespace  TechPromux\DynamicQueryBundle\Type\FieldFunction;
 
 /**
  * Interface BaseFieldFunctionType
  *
- * @package TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction
+ * @package  TechPromux\DynamicQueryBundle\Type\FieldFunction
  */
 interface BaseFieldFunctionType
 {

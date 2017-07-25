@@ -1,11 +1,11 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Entity;
+namespace  TechPromux\DynamicQueryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\BaseResource;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\HasResourceOwner;
+use  TechPromux\BaseBundle\Entity\Resource\BaseResource;
+use  TechPromux\BaseBundle\Entity\Owner\ResourceOwner;
+use  TechPromux\BaseBundle\Entity\Owner\HasResourceOwner;
 
 /**
  * Metadata
@@ -49,7 +49,7 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * @var ResourceOwner
      *
-     * @ORM\ManyToOne(targetEntity="TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner")
+     * @ORM\ManyToOne(targetEntity=" TechPromux\BaseBundle\Entity\Owner\ResourceOwner")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=true)
      */
     protected $owner;
@@ -107,11 +107,11 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Set datasource
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataSource $datasource
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataSource $datasource
      *
      * @return Metadata
      */
-    public function setDatasource(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataSource $datasource)
+    public function setDatasource(\ TechPromux\DynamicQueryBundle\Entity\DataSource $datasource)
     {
         $this->datasource = $datasource;
 
@@ -121,7 +121,7 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Get datasource
      *
-     * @return \TechPromux\Bundle\DynamicQueryBundle\Entity\DataSource
+     * @return \ TechPromux\DynamicQueryBundle\Entity\DataSource
      */
     public function getDatasource()
     {
@@ -131,11 +131,11 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Add table
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable $table
+     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataTable $table
      *
      * @return Metadata
      */
-    public function addTable(\TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable $table)
+    public function addTable(\ TechPromux\DynamicQueryBundle\Entity\MetadataTable $table)
     {
         $this->tables[] = $table;
 
@@ -145,9 +145,9 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Remove table
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable $table
+     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataTable $table
      */
-    public function removeTable(\TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataTable $table)
+    public function removeTable(\ TechPromux\DynamicQueryBundle\Entity\MetadataTable $table)
     {
         $this->tables->removeElement($table);
     }
@@ -165,11 +165,11 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Add relation
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation $relation
+     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $relation
      *
      * @return Metadata
      */
-    public function addRelation(\TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation $relation)
+    public function addRelation(\ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $relation)
     {
         $this->relations[] = $relation;
 
@@ -179,9 +179,9 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Remove relation
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation $relation
+     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $relation
      */
-    public function removeRelation(\TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataRelation $relation)
+    public function removeRelation(\ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $relation)
     {
         $this->relations->removeElement($relation);
     }
@@ -199,11 +199,11 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Add field
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField $field
+     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataField $field
      *
      * @return Metadata
      */
-    public function addField(\TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField $field)
+    public function addField(\ TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
     {
         $this->fields[] = $field;
 
@@ -213,9 +213,9 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Remove field
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField $field
+     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataField $field
      */
-    public function removeField(\TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField $field)
+    public function removeField(\ TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
     {
         $this->fields->removeElement($field);
     }
@@ -233,11 +233,11 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Add datamodel
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel $datamodel
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel
      *
      * @return Metadata
      */
-    public function addDatamodel(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel $datamodel)
+    public function addDatamodel(\ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel)
     {
         $this->datamodels[] = $datamodel;
 
@@ -247,9 +247,9 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Remove datamodel
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel $datamodel
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel
      */
-    public function removeDatamodel(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModel $datamodel)
+    public function removeDatamodel(\ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel)
     {
         $this->datamodels->removeElement($datamodel);
     }

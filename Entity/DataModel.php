@@ -1,11 +1,11 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Entity;
+namespace  TechPromux\DynamicQueryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\BaseResource;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\HasResourceOwner;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner;
+use  TechPromux\BaseBundle\Entity\Resource\BaseResource;
+use  TechPromux\BaseBundle\Entity\Owner\HasResourceOwner;
+use  TechPromux\BaseBundle\Entity\Owner\ResourceOwner;
 
 /**
  * DataModel
@@ -56,7 +56,7 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * @var ResourceOwner
      *
-     * @ORM\ManyToOne(targetEntity="TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner")
+     * @ORM\ManyToOne(targetEntity=" TechPromux\BaseBundle\Entity\Owner\ResourceOwner")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=true)
      */
     protected $owner;
@@ -110,11 +110,11 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Set metadata
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      *
      * @return DataModel
      */
-    public function setMetadata(\TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function setMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadata = $metadata;
 
@@ -124,7 +124,7 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Get metadata
      *
-     * @return \TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata
+     * @return \ TechPromux\DynamicQueryBundle\Entity\Metadata
      */
     public function getMetadata()
     {
@@ -134,11 +134,11 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Add detail
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelDetail $detail
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail
      *
      * @return DataModel
      */
-    public function addDetail(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelDetail $detail)
+    public function addDetail(\ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail)
     {
         $this->details[] = $detail;
 
@@ -148,9 +148,9 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Remove detail
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelDetail $detail
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail
      */
-    public function removeDetail(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelDetail $detail)
+    public function removeDetail(\ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail)
     {
         $this->details->removeElement($detail);
     }
@@ -168,11 +168,11 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Add group
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelGroup $group
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group
      *
      * @return DataModel
      */
-    public function addGroup(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelGroup $group)
+    public function addGroup(\ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group)
     {
         $this->groups[] = $group;
 
@@ -182,9 +182,9 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Remove group
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelGroup $group
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group
      */
-    public function removeGroup(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelGroup $group)
+    public function removeGroup(\ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group)
     {
         $this->groups->removeElement($group);
     }
@@ -202,11 +202,11 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Add condition
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition $condition
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition
      *
      * @return DataModel
      */
-    public function addCondition(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition $condition)
+    public function addCondition(\ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition)
     {
         $this->conditions[] = $condition;
 
@@ -216,9 +216,9 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Remove condition
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition $condition
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition
      */
-    public function removeCondition(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelCondition $condition)
+    public function removeCondition(\ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition)
     {
         $this->conditions->removeElement($condition);
     }
@@ -236,11 +236,11 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Add order
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelOrder $order
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order
      *
      * @return DataModel
      */
-    public function addOrder(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelOrder $order)
+    public function addOrder(\ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order)
     {
         $this->orders[] = $order;
 
@@ -250,9 +250,9 @@ class DataModel extends BaseResource implements HasResourceOwner
     /**
      * Remove order
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelOrder $order
+     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order
      */
-    public function removeOrder(\TechPromux\Bundle\DynamicQueryBundle\Entity\DataModelOrder $order)
+    public function removeOrder(\ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order)
     {
         $this->orders->removeElement($order);
     }

@@ -6,19 +6,19 @@
  * Time: 14:50
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Manager;
+namespace  TechPromux\DynamicQueryBundle\Manager;
 
 
-use TechPromux\Bundle\BaseBundle\Manager\BaseManager;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\MetadataField;
-use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentMonthDynamicValueType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentWeekDynamicValueType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentYearDynamicValueType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
-use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
+use  TechPromux\BaseBundle\Manager\BaseManager;
+use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
+use  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use  TechPromux\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
+use  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentMonthDynamicValueType;
+use  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentWeekDynamicValueType;
+use  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentYearDynamicValueType;
+use  TechPromux\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
+use  TechPromux\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
+use  TechPromux\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
 
 
 class UtilDynamicQueryManager extends BaseManager

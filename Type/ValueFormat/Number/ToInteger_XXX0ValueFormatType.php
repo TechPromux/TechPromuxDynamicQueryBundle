@@ -6,10 +6,10 @@
  * Time: 22:56
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\Number;
+namespace  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number;
 
 
-use TechPromux\Bundle\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
+use  TechPromux\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
 
 class ToInteger_XXX0ValueFormatType implements BaseValueFormatType
 {

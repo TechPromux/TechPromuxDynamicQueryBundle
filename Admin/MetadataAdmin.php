@@ -1,15 +1,15 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Admin;
+namespace  TechPromux\DynamicQueryBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use TechPromux\Bundle\BaseBundle\Admin\Resource\BaseResourceAdmin;
-use TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata;
-use TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataManager;
+use  TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
+use  TechPromux\DynamicQueryBundle\Entity\Metadata;
+use  TechPromux\DynamicQueryBundle\Manager\MetadataManager;
 
 class MetadataAdmin extends BaseResourceAdmin
 {
@@ -133,7 +133,7 @@ class MetadataAdmin extends BaseResourceAdmin
                     'disabled' => !is_null($object->getId()),
                     'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($datasourceManager) {
                         $qb = $er->createQueryBuilder('t');
-                        $qb = $datasourceManager->alterBaseQuery($qb);
+                        $qb = $datasourceManager->alterBaseQueryBuilder($qb);
                         return $qb;
                     },
                     'choice_label' => 'name',

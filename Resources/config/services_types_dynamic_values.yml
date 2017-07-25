@@ -2,7 +2,7 @@ services:
     # Dynamic Value Types Services
 
     techpromux_dynamic_query.type.dynamic_value.date.CurrentDay:
-        class: TechPromux\Bundle\DynamicQueryBundle\Type\DynamicValue\Date\CurrentDayDynamicValueType
+        class:  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\CurrentDayDynamicValueType
         tags:
             - { name: techpromux_dynamic_query.type.dynamic_value}
 

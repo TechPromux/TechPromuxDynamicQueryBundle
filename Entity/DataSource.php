@@ -1,11 +1,11 @@
 <?php
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Entity;
+namespace  TechPromux\DynamicQueryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\BaseResource;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner;
-use TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\HasResourceOwner;
+use  TechPromux\BaseBundle\Entity\Resource\BaseResource;
+use  TechPromux\BaseBundle\Entity\Owner\ResourceOwner;
+use  TechPromux\BaseBundle\Entity\Owner\HasResourceOwner;
 
 /**
  * DataSource
@@ -72,7 +72,7 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * @var ResourceOwner
      *
-     * @ORM\ManyToOne(targetEntity="TechPromux\Bundle\BaseBundle\Entity\Resource\Owner\ResourceOwner")
+     * @ORM\ManyToOne(targetEntity=" TechPromux\BaseBundle\Entity\Owner\ResourceOwner")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=true)
      */
     protected $owner;
@@ -313,11 +313,11 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * Add metadata
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      *
      * @return DataSource
      */
-    public function addMetadata(\TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function addMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadatas[] = $metadata;
 
@@ -327,9 +327,9 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * Remove metadata
      *
-     * @param \TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      */
-    public function removeMetadata(\TechPromux\Bundle\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function removeMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadatas->removeElement($metadata);
     }

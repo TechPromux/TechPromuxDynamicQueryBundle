@@ -6,10 +6,10 @@
  * Time: 00:52
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\Unary;
+namespace  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary;
 
 
-use TechPromux\Bundle\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
 
 class IsNotTrueConditionalOperatorType implements BaseConditionalOperatorType
 {

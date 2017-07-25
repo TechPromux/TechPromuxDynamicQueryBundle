@@ -2,65 +2,81 @@ services:
     # Manager Services
 
     techpromux_dynamic_query.manager.util_dynamic_query:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\UtilDynamicQueryManager
+        class:  TechPromux\DynamicQueryBundle\Manager\UtilDynamicQueryManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
 
     techpromux_dynamic_query.manager.datasource:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\DataSourceManager
+        class:  TechPromux\DynamicQueryBundle\Manager\DataSourceManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
+            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
             - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.util_dynamic_query']]
+            - [ setSecurityManager,['@techpromux.manager.default_security']]
+            - [ setConnectionFactory,['@doctrine.dbal.connection_factory']]
 
     techpromux_dynamic_query.manager.metadata:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataManager
+        class:  TechPromux\DynamicQueryBundle\Manager\MetadataManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
+            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
             - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.util_dynamic_query']]
+            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
+            - [ setDataSourceManager,['@techpromux_dynamic_query.manager.datasource']]
+            - [ setMetadataTableManager,['@techpromux_dynamic_query.manager.metadata_table']]
+            - [ setMetadataFieldManager,['@techpromux_dynamic_query.manager.metadata_field']]
+            - [ setMetadataRelationManager,['@techpromux_dynamic_query.manager.metadata_relation']]
 
     techpromux_dynamic_query.manager.metadata_table:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataTableManager
+        class:  TechPromux\DynamicQueryBundle\Manager\MetadataTableManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
             - [ setMetadataManager,['@techpromux_dynamic_query.manager.metadata']]
 
     techpromux_dynamic_query.manager.metadata_relation:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataRelationManager
+        class:  TechPromux\DynamicQueryBundle\Manager\MetadataRelationManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
             - [ setMetadataManager,['@techpromux_dynamic_query.manager.metadata']]
 
     techpromux_dynamic_query.manager.metadata_field:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\MetadataFieldManager
+        class:  TechPromux\DynamicQueryBundle\Manager\MetadataFieldManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
             - [ setMetadataManager,['@techpromux_dynamic_query.manager.metadata']]
 
     techpromux_dynamic_query.manager.datamodel:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelManager
+        class:  TechPromux\DynamicQueryBundle\Manager\DataModelManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
+            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
             - [ setMetadataManager,['@techpromux_dynamic_query.manager.metadata']]
             - [ setDatamodelDetailManager,['@techpromux_dynamic_query.manager.datamodel_detail']]
             - [ setDatamodelGroupManager,['@techpromux_dynamic_query.manager.datamodel_group']]
@@ -69,38 +85,42 @@ services:
             - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.util_dynamic_query']]
 
     techpromux_dynamic_query.manager.datamodel_detail:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelDetailManager
+        class:  TechPromux\DynamicQueryBundle\Manager\DataModelDetailManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
             - [ setDataModelManager,['@techpromux_dynamic_query.manager.datamodel']]
 
     techpromux_dynamic_query.manager.datamodel_group:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelGroupManager
+        class:  TechPromux\DynamicQueryBundle\Manager\DataModelGroupManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
             - [ setDataModelManager,['@techpromux_dynamic_query.manager.datamodel']]
 
     techpromux_dynamic_query.manager.datamodel_condition:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelConditionManager
+        class:  TechPromux\DynamicQueryBundle\Manager\DataModelConditionManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
             - [ setDataModelManager,['@techpromux_dynamic_query.manager.datamodel']]
 
     techpromux_dynamic_query.manager.datamodel_order:
-        class: TechPromux\Bundle\DynamicQueryBundle\Manager\DataModelOrderManager
+        class:  TechPromux\DynamicQueryBundle\Manager\DataModelOrderManager
         arguments: [~]
         tags:
-            - { name: techpromux.entity_manager}
+            - { name: techpromux.manager}
+            - { name: techpromux.resource_manager}
         calls:
-            - [ setServiceContainer,['@service_container']]
+            #- [ setServiceContainer,['@service_container']]
             - [ setDataModelManager,['@techpromux_dynamic_query.manager.datamodel']]
 

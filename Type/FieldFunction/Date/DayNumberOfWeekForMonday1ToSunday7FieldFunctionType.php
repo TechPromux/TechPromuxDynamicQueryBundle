@@ -6,9 +6,9 @@
  * Time: 11:30
  */
 
-namespace TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\Date;
+namespace  TechPromux\DynamicQueryBundle\Type\FieldFunction\Date;
 
-use TechPromux\Bundle\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
+use  TechPromux\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
 
 class DayNumberOfWeekForMonday1ToSunday7FieldFunctionType implements BaseFieldFunctionType
 {
