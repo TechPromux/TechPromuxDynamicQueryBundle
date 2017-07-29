@@ -18,7 +18,7 @@
 
         <!-- FIRST -->
         {% if currentPage > 1 %}
-            {% set rParams =  {'page': firstPage} | merge(routeParams) %}
+            {% set rParams =  {'_page': firstPage} | merge(routeParams) %}
             <li class="{{ firstEnabledClass }}"
                 title="{{ 'datamodel.execute.paginator.gotofirstpage' | trans({},admin.getResourceManager().getBundleName()) }}"
                 data-placement="top" data-toggle="tooltip">
@@ -34,7 +34,7 @@
 
         <!-- PREVIOUS -->
         {% if currentPage > 1 %}
-            {% set rParams =  {'page': previousPage} | merge(routeParams) %}
+            {% set rParams =  {'_page': previousPage} | merge(routeParams) %}
             <li class="{{ previousEnabledClass }}"
                 title="{{ 'datamodel.execute.paginator.gotopreviouspage' | trans({},admin.getResourceManager().getBundleName()) }}"
                 data-placement="top" data-toggle="tooltip">
@@ -62,7 +62,7 @@
                     <span>{{ page }}</span>
                 </li>
             {% else %}
-                {% set rParams =  {'page': ppage} | merge(routeParams) %}
+                {% set rParams =  {'_page': ppage} | merge(routeParams) %}
                 <li title="{{ 'datamodel.execute.paginator.gotopage' | trans({},admin.getResourceManager().getBundleName()) }} {{ ppage }}"
                     data-placement="top" data-toggle="tooltip">
                     <a href="{{ admin.generateUrl('execute', rParams) }}">{{ ppage }}</a>
@@ -72,7 +72,7 @@
 
         <!-- NEXT -->
         {% if currentPage < lastPage %}
-            {% set rParams =  {'page': nextPage} | merge(routeParams) %}
+            {% set rParams =  {'_page': nextPage} | merge(routeParams) %}
             <li class="{{ nextEnabledClass }}"
                 title="{{ 'datamodel.execute.paginator.gotonextpage' | trans({},admin.getResourceManager().getBundleName()) }}"
                 data-placement="top" data-toggle="tooltip">
@@ -88,7 +88,7 @@
 
         <!-- LAST -->
         {% if currentPage < lastPage %}
-            {% set rParams =  {'page': lastPage} | merge(routeParams) %}
+            {% set rParams =  {'_page': lastPage} | merge(routeParams) %}
             <li class="{{ lastEnabledClass }}"
                 title="{{ 'datamodel.execute.paginator.gotolastpage' | trans({},admin.getResourceManager().getBundleName()) }}"
                 data-placement="top" data-toggle="tooltip">

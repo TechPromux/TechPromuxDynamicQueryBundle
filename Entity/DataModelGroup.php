@@ -133,11 +133,11 @@ class DataModelGroup extends BaseResource
     /**
      * Set datamodel
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel
      *
      * @return DataModelGroup
      */
-    public function setDatamodel(\ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel)
+    public function setDatamodel(\TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel)
     {
         $this->datamodel = $datamodel;
 
@@ -147,7 +147,7 @@ class DataModelGroup extends BaseResource
     /**
      * Get datamodel
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\DataModel
+     * @return \TechPromux\DynamicQueryBundle\Entity\DataModel
      */
     public function getDatamodel()
     {
@@ -157,11 +157,11 @@ class DataModelGroup extends BaseResource
     /**
      * Set field
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataField $field
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataField $field
      *
      * @return DataModelGroup
      */
-    public function setField(\ TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
+    public function setField(\TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
     {
         $this->field = $field;
 
@@ -171,7 +171,7 @@ class DataModelGroup extends BaseResource
     /**
      * Get field
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\MetadataField
+     * @return \TechPromux\DynamicQueryBundle\Entity\MetadataField
      */
     public function getField()
     {

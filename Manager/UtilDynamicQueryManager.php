@@ -6,7 +6,7 @@
  * Time: 14:50
  */
 
-namespace  TechPromux\DynamicQueryBundle\Manager;
+namespace TechPromux\DynamicQueryBundle\Manager;
 
 
 use  TechPromux\BaseBundle\Manager\BaseManager;
@@ -283,6 +283,55 @@ class UtilDynamicQueryManager extends BaseManager
             return $formatted_value;
         } catch (\Exception $ex) {
             return '-- ERROR!!! --';
+        }
+    }
+
+    public function pushValueToArray(array $array, $value)
+    {
+        $array[] = $value;
+        return $array;
+    }
+
+    public function summarizeValues($summarize_function, array $values = array())
+    {
+        switch ($summarize_function) {
+            case 'SUM':
+                $result = 0;
+                foreach ($values as $i => $value) {
+                    $result += !is_null($value) ? $value : 0;
+                }
+                return $result;
+            case 'AVG':
+                if (count($values) == 0) return null;
+                $result = 0;
+                $cont = 0;
+                foreach ($values as $i => $value) {
+                    if (!is_null($value)) {
+                        $result += $value;
+                        $cont++;
+                    }
+                }
+                return $result / $cont;
+            case 'COUNT':
+                $result = 0;
+                foreach ($values as $i => $value) {
+                    if (!is_null($value)) ;
+                    $result++;
+                }
+                return $result;
+            case 'MIN':
+                $result = PHP_INT_MAX;
+                foreach ($values as $i => $value) {
+                    $result = !is_null($value) && $value <= $result ? $value : $result;
+                }
+                return $result;
+            case 'MAX':
+                $result = PHP_INT_MIN;
+                foreach ($values as $i => $value) {
+                    $result = !is_null($value) && $value >= $result ? $value : $result;
+                }
+                return $result;;
+
         }
     }
 

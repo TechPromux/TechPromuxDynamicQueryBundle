@@ -168,11 +168,11 @@ class MetadataRelation extends BaseResource
     /**
      * Set metadata
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      *
      * @return MetadataRelation
      */
-    public function setMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function setMetadata(\TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadata = $metadata;
 
@@ -182,7 +182,7 @@ class MetadataRelation extends BaseResource
     /**
      * Get metadata
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\Metadata
+     * @return \TechPromux\DynamicQueryBundle\Entity\Metadata
      */
     public function getMetadata()
     {
@@ -192,11 +192,11 @@ class MetadataRelation extends BaseResource
     /**
      * Set leftTable
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataTable $leftTable
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataTable $leftTable
      *
      * @return MetadataRelation
      */
-    public function setLeftTable(\ TechPromux\DynamicQueryBundle\Entity\MetadataTable $leftTable)
+    public function setLeftTable(\TechPromux\DynamicQueryBundle\Entity\MetadataTable $leftTable)
     {
         $this->leftTable = $leftTable;
 
@@ -206,7 +206,7 @@ class MetadataRelation extends BaseResource
     /**
      * Get leftTable
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\MetadataTable
+     * @return \TechPromux\DynamicQueryBundle\Entity\MetadataTable
      */
     public function getLeftTable()
     {
@@ -216,11 +216,11 @@ class MetadataRelation extends BaseResource
     /**
      * Set rightTable
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataTable $rightTable
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataTable $rightTable
      *
      * @return MetadataRelation
      */
-    public function setRightTable(\ TechPromux\DynamicQueryBundle\Entity\MetadataTable $rightTable)
+    public function setRightTable(\TechPromux\DynamicQueryBundle\Entity\MetadataTable $rightTable)
     {
         $this->rightTable = $rightTable;
 
@@ -230,7 +230,7 @@ class MetadataRelation extends BaseResource
     /**
      * Get rightTable
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\MetadataTable
+     * @return \TechPromux\DynamicQueryBundle\Entity\MetadataTable
      */
     public function getRightTable()
     {

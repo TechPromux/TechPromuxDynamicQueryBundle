@@ -453,7 +453,7 @@ class MetadataManager extends BaseResourceManager
      * @param Metadata $metadata
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
-    public function getQueryBuilderFromMetadata($metadata)
+    public function getQueryBuilderFromMetadata(Metadata $metadata)
     {
         /* @var $queryBuilder \Doctrine\DBAL\Query\QueryBuilder */
         $queryBuilder = $this->getDataSourceManager()->createQueryBuilderFromDataSource($metadata->getDatasource());
@@ -498,6 +498,25 @@ class MetadataManager extends BaseResourceManager
         return $queryBuilder;
     }
 
+    /**
+     *
+     * @param Metadata $metadata
+     * @return \Doctrine\DBAL\Query\QueryBuilder
+     */
+    public function getQueryBuilderFromMetadataTable(MetadataTable $metadata_table)
+    {
+        $metadata = $metadata_table->getMetadata();
+
+        /* @var $queryBuilder \Doctrine\DBAL\Query\QueryBuilder */
+        $queryBuilder = $this->getDataSourceManager()->createQueryBuilderFromDataSource($metadata->getDatasource());
+
+        $table_sql_name = $metadata_table->getSQLName();
+        $table_sql_alias = $metadata_table->getSQLAlias();
+
+        $queryBuilder->from($table_sql_name, $table_sql_alias);
+
+        return $queryBuilder;
+    }
     //--------------------------------------------------------------------------
 
     /**

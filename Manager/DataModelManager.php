@@ -6,7 +6,7 @@
  * Time: 01:01
  */
 
-namespace  TechPromux\DynamicQueryBundle\Manager;
+namespace TechPromux\DynamicQueryBundle\Manager;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -442,9 +442,9 @@ class DataModelManager extends BaseResourceManager
      * @param DataModel $datamodel
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
-    public function getQueryBuilderFromDataModel($datamodel)
+    public function getQueryBuilderFromDataModel(DataModel $datamodel)
     {
-        /* @var $metadata \TechPrommux\DynamicQueryBundle\Entity\Metadata */
+        /* @var $metadata Metadata */
         $metadata = $datamodel->getMetadata();
         /* @var $queryBuilder \Doctrine\DBAL\Query\QueryBuilder */
         $queryBuilder = $this->getMetadataManager()->getQueryBuilderFromMetadata($metadata);
@@ -615,6 +615,59 @@ class DataModelManager extends BaseResourceManager
         return $queryBuilder;
     }
 
+    /**
+     *
+     * @param DataModel $datamodel
+     * @return \Doctrine\DBAL\Query\QueryBuilder
+     */
+    public function getQueryBuilderFromDataModelDetail(DataModelDetail $detail)
+    {
+        /* @var $metadata_table MetadataTable */
+        $metadata_table = $detail->getField()->getTable();
+
+        /* @var $queryBuilder \Doctrine\DBAL\Query\QueryBuilder */
+        $queryBuilder = $this->getMetadataManager()->getQueryBuilderFromMetadataTable($metadata_table);
+
+        $detail_sql_name = $detail->getSqlName();
+        $detail_sql_alias = $detail->getSQLAlias();
+
+        $queryBuilder->addSelect('DISTINCT ' . $detail_sql_name . ' AS ' . $detail_sql_alias);
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param DataModelDetail $detail
+     * @return array
+     */
+    public function getDistinctResultsFromDatamodelDetail(DataModelDetail $detail)
+    {
+        $queryBuilder = $this->getQueryBuilderFromDataModelDetail($detail);
+
+        $result = $queryBuilder->execute()->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * @param DataModelDetail $detail
+     * @return array
+     */
+    public function getDistinctResultsChoicesFromDatamodelDetail(DataModelDetail $detail)
+    {
+        $result = $this->getDistinctResultsFromDatamodelDetail($detail);
+
+        $alias = $detail->getSQLAlias();
+
+        $result_choices = array();
+
+        foreach ($result as $i => $row) {
+            $result_choices[$row[$alias]] = $row[$alias];
+        }
+
+        return $result_choices;
+    }
+
     //---------------------------------------------------------------------------------------------------------------
 
     /**
@@ -751,7 +804,7 @@ class DataModelManager extends BaseResourceManager
 
     /**
      * @param $queryBuilder
-     * @return mixed
+     * @return Pagerfanta
      */
     public function createPaginatorForQueryBuilder($queryBuilder)
     {

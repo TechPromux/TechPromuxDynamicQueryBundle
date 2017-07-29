@@ -72,7 +72,7 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * @var ResourceOwner
      *
-     * @ORM\ManyToOne(targetEntity=" TechPromux\BaseBundle\Entity\Owner\ResourceOwner")
+     * @ORM\ManyToOne(targetEntity="TechPromux\BaseBundle\Entity\Owner\ResourceOwner")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=true)
      */
     protected $owner;
@@ -313,11 +313,11 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * Add metadata
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      *
      * @return DataSource
      */
-    public function addMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function addMetadata(\TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadatas[] = $metadata;
 
@@ -327,9 +327,9 @@ class DataSource extends BaseResource implements HasResourceOwner
     /**
      * Remove metadata
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      */
-    public function removeMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function removeMetadata(\TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadatas->removeElement($metadata);
     }

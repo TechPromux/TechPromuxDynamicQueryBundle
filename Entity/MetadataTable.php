@@ -233,11 +233,11 @@ class MetadataTable extends BaseResource
     /**
      * Set metadata
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      *
      * @return MetadataTable
      */
-    public function setMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function setMetadata(\TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadata = $metadata;
 
@@ -247,7 +247,7 @@ class MetadataTable extends BaseResource
     /**
      * Get metadata
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\Metadata
+     * @return \TechPromux\DynamicQueryBundle\Entity\Metadata
      */
     public function getMetadata()
     {
@@ -257,11 +257,11 @@ class MetadataTable extends BaseResource
     /**
      * Add field
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataField $field
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataField $field
      *
      * @return MetadataTable
      */
-    public function addField(\ TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
+    public function addField(\TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
     {
         $this->fields[] = $field;
 
@@ -271,9 +271,9 @@ class MetadataTable extends BaseResource
     /**
      * Remove field
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataField $field
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataField $field
      */
-    public function removeField(\ TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
+    public function removeField(\TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
     {
         $this->fields->removeElement($field);
     }
@@ -291,11 +291,11 @@ class MetadataTable extends BaseResource
     /**
      * Add leftRelation
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation
      *
      * @return MetadataTable
      */
-    public function addLeftRelation(\ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation)
+    public function addLeftRelation(\TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation)
     {
         $this->leftRelations[] = $leftRelation;
 
@@ -305,9 +305,9 @@ class MetadataTable extends BaseResource
     /**
      * Remove leftRelation
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation
      */
-    public function removeLeftRelation(\ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation)
+    public function removeLeftRelation(\TechPromux\DynamicQueryBundle\Entity\MetadataRelation $leftRelation)
     {
         $this->leftRelations->removeElement($leftRelation);
     }
@@ -325,11 +325,11 @@ class MetadataTable extends BaseResource
     /**
      * Add rightRelation
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation
      *
      * @return MetadataTable
      */
-    public function addRightRelation(\ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation)
+    public function addRightRelation(\TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation)
     {
         $this->rightRelations[] = $rightRelation;
 
@@ -339,9 +339,9 @@ class MetadataTable extends BaseResource
     /**
      * Remove rightRelation
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation
      */
-    public function removeRightRelation(\ TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation)
+    public function removeRightRelation(\TechPromux\DynamicQueryBundle\Entity\MetadataRelation $rightRelation)
     {
         $this->rightRelations->removeElement($rightRelation);
     }

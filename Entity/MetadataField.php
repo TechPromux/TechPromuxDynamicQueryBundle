@@ -162,11 +162,11 @@ class MetadataField extends BaseResource
     /**
      * Set metadata
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
+     * @param \TechPromux\DynamicQueryBundle\Entity\Metadata $metadata
      *
      * @return MetadataField
      */
-    public function setMetadata(\ TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
+    public function setMetadata(\TechPromux\DynamicQueryBundle\Entity\Metadata $metadata)
     {
         $this->metadata = $metadata;
 
@@ -176,7 +176,7 @@ class MetadataField extends BaseResource
     /**
      * Get metadata
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\Metadata
+     * @return \TechPromux\DynamicQueryBundle\Entity\Metadata
      */
     public function getMetadata()
     {
@@ -186,11 +186,11 @@ class MetadataField extends BaseResource
     /**
      * Set table
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataTable $table
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataTable $table
      *
      * @return MetadataField
      */
-    public function setTable(\ TechPromux\DynamicQueryBundle\Entity\MetadataTable $table)
+    public function setTable(\TechPromux\DynamicQueryBundle\Entity\MetadataTable $table)
     {
         $this->table = $table;
 
@@ -200,7 +200,7 @@ class MetadataField extends BaseResource
     /**
      * Get table
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\MetadataTable
+     * @return \TechPromux\DynamicQueryBundle\Entity\MetadataTable
      */
     public function getTable()
     {
@@ -210,11 +210,11 @@ class MetadataField extends BaseResource
     /**
      * Add detail
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail
      *
      * @return MetadataField
      */
-    public function addDetail(\ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail)
+    public function addDetail(\TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail)
     {
         $this->details[] = $detail;
 
@@ -224,9 +224,9 @@ class MetadataField extends BaseResource
     /**
      * Remove detail
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail
      */
-    public function removeDetail(\ TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail)
+    public function removeDetail(\TechPromux\DynamicQueryBundle\Entity\DataModelDetail $detail)
     {
         $this->details->removeElement($detail);
     }
@@ -244,11 +244,11 @@ class MetadataField extends BaseResource
     /**
      * Add group
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group
      *
      * @return MetadataField
      */
-    public function addGroup(\ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group)
+    public function addGroup(\TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group)
     {
         $this->groups[] = $group;
 
@@ -258,9 +258,9 @@ class MetadataField extends BaseResource
     /**
      * Remove group
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group
      */
-    public function removeGroup(\ TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group)
+    public function removeGroup(\TechPromux\DynamicQueryBundle\Entity\DataModelGroup $group)
     {
         $this->groups->removeElement($group);
     }
@@ -278,11 +278,11 @@ class MetadataField extends BaseResource
     /**
      * Add condition
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition
      *
      * @return MetadataField
      */
-    public function addCondition(\ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition)
+    public function addCondition(\TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition)
     {
         $this->conditions[] = $condition;
 
@@ -292,9 +292,9 @@ class MetadataField extends BaseResource
     /**
      * Remove condition
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition
      */
-    public function removeCondition(\ TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition)
+    public function removeCondition(\TechPromux\DynamicQueryBundle\Entity\DataModelCondition $condition)
     {
         $this->conditions->removeElement($condition);
     }
@@ -312,11 +312,11 @@ class MetadataField extends BaseResource
     /**
      * Add order
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order
      *
      * @return MetadataField
      */
-    public function addOrder(\ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order)
+    public function addOrder(\TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order)
     {
         $this->orders[] = $order;
 
@@ -326,9 +326,9 @@ class MetadataField extends BaseResource
     /**
      * Remove order
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order
      */
-    public function removeOrder(\ TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order)
+    public function removeOrder(\TechPromux\DynamicQueryBundle\Entity\DataModelOrder $order)
     {
         $this->orders->removeElement($order);
     }

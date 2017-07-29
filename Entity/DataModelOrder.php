@@ -164,11 +164,11 @@ class DataModelOrder extends BaseResource
     /**
      * Set datamodel
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel
+     * @param \TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel
      *
      * @return DataModelOrder
      */
-    public function setDatamodel(\ TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel)
+    public function setDatamodel(\TechPromux\DynamicQueryBundle\Entity\DataModel $datamodel)
     {
         $this->datamodel = $datamodel;
 
@@ -178,7 +178,7 @@ class DataModelOrder extends BaseResource
     /**
      * Get datamodel
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\DataModel
+     * @return \TechPromux\DynamicQueryBundle\Entity\DataModel
      */
     public function getDatamodel()
     {
@@ -188,11 +188,11 @@ class DataModelOrder extends BaseResource
     /**
      * Set field
      *
-     * @param \ TechPromux\DynamicQueryBundle\Entity\MetadataField $field
+     * @param \TechPromux\DynamicQueryBundle\Entity\MetadataField $field
      *
      * @return DataModelOrder
      */
-    public function setField(\ TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
+    public function setField(\TechPromux\DynamicQueryBundle\Entity\MetadataField $field)
     {
         $this->field = $field;
 
@@ -202,7 +202,7 @@ class DataModelOrder extends BaseResource
     /**
      * Get field
      *
-     * @return \ TechPromux\DynamicQueryBundle\Entity\MetadataField
+     * @return \TechPromux\DynamicQueryBundle\Entity\MetadataField
      */
     public function getField()
     {

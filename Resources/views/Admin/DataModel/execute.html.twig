@@ -1,4 +1,4 @@
-{% extends "SonataAdminBundle:CRUD:show.html.twig" %}
+    {% extends "SonataAdminBundle:CRUD:show.html.twig" %}
 
 {% block title %}
     {{ object.title }}
@@ -98,13 +98,13 @@
             $("#datamodel-filters-form-{{ object.id }}").trigger('submit');
         });
 
-        // linking table header order arrows with filters form submit action
+        // linking table header order buttons with filters form submit action
 
         $(document).on('click', '#datamodel-table-{{ object.id }} a.datamodel-data-order-by-{{ object.id }}', function (event) {
-
-            $("#datamodel-filters-form-{{ object.id }} #form__sort_by").val($(this).attr('data-sort-by'));
-            $("#datamodel-filters-form-{{ object.id }} #form__sort_order").val($(this).attr('data-sort-order'));
-
+            event.preventDefault();
+            event.stopPropagation();
+            $("#datamodel-filters-form-{{ object.id }} #filters_form_{{ object.id }}__sort_by").val($(this).attr('data-sort-by'));
+            $("#datamodel-filters-form-{{ object.id }} #filters_form_{{ object.id }}__sort_type").val($(this).attr('data-sort-order'));
             $("#datamodel-filters-form-{{ object.id }}").trigger('submit');
         });
 
@@ -157,13 +157,13 @@
 
             $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-asc').hide();
             $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-desc').hide();
-            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').show().css({'opacity': '1.0'});
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-header-sort-icon-{{ object.id }} i.fa-sort-{{ filter.data._sort_by }}-{{ filter.data._sort_type | lower }}').show().css({'opacity': '1.0'});
             ;
 
-            $('#datamodel-table-{{ object.id }} a.datamodel-data-order-by-{{ filter.data._sort_by }}-{{ filter.data._sort_order | lower }}').parent().addClass('active');
+            $('#datamodel-table-{{ object.id }} a.datamodel-data-order-by-{{ filter.data._sort_by }}-{{ filter.data._sort_type | lower }}').parent().addClass('active');
 
-            $("#datamodel-filters-form-{{ object.id }} #form__sort_by").val('{{ filter.data._sort_by }}');
-            $("#datamodel-filters-form-{{ object.id }} #form__sort_order").val('{{ filter.data._sort_order | lower }}');
+            $("#datamodel-filters-form-{{ object.id }} #filters_form_{{ object.id }}__sort_by").val('{{ filter.data._sort_by }}');
+            $("#datamodel-filters-form-{{ object.id }} #filters_form_{{ object.id }}__sort_type").val('{{ filter.data._sort_type | lower }}');
 
         });
 

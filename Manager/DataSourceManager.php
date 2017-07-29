@@ -336,7 +336,7 @@ class DataSourceManager extends BaseResourceManager
      * @param DataSource $object
      * @param bool $flushed
      *
-     * @return \ TechPromux\BaseBundle\Entity\Resource\BaseResource|void
+     * @return \TechPromux\BaseBundle\Entity\Resource\BaseResource|void
      */
     public function preUpdate($object, $flushed = true)
     {

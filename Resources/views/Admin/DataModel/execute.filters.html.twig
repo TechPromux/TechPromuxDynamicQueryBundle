@@ -20,11 +20,11 @@
                     <fieldset>
                         {% for field in 0..(filter.form._filters_count.vars.attr.value-1) %}
                             <div class="form-group row">
-                                {{ form_label(filter.form['d_'~loop.index0~'_id']) }}
+                                {{ form_label(filter.form['id_'~loop.index0]) }}
                                 <div class="col-lg-9">
-                                    {{ form_widget(filter.form['d_'~loop.index0~'_id']) }}
-                                    {{ form_widget(filter.form['d_'~loop.index0~'_operator']) }}
-                                    {{ form_widget(filter.form['d_'~loop.index0~'_value']) }}
+                                    {{ form_widget(filter.form['id_'~loop.index0]) }}
+                                    {{ form_widget(filter.form['operator_'~loop.index0]) }}
+                                    {{ form_widget(filter.form['value_'~loop.index0]) }}
                                 </div>
 
                             </div>
