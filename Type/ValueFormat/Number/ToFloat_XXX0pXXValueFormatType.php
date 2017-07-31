@@ -70,7 +70,7 @@ class ToFloat_XXX0pXXValueFormatType implements BaseValueFormatType
         $thousand_separator = '';
         $decimal_pointer = '.';
         $decimal_digits = 2;
-        $formatted_value = number_format((int)$value, $decimal_digits, $decimal_pointer, $thousand_separator);
+        $formatted_value = number_format($value, $decimal_digits, $decimal_pointer, $thousand_separator);
         return $formatted_value;
     }
 }

@@ -286,14 +286,20 @@ class UtilDynamicQueryManager extends BaseManager
         }
     }
 
-    public function pushValueToArray(array $array, $value)
+    public function pushValuesToArray(array $array, $value)
     {
-        $array[] = $value;
+        $values = is_array($value) ? $value : array($value);
+        $array = array_merge($array, $values);
         return $array;
     }
 
-    public function summarizeValues($summarize_function, array $values = array())
+    public function summarizeValues($summarize_function, $values)
     {
+        if (is_null($values)) {
+            $values = array();
+        } elseif (!is_array($values)) {
+            $values = array($values);
+        }
         switch ($summarize_function) {
             case 'SUM':
                 $result = 0;
@@ -304,35 +310,69 @@ class UtilDynamicQueryManager extends BaseManager
             case 'AVG':
                 if (count($values) == 0) return null;
                 $result = 0;
-                $cont = 0;
+                //$cont = 0;
                 foreach ($values as $i => $value) {
-                    if (!is_null($value)) {
-                        $result += $value;
-                        $cont++;
-                    }
+                    $result += !is_null($value) ? $value : 0;
+                    //$cont++;
                 }
-                return $result / $cont;
+                return $result / count($values);
             case 'COUNT':
                 $result = 0;
                 foreach ($values as $i => $value) {
-                    if (!is_null($value)) ;
-                    $result++;
+                    if (!is_null($value)) {
+                        $result++;
+                    }
                 }
                 return $result;
             case 'MIN':
+                if (count($values) == 0) return null;
                 $result = PHP_INT_MAX;
                 foreach ($values as $i => $value) {
                     $result = !is_null($value) && $value <= $result ? $value : $result;
                 }
                 return $result;
             case 'MAX':
+                if (count($values) == 0) return null;
                 $result = PHP_INT_MIN;
                 foreach ($values as $i => $value) {
                     $result = !is_null($value) && $value >= $result ? $value : $result;
                 }
-                return $result;;
+                return $result;
 
         }
+    }
+
+
+    public function verifyLimitIndicator($value, $limit_type, $limit)
+    {
+        if (is_null($value))
+            return false;
+
+        switch ($limit_type) {
+            case 'less_than':
+                return ($value < $limit);
+            case 'less_or_equal':
+                return ($value <= $limit);
+            case 'greater_than':
+                return ($value > $limit);
+            case 'greater_or_equal':
+                return ($value >= $limit);
+            case 'between':
+                $limits = explode(',', $limit . ',');
+                $min = trim($limits[0]);
+                $max = trim($limits[1]);
+                return ($value >= $min and $value <= $max);
+            case 'not_between':
+                $limits = explode(',', $limit . ',');
+                $min = trim($limits[0]);
+                $max = trim($limits[1]);
+                return ($value < $min or $value > $max);
+            default:
+                return false;
+
+        }
+
+        return false;
     }
 
     //----------------------------------------------------------------------------------------
