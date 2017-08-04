@@ -6,7 +6,7 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use TechPromux\DynamicQueryBundle\Entity\DataModel;
-use  TechPromux\DynamicQueryBundle\Manager\DataModelManager;
+use TechPromux\DynamicQueryBundle\Manager\DataModelManager;
 
 class DataModelAdminController extends CRUDController
 {
@@ -100,7 +100,7 @@ class DataModelAdminController extends CRUDController
 
         $helpers = array(
             'formatter' => $manager->getUtilDynamicQueryManager(),
-            'locale' => $manager->getResourceOwnerManager()->getSecurityManager()->getLocaleFromAuthenticatedUser(),
+            'locale' => $manager->getUtilDynamicQueryManager()->getSecurityManager()->getLocaleFromAuthenticatedUser(),
             'manager' => $manager,
         );
 

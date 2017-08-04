@@ -6,10 +6,10 @@
  * Time: 00:52
  */
 
-namespace  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary;
+namespace TechPromux\DynamicQueryBundle\Type\ConditionalOperator\Unary;
 
 
-use  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
 
 class IsNullConditionalOperatorType implements BaseConditionalOperatorType
 {

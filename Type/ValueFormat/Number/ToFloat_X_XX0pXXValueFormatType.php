@@ -6,10 +6,10 @@
  * Time: 22:56
  */
 
-namespace  TechPromux\DynamicQueryBundle\Type\ValueFormat\Number;
+namespace TechPromux\DynamicQueryBundle\Type\ValueFormat\Number;
 
 
-use  TechPromux\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
+use TechPromux\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
 
 class ToFloat_X_XX0pXXValueFormatType implements BaseValueFormatType
 {

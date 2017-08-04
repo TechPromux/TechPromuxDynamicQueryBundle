@@ -1,9 +1,9 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Entity;
+namespace TechPromux\DynamicQueryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use  TechPromux\BaseBundle\Entity\Resource\BaseResource;
+use TechPromux\BaseBundle\Entity\Resource\BaseResource;
 
 /**
  * DataModelCondition
@@ -93,7 +93,7 @@ class DataModelCondition extends BaseResource
 
     public function __toString()
     {
-        return $this->getName() ?: '';
+        return $this->getName() ? $this->getName() : '';
     }
 
     //---------------------------------------------------------------------------

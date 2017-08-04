@@ -1,6 +1,6 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Type\ConditionalOperator;
+namespace TechPromux\DynamicQueryBundle\Type\ConditionalOperator;
 
 /**
  * Interface BaseConditionalOperatorType

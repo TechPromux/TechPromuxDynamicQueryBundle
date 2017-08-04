@@ -1,6 +1,6 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Type\DynamicValue;
+namespace TechPromux\DynamicQueryBundle\Type\DynamicValue;
 
 /**
  * Interface BaseDynamicValueType

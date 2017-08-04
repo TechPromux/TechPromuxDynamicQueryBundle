@@ -6,11 +6,11 @@
  * Time: 12:31
  */
 
-namespace  TechPromux\DynamicQueryBundle\Type\TableRelation;
+namespace TechPromux\DynamicQueryBundle\Type\TableRelation;
 
 
 use Doctrine\ORM\QueryBuilder;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
+use TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
 
 class LeftJoinTableRelationType implements BaseTableRelationType
 {

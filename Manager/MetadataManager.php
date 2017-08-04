@@ -6,18 +6,18 @@
  * Time: 01:01
  */
 
-namespace  TechPromux\DynamicQueryBundle\Manager;
+namespace TechPromux\DynamicQueryBundle\Manager;
 
-use  TechPromux\BaseBundle\Manager\Owner\BaseResourceOwnerManager;
-use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
-use  TechPromux\DynamicQueryBundle\Entity\DataSource;
-use  TechPromux\DynamicQueryBundle\Entity\Metadata;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataTable;
-use  TechPromux\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
-use  TechPromux\DynamicQueryBundle\Type\TableRelation\InnerJoinTableRelationType;
-use  TechPromux\DynamicQueryBundle\Type\TableRelation\LeftJoinTableRelationType;
+use TechPromux\BaseBundle\Manager\Context\BaseResourceContextManager;
+use TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use TechPromux\DynamicQueryBundle\Entity\DataSource;
+use TechPromux\DynamicQueryBundle\Entity\Metadata;
+use TechPromux\DynamicQueryBundle\Entity\MetadataField;
+use TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
+use TechPromux\DynamicQueryBundle\Entity\MetadataTable;
+use TechPromux\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
+use TechPromux\DynamicQueryBundle\Type\TableRelation\InnerJoinTableRelationType;
+use TechPromux\DynamicQueryBundle\Type\TableRelation\LeftJoinTableRelationType;
 
 class MetadataManager extends BaseResourceManager
 {

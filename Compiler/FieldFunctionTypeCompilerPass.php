@@ -1,6 +1,6 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Compiler;
+namespace TechPromux\DynamicQueryBundle\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

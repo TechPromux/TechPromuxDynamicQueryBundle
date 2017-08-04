@@ -1,18 +1,18 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Admin;
+namespace TechPromux\DynamicQueryBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use  TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
-use  TechPromux\DynamicQueryBundle\Entity\DataModel;
-use  TechPromux\DynamicQueryBundle\Entity\DataModelDetail;
-use  TechPromux\DynamicQueryBundle\Entity\DataModelOrder;
-use  TechPromux\DynamicQueryBundle\Manager\DataModelDetailManager;
-use  TechPromux\DynamicQueryBundle\Manager\DataModelOrderManager;
+use TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
+use TechPromux\DynamicQueryBundle\Entity\DataModel;
+use TechPromux\DynamicQueryBundle\Entity\DataModelDetail;
+use TechPromux\DynamicQueryBundle\Entity\DataModelOrder;
+use TechPromux\DynamicQueryBundle\Manager\DataModelDetailManager;
+use TechPromux\DynamicQueryBundle\Manager\DataModelOrderManager;
 
 class DataModelGroupAdmin extends BaseResourceAdmin
 {
@@ -73,7 +73,7 @@ class DataModelGroupAdmin extends BaseResourceAdmin
                 )
             ))
             ->add('field', 'entity', array(
-                    'class' => $metadata_field_manager->getResourceClassShortcut(),
+                    'class' => $metadata_field_manager->getResourceClass(),
                     'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($metadata_field_manager, $metadata) {
                         $qb = $metadata_field_manager->createQueryBuilderForMetadataAndEnabledsSelection($metadata);
                         return $qb;

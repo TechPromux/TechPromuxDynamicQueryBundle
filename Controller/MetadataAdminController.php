@@ -1,6 +1,6 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Controller;
+namespace TechPromux\DynamicQueryBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;

@@ -1,6 +1,6 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Type\ValueFormat;
+namespace TechPromux\DynamicQueryBundle\Type\ValueFormat;
 
 /**
  * Interface BaseValueFormatType

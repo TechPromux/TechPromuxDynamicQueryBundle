@@ -8,6 +8,7 @@ services:
             - { name: techpromux.manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
+            - [ setSecurityManager,['@techpromux.manager.default_security']]
 
     techpromux_dynamic_query.manager.datasource:
         class:  TechPromux\DynamicQueryBundle\Manager\DataSourceManager
@@ -17,9 +18,8 @@ services:
             - { name: techpromux.resource_manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
-            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
+            - [ setResourceContextManager,['@techpromux.manager.default_resource_context']]
             - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.util_dynamic_query']]
-            - [ setSecurityManager,['@techpromux.manager.default_security']]
             - [ setConnectionFactory,['@doctrine.dbal.connection_factory']]
 
     techpromux_dynamic_query.manager.metadata:
@@ -30,9 +30,8 @@ services:
             - { name: techpromux.resource_manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
-            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
+            - [ setResourceContextManager,['@techpromux.manager.default_resource_context']]
             - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.util_dynamic_query']]
-            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
             - [ setDataSourceManager,['@techpromux_dynamic_query.manager.datasource']]
             - [ setMetadataTableManager,['@techpromux_dynamic_query.manager.metadata_table']]
             - [ setMetadataFieldManager,['@techpromux_dynamic_query.manager.metadata_field']]
@@ -76,7 +75,7 @@ services:
             - { name: techpromux.resource_manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
-            - [ setResourceOwnerManager,['@techpromux_dynamic_configuration.manager.default_resource_owner']]
+            - [ setResourceContextManager,['@techpromux.manager.default_resource_context']]
             - [ setMetadataManager,['@techpromux_dynamic_query.manager.metadata']]
             - [ setDatamodelDetailManager,['@techpromux_dynamic_query.manager.datamodel_detail']]
             - [ setDatamodelGroupManager,['@techpromux_dynamic_query.manager.datamodel_group']]

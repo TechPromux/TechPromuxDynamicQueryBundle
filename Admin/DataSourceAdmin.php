@@ -1,6 +1,6 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Admin;
+namespace TechPromux\DynamicQueryBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -8,9 +8,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use  TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
-use  TechPromux\DynamicQueryBundle\Entity\DataSource;
-use  TechPromux\DynamicQueryBundle\Manager\DataSourceManager;
+use TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
+use TechPromux\DynamicQueryBundle\Entity\DataSource;
+use TechPromux\DynamicQueryBundle\Manager\DataSourceManager;
 
 class DataSourceAdmin extends BaseResourceAdmin
 {
@@ -142,7 +142,7 @@ class DataSourceAdmin extends BaseResourceAdmin
 
         if (!is_null($object) && !is_null($object->getId())) {
             $encoded_password = $object->getDbPassword();
-            $plain_password = $this->getResourceManager()->getSecurityManager()->decodeReversibleString($encoded_password);
+            $plain_password = $this->getResourceManager()->getUtilDynamicQueryManager()->getSecurityManager()->decodeReversibleString($encoded_password);
             $object->setPlainPassword($plain_password);
         }
 

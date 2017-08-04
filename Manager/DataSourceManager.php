@@ -6,12 +6,12 @@
  * Time: 01:01
  */
 
-namespace  TechPromux\DynamicQueryBundle\Manager;
+namespace TechPromux\DynamicQueryBundle\Manager;
 
 use Doctrine\Bundle\DoctrineBundle\ConnectionFactory;
-use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
-use  TechPromux\BaseBundle\Manager\Security\BaseSecurityManager;
-use  TechPromux\DynamicQueryBundle\Entity\DataSource;
+use TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use TechPromux\BaseBundle\Manager\Security\BaseSecurityManager;
+use TechPromux\DynamicQueryBundle\Entity\DataSource;
 
 class DataSourceManager extends BaseResourceManager
 {
@@ -69,30 +69,6 @@ class DataSourceManager extends BaseResourceManager
         $this->util_dynamic_query_manager = $util_dynamic_query_manager;
         return $this;
     }
-
-    /**
-     * @var BaseSecurityManager
-     */
-    private $security_manager;
-
-    /**
-     * @return BaseSecurityManager
-     */
-    public function getSecurityManager()
-    {
-        return $this->security_manager;
-    }
-
-    /**
-     * @param BaseSecurityManager $security_manager
-     * @return DataSourceManager
-     */
-    public function setSecurityManager($security_manager)
-    {
-        $this->security_manager = $security_manager;
-        return $this;
-    }
-
 
     //-----------------------------------------------------------------------------------------------
 
@@ -186,7 +162,7 @@ class DataSourceManager extends BaseResourceManager
     {
 
         $encoded_password = $datasource->getDbPassword();
-        $plain_password = $this->getSecurityManager()->decodeReversibleString($encoded_password);
+        $plain_password = $this->getUtilDynamicQueryManager()->getSecurityManager()->decodeReversibleString($encoded_password);
         $connection = $this->createDoctrineDBALConnection(
             $datasource->getDriverType(),
             $datasource->getDbHost(),
@@ -325,7 +301,7 @@ class DataSourceManager extends BaseResourceManager
         parent::prePersist($object);
 
         $plain_password = $object->getPlainPassword();
-        $encoded_password = $this->encodeReversibleString($plain_password);
+        $encoded_password = $this->getgetSecurityManager()->encodeReversibleString($plain_password);
         $object->setDbPassword($encoded_password);
 
         $metadata_information = $this->getDataSourceMetadataInformation($object);

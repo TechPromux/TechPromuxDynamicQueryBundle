@@ -1,15 +1,15 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Admin;
+namespace TechPromux\DynamicQueryBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use  TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
-use  TechPromux\DynamicQueryBundle\Manager\MetadataManager;
-use  TechPromux\DynamicQueryBundle\Manager\MetadataRelationManager;
+use TechPromux\BaseBundle\Admin\Resource\BaseResourceAdmin;
+use TechPromux\DynamicQueryBundle\Manager\MetadataManager;
+use TechPromux\DynamicQueryBundle\Manager\MetadataRelationManager;
 
 class MetadataRelationAdmin extends BaseResourceAdmin
 {

@@ -6,10 +6,10 @@
  * Time: 01:01
  */
 
-namespace  TechPromux\DynamicQueryBundle\Manager;
+namespace TechPromux\DynamicQueryBundle\Manager;
 
-use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
+use TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
 
 class MetadataRelationManager extends BaseResourceManager
 {

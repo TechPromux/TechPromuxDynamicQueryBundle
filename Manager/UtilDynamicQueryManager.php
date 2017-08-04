@@ -9,16 +9,16 @@
 namespace TechPromux\DynamicQueryBundle\Manager;
 
 
-use  TechPromux\BaseBundle\Manager\BaseManager;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
-use  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
-use  TechPromux\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
-use  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentMonthDynamicValueType;
-use  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentWeekDynamicValueType;
-use  TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentYearDynamicValueType;
-use  TechPromux\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
-use  TechPromux\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
-use  TechPromux\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
+use TechPromux\BaseBundle\Manager\BaseManager;
+use TechPromux\DynamicQueryBundle\Entity\MetadataField;
+use TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use TechPromux\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
+use TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentMonthDynamicValueType;
+use TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentWeekDynamicValueType;
+use TechPromux\DynamicQueryBundle\Type\DynamicValue\Date\FirstDayOfCurrentYearDynamicValueType;
+use TechPromux\DynamicQueryBundle\Type\FieldFunction\BaseFieldFunctionType;
+use TechPromux\DynamicQueryBundle\Type\TableRelation\BaseTableRelationType;
+use TechPromux\DynamicQueryBundle\Type\ValueFormat\BaseValueFormatType;
 
 
 class UtilDynamicQueryManager extends BaseManager
@@ -31,6 +31,31 @@ class UtilDynamicQueryManager extends BaseManager
     public function getBundleName()
     {
         return 'TechPromuxDynamicQueryBundle';
+    }
+
+    //----------------------------------------------------------------------------
+
+    /**
+     * @var BaseSecurityManager
+     */
+    private $security_manager;
+
+    /**
+     * @return BaseSecurityManager
+     */
+    public function getSecurityManager()
+    {
+        return $this->security_manager;
+    }
+
+    /**
+     * @param BaseSecurityManager $security_manager
+     * @return DataSourceManager
+     */
+    public function setSecurityManager($security_manager)
+    {
+        $this->security_manager = $security_manager;
+        return $this;
     }
 
     //----------------------------------------------------------------------------

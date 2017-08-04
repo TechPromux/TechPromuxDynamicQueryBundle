@@ -1,6 +1,6 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Type\FieldFunction;
+namespace TechPromux\DynamicQueryBundle\Type\FieldFunction;
 
 /**
  * Interface BaseFieldFunctionType

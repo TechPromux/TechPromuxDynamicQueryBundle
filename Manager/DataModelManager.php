@@ -11,19 +11,17 @@ namespace TechPromux\DynamicQueryBundle\Manager;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Pagerfanta\Pagerfanta;
-use  TechPromux\BaseBundle\Manager\Adapter\Paginator\DoctrineDbalPaginatorAdapter;
-use  TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
-use  TechPromux\DynamicQueryBundle\Entity\DataModel;
-use  TechPromux\DynamicQueryBundle\Entity\DataModelCondition;
-use  TechPromux\DynamicQueryBundle\Entity\DataModelDetail;
-use  TechPromux\DynamicQueryBundle\Entity\DataModelGroup;
-use  TechPromux\DynamicQueryBundle\Entity\DataModelOrder;
-use  TechPromux\DynamicQueryBundle\Entity\DataSource;
-use  TechPromux\DynamicQueryBundle\Entity\Metadata;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataTable;
-use  TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
+use TechPromux\BaseBundle\Adapter\Paginator\DoctrineDbalPaginatorAdapter;
+use TechPromux\BaseBundle\Manager\Resource\BaseResourceManager;
+use TechPromux\DynamicQueryBundle\Entity\DataModel;
+use TechPromux\DynamicQueryBundle\Entity\DataModelCondition;
+use TechPromux\DynamicQueryBundle\Entity\DataModelDetail;
+use TechPromux\DynamicQueryBundle\Entity\DataModelGroup;
+use TechPromux\DynamicQueryBundle\Entity\DataModelOrder;
+use TechPromux\DynamicQueryBundle\Entity\Metadata;
+use TechPromux\DynamicQueryBundle\Entity\MetadataField;
+use TechPromux\DynamicQueryBundle\Entity\MetadataTable;
+use TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
 
 class DataModelManager extends BaseResourceManager
 {

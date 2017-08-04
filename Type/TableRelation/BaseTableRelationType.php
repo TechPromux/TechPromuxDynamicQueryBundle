@@ -1,9 +1,9 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Type\TableRelation;
+namespace TechPromux\DynamicQueryBundle\Type\TableRelation;
 
 use Doctrine\ORM\QueryBuilder;
-use  TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
+use TechPromux\DynamicQueryBundle\Entity\MetadataRelation;
 
 /**
  * Interface BaseTableRelationType

@@ -1,11 +1,11 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle\Entity;
+namespace TechPromux\DynamicQueryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use  TechPromux\BaseBundle\Entity\Resource\BaseResource;
-use  TechPromux\BaseBundle\Entity\Owner\ResourceOwner;
-use  TechPromux\BaseBundle\Entity\Owner\HasResourceOwner;
+use TechPromux\BaseBundle\Entity\Resource\BaseResource;
+use TechPromux\BaseBundle\Entity\Context\BaseResourceContext;
+use TechPromux\BaseBundle\Entity\Context\HasResourceContext;
 
 /**
  * Metadata
@@ -13,7 +13,7 @@ use  TechPromux\BaseBundle\Entity\Owner\HasResourceOwner;
  * @ORM\Table(name="techpromux_dynamic_query_metadata")
  * @ORM\Entity(")
  */
-class Metadata extends BaseResource implements HasResourceOwner
+class Metadata extends BaseResource implements HasResourceContext
 {
     /**
      * @ORM\ManyToOne(targetEntity="DataSource", inversedBy="metadatas")
@@ -47,30 +47,30 @@ class Metadata extends BaseResource implements HasResourceOwner
     private $datamodels;
 
     /**
-     * @var ResourceOwner
+     * @var BaseResourceContext
      *
-     * @ORM\ManyToOne(targetEntity="TechPromux\BaseBundle\Entity\Owner\ResourceOwner")
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="TechPromux\BaseBundle\Entity\Context\BaseResourceContext")
+     * @ORM\JoinColumn(name="context_id", referencedColumnName="id", nullable=true)
      */
-    protected $owner;
+    protected $context;
 
     //-----------------------------------------------------------------------------------------
 
     public function __toString()
     {
-        return $this->getName() ? $this->getName() : '';
+        return $this->getTitle() ? $this->getTitle() : '';
     }
 
     /**
      * Set owner
      *
-     * @param ResourceOwner $owner
+     * @param BaseResourceContext $context
      *
      * @return DataSource
      */
-    public function setOwner(ResourceOwner $owner = null)
+    public function setContext(BaseResourceContext $context = null)
     {
-        $this->owner = $owner;
+        $this->context = $context;
 
         return $this;
     }
@@ -78,11 +78,11 @@ class Metadata extends BaseResource implements HasResourceOwner
     /**
      * Get owner
      *
-     * @return ResourceOwner
+     * @return BaseResourceContext
      */
-    public function getOwner()
+    public function getContext()
     {
-        return $this->owner;
+        return $this->context;
     }
 
     public function getDataSourceTitleMetadataTitleAndEnabled()

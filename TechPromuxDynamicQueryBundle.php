@@ -1,14 +1,14 @@
 <?php
 
-namespace  TechPromux\DynamicQueryBundle;
+namespace TechPromux\DynamicQueryBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use  TechPromux\DynamicQueryBundle\Compiler\ConditionalOperatorTypeCompilerPass;
-use  TechPromux\DynamicQueryBundle\Compiler\DynamicValueTypeCompilerPass;
-use  TechPromux\DynamicQueryBundle\Compiler\FieldFunctionTypeCompilerPass;
-use  TechPromux\DynamicQueryBundle\Compiler\TableRelationTypeCompilerPass;
-use  TechPromux\DynamicQueryBundle\Compiler\ValueFormatTypeCompilerPass;
+use TechPromux\DynamicQueryBundle\Compiler\ConditionalOperatorTypeCompilerPass;
+use TechPromux\DynamicQueryBundle\Compiler\DynamicValueTypeCompilerPass;
+use TechPromux\DynamicQueryBundle\Compiler\FieldFunctionTypeCompilerPass;
+use TechPromux\DynamicQueryBundle\Compiler\TableRelationTypeCompilerPass;
+use TechPromux\DynamicQueryBundle\Compiler\ValueFormatTypeCompilerPass;
 
 class TechPromuxDynamicQueryBundle extends Bundle
 {

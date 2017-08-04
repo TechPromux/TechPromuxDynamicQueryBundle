@@ -6,10 +6,10 @@
  * Time: 11:30
  */
 
-namespace  TechPromux\DynamicQueryBundle\Type\FieldFunction;
+namespace TechPromux\DynamicQueryBundle\Type\FieldFunction;
 
 
-use  TechPromux\DynamicQueryBundle\Entity\MetadataField;
+use TechPromux\DynamicQueryBundle\Entity\MetadataField;
 
 class BlankFieldFunctionType implements BaseFieldFunctionType
 {
