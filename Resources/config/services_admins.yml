@@ -6,7 +6,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\DataSourceAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\DataSource, TechPromuxDynamicQueryBundle:DataSourceAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: DataSource }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_datasource_list }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.datasource']]
@@ -15,7 +15,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\MetadataAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\Metadata, TechPromuxDynamicQueryBundle:MetadataAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: Metadata }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_metadata_list }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.metadata']]
@@ -24,7 +24,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\MetadataTableAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\MetadataTable, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: Table, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_metadata_table_list, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.metadata_table']]
@@ -33,7 +33,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\MetadataFieldAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\MetadataField, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: Field, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_metadata_field_list, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.metadata_field']]
@@ -42,7 +42,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\MetadataRelationAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\MetadataRelation, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: Relation, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_metadata_relation_list, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.metadata_relation']]
@@ -51,7 +51,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\DataModelAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\DataModel, TechPromuxDynamicQueryBundle:DataModelAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: DataModel }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_datamodel_list }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.datamodel']]
@@ -60,7 +60,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\DataModelDetailAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\DataModelDetail, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: DataModelDetail, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_datamodel_detail_list, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.datamodel_detail']]
@@ -69,7 +69,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\DataModelGroupAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\DataModelGroup, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: DataModelGroup, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_datamodel_group_list, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.datamodel_group']]
@@ -78,7 +78,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\DataModelConditionAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\DataModelCondition, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: DataModelCondition, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_datamodel_condition_list, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.datamodel_condition']]
@@ -87,7 +87,7 @@ services:
         class:  TechPromux\DynamicQueryBundle\Admin\DataModelOrderAdmin
         arguments: [~,  TechPromux\DynamicQueryBundle\Entity\DataModelOrder, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: DataModel, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: techpromux_dynamic_queries_admin, label: sidebar.link_datamodel_list, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain,['TechPromuxDynamicQueryBundle']]
             - [ setResourceManager,['@techpromux_dynamic_query.manager.datamodel_order']]

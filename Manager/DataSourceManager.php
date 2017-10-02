@@ -301,7 +301,7 @@ class DataSourceManager extends BaseResourceManager
         parent::prePersist($object);
 
         $plain_password = $object->getPlainPassword();
-        $encoded_password = $this->getgetSecurityManager()->encodeReversibleString($plain_password);
+        $encoded_password = $this->getUtilDynamicQueryManager()->getSecurityManager()->encodeReversibleString($plain_password);
         $object->setDbPassword($encoded_password);
 
         $metadata_information = $this->getDataSourceMetadataInformation($object);

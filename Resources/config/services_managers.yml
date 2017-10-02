@@ -8,7 +8,7 @@ services:
             - { name: techpromux.manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
-            - [ setSecurityManager,['@techpromux.manager.default_security']]
+            - [ setSecurityManager,['@techpromux_base.manager.default_security']]
 
     techpromux_dynamic_query.manager.datasource:
         class:  TechPromux\DynamicQueryBundle\Manager\DataSourceManager
@@ -18,7 +18,7 @@ services:
             - { name: techpromux.resource_manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
-            - [ setResourceContextManager,['@techpromux.manager.default_resource_context']]
+            - [ setResourceContextManager,['@techpromux_base.manager.resource_context']]
             - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.util_dynamic_query']]
             - [ setConnectionFactory,['@doctrine.dbal.connection_factory']]
 
@@ -30,7 +30,7 @@ services:
             - { name: techpromux.resource_manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
-            - [ setResourceContextManager,['@techpromux.manager.default_resource_context']]
+            - [ setResourceContextManager,['@techpromux_base.manager.resource_context']]
             - [ setUtilDynamicQueryManager,['@techpromux_dynamic_query.manager.util_dynamic_query']]
             - [ setDataSourceManager,['@techpromux_dynamic_query.manager.datasource']]
             - [ setMetadataTableManager,['@techpromux_dynamic_query.manager.metadata_table']]
@@ -75,7 +75,7 @@ services:
             - { name: techpromux.resource_manager}
         calls:
             #- [ setServiceContainer,['@service_container']]
-            - [ setResourceContextManager,['@techpromux.manager.default_resource_context']]
+            - [ setResourceContextManager,['@techpromux_base.manager.resource_context']]
             - [ setMetadataManager,['@techpromux_dynamic_query.manager.metadata']]
             - [ setDatamodelDetailManager,['@techpromux_dynamic_query.manager.datamodel_detail']]
             - [ setDatamodelGroupManager,['@techpromux_dynamic_query.manager.datamodel_group']]

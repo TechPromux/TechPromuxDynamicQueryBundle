@@ -1,7 +1,3 @@
-imports:
-    - { resource: 'parameters.yml'}
-    - { resource: 'security.yml'}
-
 sonata_media:
     contexts:
         techpromux_dynamic_query_media_image:
@@ -22,7 +18,7 @@ sonata_admin:
 
         groups:
             techpromux_dynamic_queries_admin:
-                label: Dynamic Queries
+                label: techpromux_dynamic_queries_group_label
                 label_catalogue: TechPromuxDynamicQueryBundle
                 icon: '<i class="glyphicon glyphicon-cog"></i>'
                 items:

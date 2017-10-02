@@ -51,7 +51,12 @@ class DataSourceAdmin extends BaseResourceAdmin
         return $query;
     }
 
-     //------------------------------------------------------------------------------------
+    public function toString($object)
+    {
+        return $object->getName() ?: '';
+    }
+
+    //------------------------------------------------------------------------------------
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -60,18 +65,10 @@ class DataSourceAdmin extends BaseResourceAdmin
     {
         parent::configureDatagridFilters($datagridMapper);
         $datagridMapper
-            ->add('name', null, array(
-                'global_search' => false
-            ))
-            ->add('driverType', null, array(
-                'global_search' => false
-            ))
-            ->add('dbHost', null, array(
-                'global_search' => false
-            ))
-            ->add('dbName', null, array(
-                'global_search' => false
-            ));
+            ->add('name')
+            ->add('driverType')
+            ->add('dbHost')
+            ->add('dbName');
     }
 
     /**
@@ -80,7 +77,7 @@ class DataSourceAdmin extends BaseResourceAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->add('name')
             //->add('description', 'html')
             ->add('dbHost', 'string', array(
                 'row_align' => 'center',
@@ -114,7 +111,7 @@ class DataSourceAdmin extends BaseResourceAdmin
         parent::configureListFields($listMapper);
 
         $listMapper->add('_action', 'actions', array(
-            'label' => 'Actions',
+            //'label' => 'Actions',
             'row_align' => 'center',
             'header_style' => 'width: 120px',
             'actions' => array(

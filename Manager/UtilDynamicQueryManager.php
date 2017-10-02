@@ -320,7 +320,7 @@ class UtilDynamicQueryManager extends BaseManager
 
     public function summarizeValues($summarize_function, $values)
     {
-        if (is_null($values)) {
+        if (empty($values)) {
             $values = array();
         } elseif (!is_array($values)) {
             $values = array($values);
@@ -363,7 +363,9 @@ class UtilDynamicQueryManager extends BaseManager
                     $result = !is_null($value) && $value >= $result ? $value : $result;
                 }
                 return $result;
-
+            default:
+                if (count($values) == 0) return null;
+                return $values[0];
         }
     }
 

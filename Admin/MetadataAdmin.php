@@ -26,7 +26,7 @@ class MetadataAdmin extends BaseResourceAdmin
     //----------------------------------------------------------------------------
 
     protected $accessMapping = array(
-        'copy' => 'COPY',
+        'copy' => 'CREATE',
     );
 
     //----------------------------------------------------------------------------
@@ -34,12 +34,6 @@ class MetadataAdmin extends BaseResourceAdmin
     protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection)
     {
         parent::configureRoutes($collection);
-        //if (!$this->getParent()) {
-        //    $collection->clear();
-        //} else {
-        //    $collection->clearExcept(array('list', 'create', 'edit', 'delete'));
-        //    $collection->add('duplicate', $this->getRouterIdParameter() . '/duplicate');
-        //}
         $collection->add('copy', $this->getRouterIdParameter() . '/copy');
     }
 
@@ -51,8 +45,10 @@ class MetadataAdmin extends BaseResourceAdmin
         //parent::configureDatagridFilters($datagridMapper);
 
         $datagridMapper
-            //->add('datasource')
-            //->add('title')
+            ->add('datasource')
+            ->add('name')
+            ->add('title')
+            //->add('tables')
         ;
     }
 
@@ -62,9 +58,9 @@ class MetadataAdmin extends BaseResourceAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->add('name')
             ->add('title')
-            //->add('datasource', 'string')
+            ->add('datasource', 'html')
             ->add('tables', null, array(
                 'row_align' => 'left',
                 'header_style' => 'width: 30%',
@@ -80,7 +76,7 @@ class MetadataAdmin extends BaseResourceAdmin
         parent::configureListFields($listMapper);
         $listMapper
             ->add('_action', 'actions', array(
-                'label' => 'Actions',
+                //'label' => 'Actions',
                 'row_align' => 'right',
                 'header_style' => 'width: 120px',
                 //'header_class' => 'fa fa-table',

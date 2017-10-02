@@ -35,8 +35,8 @@ class DataModelAdmin extends BaseResourceAdmin
     //----------------------------------------------------------------------------------
 
     protected $accessMapping = array(
-        'copy' => 'COPY',
-        'execute' => 'EXECUTE',
+        'copy' => 'CREATE',
+        'execute' => 'VIEW',
     );
 
     /**
@@ -69,21 +69,8 @@ class DataModelAdmin extends BaseResourceAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        if (!$this->isGranted('EDIT')) {
-            $datagridMapper
-                ->add('title', null, array(
-                    'global_search' => true
-                ));
-        } else {
-            parent::configureDatagridFilters($datagridMapper);
-            $datagridMapper
-                ->add('title', null, array(
-                    'global_search' => true
-                ))
-                ->add('description', null, array(
-                    'global_search' => false
-                ));
-        }
+        $datagridMapper
+            ->add('title');
     }
 
     /**
@@ -91,11 +78,10 @@ class DataModelAdmin extends BaseResourceAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-
-        $listMapper->addIdentifier('name', null, array(
+        $listMapper->add('name', null, array(
             'row_align' => 'left',
         ));
-        $listMapper->addIdentifier('title', null, array(
+        $listMapper->add('title', null, array(
             'row_align' => 'left',
         ));
 
@@ -109,7 +95,7 @@ class DataModelAdmin extends BaseResourceAdmin
                 ),
             ))
                 //->add('description')
-                ->add('metadata', null, array(
+                ->add('metadata', 'html', array(
                     'row_align' => 'left',
                     'header_style' => 'width: 25%',
                 ))
@@ -119,11 +105,10 @@ class DataModelAdmin extends BaseResourceAdmin
                 ));
         }
 
-
         parent::configureListFields($listMapper);
 
         $listMapper->add('_action', 'actions', array(
-            'label' => ('Actions'),
+            //'label' => ('Actions'),
             'row_align' => 'right',
             'header_style' => 'width: 190px',
             'actions' => array(
