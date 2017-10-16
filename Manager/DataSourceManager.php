@@ -297,7 +297,6 @@ class DataSourceManager extends BaseResourceManager
      */
     public function prePersist($object, $flushed = true)
     {
-
         parent::prePersist($object);
 
         $plain_password = $object->getPlainPassword();
@@ -316,12 +315,13 @@ class DataSourceManager extends BaseResourceManager
      */
     public function preUpdate($object, $flushed = true)
     {
-
         parent::preUpdate($object);
 
-        $plain_password = $object->getPlainPassword();
-        $encoded_password = $this->getSecurityManager()->encodeReversibleString($plain_password);
-        $object->setDbPassword($encoded_password);
+        if (!empty($object->getPlainPassword()) || $object->getPlainPassword() === '') {
+            $plain_password = $object->getPlainPassword();
+            $encoded_password = $this->getUtilDynamicQueryManager()->getSecurityManager()->encodeReversibleString($plain_password);
+            $object->setDbPassword($encoded_password);
+        }
 
         $metadata_information = $this->getDataSourceMetadataInformation($object);
         $object->setMetadataInfo($metadata_information);

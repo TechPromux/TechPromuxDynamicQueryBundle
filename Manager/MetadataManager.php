@@ -189,16 +189,19 @@ class MetadataManager extends BaseResourceManager
             $metadata = $manager->find($object->getId());
             /* @var $metadata Metadata */
 
+            $copy_suffix = ' (COPY ' . (new \DateTime())->format('Y-m-d H:i:s') . ')';
+
             $new_metadata = $manager->createNewInstance();
             /* @var $new_metadata Metadata */
 
             $new_metadata->setDataSource($metadata->getDataSource());
 
-            $new_metadata->setName($metadata->getName() . '__COPY__' . (new \DateTime())->format('YmdHis'));
-            $new_metadata->setTitle($metadata->getTitle() . ' (' . $manager->trans('COPY') . ')');
+            $new_metadata->setName($metadata->getName() . $copy_suffix);
+            $new_metadata->setTitle($metadata->getTitle() . $copy_suffix);
             $new_metadata->setDescription($metadata->getDescription());
+            $new_metadata->setEnabled(false);
 
-            $manager->persist($new_metadata);
+            $manager->prePersist($new_metadata);
 
             $tables = $manager->getMetadataTableManager()->findBy(array('metadata' => $metadata->getId()));
 
@@ -223,7 +226,7 @@ class MetadataManager extends BaseResourceManager
 
                 $tables_to_copy[$tbl->getId()] = $new_table;
 
-                $manager->getMetadataTableManager()->persist($new_table);
+                $manager->getMetadataTableManager()->prePersist($new_table);
             }
 
             $fields = $this->getMetadataFieldManager()->findBy(array('metadata' => $metadata->getId()));
@@ -234,19 +237,18 @@ class MetadataManager extends BaseResourceManager
                 $new_field = $this->getMetadataFieldManager()->createNewInstance();
                 /* @var $new_field MetadataField */
 
-
                 $new_field->setName($fld->getName());
                 $new_field->setTitle($fld->getTitle());
 
                 $new_field->setType($fld->getType());
-                $new_field->setTable($tables_to_copy[$fld->getTable()->getId()]);
                 $new_field->setEnabled($fld->getEnabled());
                 $new_field->setPosition($fld->getPosition());
 
                 $new_field->setMetadata($new_metadata);
+                $new_field->setTable($tables_to_copy[$fld->getTable()->getId()]);
                 $new_metadata->addField($new_field);
 
-                $manager->getMetadataFieldManager()->persist($new_field);
+                $manager->getMetadataFieldManager()->prePersist($new_field);
             }
 
             $relations = $this->getMetadataRelationManager()->findBy(array('metadata' => $metadata->getId()));
@@ -258,18 +260,21 @@ class MetadataManager extends BaseResourceManager
                 /* @var $new_relation MetadataRelation */
 
                 $new_relation->setName($rls->getName());
-                $new_relation->setJoinType($rls->getJoinType());
                 $new_relation->setLeftTable($tables_to_copy[$rls->getLeftTable()->getId()]);
                 $new_relation->setLeftColumn($rls->getLeftColumn());
                 $new_relation->setRightTable($tables_to_copy[$rls->getRightTable()->getId()]);
                 $new_relation->setRightColumn($rls->getRightColumn());
+                $new_relation->setJoinType($rls->getJoinType());
                 $new_relation->setPosition($rls->getPosition());
 
                 $new_relation->setMetadata($new_metadata);
                 $new_metadata->addRelation($new_relation);
 
-                $manager->getMetadataRelationManager()->persist($new_relation);
+                $manager->getMetadataRelationManager()->prePersist($new_relation);
             }
+
+            $manager->persistWithoutPreAndPostPersist($new_metadata);
+
         });
 
         return $new_metadata;

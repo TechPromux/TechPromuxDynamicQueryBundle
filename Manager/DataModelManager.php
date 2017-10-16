@@ -202,7 +202,6 @@ class DataModelManager extends BaseResourceManager
      */
     public function postPersist($object)
     {
-
         parent::postPersist($object);
 
         $metadata = $object->getMetadata();
@@ -295,142 +294,162 @@ class DataModelManager extends BaseResourceManager
      */
     public function createCopyForDataModel($object)
     {
-        $datamodel = $this->find($object->getId());
-        /* @var $dataModel DataModel */
+        $manager = $this;
+        /* @var $manager DataModelManager */
+        $new_datamodel = null;
 
-        $duplicatedDataModel = $this->createNewInstance();
-        /* @var $duplicatedDataModel DataModel */
+        $this->executeTransaction(function () use ($manager, $object, &$new_datamodel) {
 
-        $duplicatedDataModel->setMetadata($datamodel->getMetadata());
+            $datamodel = $manager->find($object->getId());
+            /* @var $dataModel DataModel */
 
-        $duplicatedDataModel->setName($datamodel->getName() . ' (' . $this->trans('Duplicated') . ')');
-        $duplicatedDataModel->setTitle($datamodel->getTitle() . ' (' . $this->trans('Duplicated') . ')');
+            $new_datamodel = $manager->createNewInstance();
+            /* @var $new_datamodel DataModel */
 
-        $duplicatedDataModel->setDescription($datamodel->getDescription());
-        $duplicatedDataModel->setEnabled(false);
+            $new_datamodel->setMetadata($datamodel->getMetadata());
 
-        //-------------------------------------------------
+            $copy_suffix = ' (COPY ' . (new \DateTime())->format('Y-m-d H:i:s') . ')';
 
-        $details = $this->getDatamodelDetailManager()->findBy(array('datamodel' => $datamodel->getId()));
+            $new_datamodel->setName($datamodel->getName() . $copy_suffix);
+            $new_datamodel->setTitle($datamodel->getTitle() . $copy_suffix);
 
-        foreach ($details as $dtl) {
-            /* @var $dtl DataModelDetail */
-            $duplicatedDtl = $this->getDatamodelDetailManager()->createNewInstance();
-            /* @var $duplicatedDtl DataModelDetail */
+            $new_datamodel->setDescription($datamodel->getDescription());
+            $new_datamodel->setEnabled(false);
 
-            $duplicatedDtl->setDatamodel($duplicatedDataModel);
+            $manager->prePersist($new_datamodel);
 
-            $duplicatedDtl->setName($dtl->getName());
-            $duplicatedDtl->setTitle($dtl->getTitle());
+            //-------------------------------------------------
 
-            $duplicatedDtl->setField($dtl->getField());
-            $duplicatedDtl->setFunction($dtl->getFunction());
+            $details = $manager->getDatamodelDetailManager()->findBy(
+                array('datamodel' => $datamodel->getId()),
+                array('position' => 'ASC')
+            );
 
-            $duplicatedDtl->setAbbreviation($dtl->getAbbreviation());
+            foreach ($details as $dtl) {
+                /* @var $dtl DataModelDetail */
+                $new_detail = $manager->getDatamodelDetailManager()->createNewInstance();
+                /* @var $new_detail DataModelDetail */
 
-            $duplicatedDtl->setPresentationFormat($dtl->getPresentationFormat());
-            $duplicatedDtl->setPresentationPrefix($dtl->getPresentationPrefix());
-            $duplicatedDtl->setPresentationSuffix($dtl->getPresentationSuffix());
+                $new_detail->setName($dtl->getName());
+                $new_detail->setTitle($dtl->getTitle());
 
-            $duplicatedDtl->setEnabled($dtl->getEnabled());
-            $duplicatedDtl->setPosition($dtl->getPosition());
+                $new_detail->setFunction($dtl->getFunction());
 
-            $this->getDatamodelDetailManager()->prePersist($duplicatedDtl);
+                $new_detail->setAbbreviation($dtl->getAbbreviation());
 
-            $duplicatedDataModel->addDetail($duplicatedDtl);
+                $new_detail->setPresentationFormat($dtl->getPresentationFormat());
+                $new_detail->setPresentationPrefix($dtl->getPresentationPrefix());
+                $new_detail->setPresentationSuffix($dtl->getPresentationSuffix());
 
-            //$this->getEntityManager()->persist($duplicatedDtl);
-        }
+                $new_detail->setSqlName($dtl->getSqlName());
+                $new_detail->setSqlType($dtl->getSqlType());
+                $new_detail->setSqlTypeCategorization($dtl->getSqlTypeCategorization());
+                $new_detail->setSqlName($dtl->getSqlName());
 
-        //-------------------------------------------------
+                $new_detail->setEnabled($dtl->getEnabled());
+                $new_detail->setPosition($dtl->getPosition());
 
-        $conditions = $this->getDatamodelConditionManager()->findBy(array('datamodel' => $datamodel->getId()));
+                $new_detail->setField($dtl->getField());
 
-        foreach ($conditions as $cdtn) {
-            /* @var $cdtn DataModelCondition */
-            $duplicatedCdtn = $this->getDatamodelConditionManager()->createNewInstance();
-            /* @var $duplicatedCdtn DataModelCondition */
+                $new_detail->setDatamodel($new_datamodel);
+                $new_datamodel->addDetail($new_detail);
 
-            $duplicatedCdtn->setDatamodel($duplicatedDataModel);
+                $manager->getDatamodelDetailManager()->prePersist($new_detail);
 
-            $duplicatedCdtn->setName($cdtn->getName());
-            $duplicatedCdtn->setTitle($cdtn->getTitle());
+            }
 
-            $duplicatedCdtn->setField($cdtn->getField());
-            $duplicatedCdtn->setFunction($cdtn->getFunction());
+            //-------------------------------------------------
 
-            $duplicatedCdtn->setOperator($cdtn->getOperator());
+            $conditions = $manager->getDatamodelConditionManager()->findBy(array('datamodel' => $datamodel->getId()));
 
-            $duplicatedCdtn->setCompareToType($cdtn->getCompareToType());
-            $duplicatedCdtn->setCompareToFixedValue($cdtn->getCompareToFixedValue());
-            $duplicatedCdtn->setCompareToDynamicValue($cdtn->getCompareToDynamicValue());
-            $duplicatedCdtn->setCompareToField($cdtn->getCompareToField());
-            $duplicatedCdtn->setCompareToFunction($cdtn->getCompareToFunction());
+            foreach ($conditions as $cdtn) {
+                /* @var $cdtn DataModelCondition */
+                $new_condition = $this->getDatamodelConditionManager()->createNewInstance();
+                /* @var $new_condition DataModelCondition */
 
-            $duplicatedCdtn->setEnabled($cdtn->getEnabled());
-            $duplicatedCdtn->setPosition($cdtn->getPosition());
+                $new_condition->setName($cdtn->getName());
+                $new_condition->setTitle($cdtn->getTitle());
 
-            $this->getDatamodelConditionManager()->prePersist($duplicatedCdtn);
+                $new_condition->setFunction($cdtn->getFunction());
 
-            $duplicatedDataModel->addCondition($duplicatedCdtn);
-        }
+                $new_condition->setOperator($cdtn->getOperator());
 
-        //-------------------------------------------------
+                $new_condition->setCompareToType($cdtn->getCompareToType());
+                $new_condition->setCompareToFixedValue($cdtn->getCompareToFixedValue());
+                $new_condition->setCompareToDynamicValue($cdtn->getCompareToDynamicValue());
+                $new_condition->setCompareToField($cdtn->getCompareToField());
+                $new_condition->setCompareToFunction($cdtn->getCompareToFunction());
 
-        $groups = $this->getDatamodelGroupManager()->findBy(array('datamodel' => $datamodel->getId()));
+                $new_condition->setSqlName($cdtn->getSqlName());
 
-        foreach ($groups as $grp) {
-            /* @var $grp DataModelGroup */
-            $duplicatedGrp = $this->getDatamodelGroupManager()->createNewInstance();
-            /* @var $duplicatedGrp DataModelGroup */
+                $new_condition->setEnabled($cdtn->getEnabled());
+                $new_condition->setPosition($cdtn->getPosition());
 
-            $duplicatedGrp->setDatamodel($duplicatedDataModel);
+                $new_condition->setField($cdtn->getField());
 
-            $duplicatedGrp->setName($dtl->getName());
-            $duplicatedGrp->setTitle($dtl->getTitle());
+                $new_condition->setDatamodel($new_datamodel);
+                $new_datamodel->addCondition($new_condition);
 
-            $duplicatedGrp->setField($dtl->getField());
-            $duplicatedGrp->setFunction($dtl->getFunction());
+                $manager->getDatamodelConditionManager()->prePersist($new_condition);
+            }
 
-            $duplicatedGrp->setEnabled($dtl->getEnabled());
-            $duplicatedGrp->setPosition($dtl->getPosition());
+            //-------------------------------------------------
 
-            $this->getDatamodelGroupManager()->prePersist($duplicatedGrp);
+            $groups = $manager->getDatamodelGroupManager()->findBy(array('datamodel' => $datamodel->getId()));
 
-            $duplicatedDataModel->addGroup($duplicatedGrp);
-        }
+            foreach ($groups as $grp) {
+                /* @var $grp DataModelGroup */
+                $new_group = $this->getDatamodelGroupManager()->createNewInstance();
+                /* @var $new_group DataModelGroup */
 
-        //-------------------------------------------------
+                $new_group->setName($grp->getName());
+                $new_group->setTitle($grp->getTitle());
 
-        $orders = $this->getDatamodelOrderManager()->findBy(array('datamodel' => $datamodel->getId()));
+                $new_group->setFunction($grp->getFunction());
+                $new_group->setSqlName($grp->getSqlName());
 
-        foreach ($orders as $ord) {
-            /* @var $ord DataModelOrder */
-            $duplicatedOrd = $this->getDatamodelOrderManager()->createNewInstance();
-            /* @var $duplicatedOrd DataModelOrder */
+                $new_group->setEnabled($grp->getEnabled());
+                $new_group->setPosition($grp->getPosition());
 
-            $duplicatedOrd->setDatamodel($duplicatedDataModel);
+                $new_group->setField($grp->getField());
 
-            $duplicatedOrd->setName($ord->getName());
-            $duplicatedOrd->setTitle($ord->getTitle());
+                $new_group->setDatamodel($new_datamodel);
+                $new_datamodel->addGroup($new_group);
 
-            $duplicatedOrd->setField($ord->getField());
-            $duplicatedOrd->setFunction($ord->getFunction());
-            $duplicatedOrd->setType($ord->getType());
+                $manager->getDatamodelGroupManager()->prePersist($new_group);
+            }
 
-            $duplicatedOrd->setEnabled($ord->getEnabled());
-            $duplicatedOrd->setPosition($ord->getPosition());
+            //-------------------------------------------------
 
-            $this->getDatamodelOrderManager()->prePersist($duplicatedOrd);
+            $orders = $manager->getDatamodelOrderManager()->findBy(array('datamodel' => $datamodel->getId()));
 
-            $duplicatedDataModel->addOrder($duplicatedOrd);
-        }
+            foreach ($orders as $ord) {
+                /* @var $ord DataModelOrder */
+                $new_order = $manager->getDatamodelOrderManager()->createNewInstance();
+                /* @var $new_order DataModelOrder */
 
-        //-------------------------------------------------
+                $new_order->setName($ord->getName());
+                $new_order->setTitle($ord->getTitle());
 
-        $duplicatedDataModel = $this->persist($duplicatedDataModel);
+                $new_order->setFunction($ord->getFunction());
+                $new_order->setType($ord->getType());
+                $new_order->setSqlName($ord->getSqlName());
 
-        return $duplicatedDataModel;
+                $new_order->setEnabled($ord->getEnabled());
+                $new_order->setPosition($ord->getPosition());
+
+                $new_order->setField($ord->getField());
+
+                $new_order->setDatamodel($new_datamodel);
+                $new_datamodel->addOrder($new_order);
+
+                $manager->getDatamodelOrderManager()->prePersist($new_order);
+            }
+
+            $manager->persistWithoutPreAndPostPersist($new_datamodel);
+        });
+
+        return $new_datamodel;
     }
 
     //----------------------------------------------------------------------------------------------------------
@@ -763,7 +782,6 @@ class DataModelManager extends BaseResourceManager
 
     public function getEnabledDetailsDescriptionsFromDataModel($datamodel_id)
     {
-
         $details = $this->getDatamodelDetailManager()->findBy(array('datamodel' => $datamodel_id, 'enabled' => true), array('position' => 'ASC'));
 
         $descriptions = array();
@@ -791,26 +809,4 @@ class DataModelManager extends BaseResourceManager
     }
 
     //--------------------------------------------------------------------------------------------------------
-
-    // TODO: Pasar para el controller, esto es de la vista, el manager solo se encarga de generar el query
-    // asi como los otros metodos para las runnables query....
-
-    protected function createPaginatorAdapterForQueryBuilder($queryBuilder)
-    {
-        return new DoctrineDbalPaginatorAdapter($queryBuilder);
-    }
-
-    /**
-     * @param $queryBuilder
-     * @return Pagerfanta
-     */
-    public function createPaginatorForQueryBuilder($queryBuilder)
-    {
-        $adapter = $this->createPaginatorAdapterForQueryBuilder($queryBuilder);
-
-        $paginator = new Pagerfanta($adapter);
-
-        return $paginator;
-    }
-
 }

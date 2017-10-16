@@ -44,11 +44,21 @@ class MetadataAdmin extends BaseResourceAdmin
     {
         //parent::configureDatagridFilters($datagridMapper);
 
+        $datasourceManager = $this->getResourceManager()->getDataSourceManager();
         $datagridMapper
-            ->add('datasource')
+            ->add('datasource', null, [], 'entity',
+                array(
+                    'class' => $datasourceManager->getResourceClass(),
+                    'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($datasourceManager) {
+                        $qb = $er->createQueryBuilder('t');
+                        $qb = $datasourceManager->alterBaseQueryBuilder($qb);
+                        return $qb;
+                    },
+                    'choice_label' => 'title',
+                    "multiple" => false, "expanded" => false, 'required' => true)
+            )
             ->add('name')
-            ->add('title')
-            //->add('tables')
+            ->add('title')//->add('tables')
         ;
     }
 
@@ -61,12 +71,14 @@ class MetadataAdmin extends BaseResourceAdmin
             ->add('name')
             ->add('title')
             ->add('datasource', 'html')
+            /*
             ->add('tables', null, array(
                 'row_align' => 'left',
                 'header_style' => 'width: 30%',
                 //'associated_property' => 'selectedTableNameOrCustomQuery',
                 'route' => array('name' => '__'),
             ))
+            */
             ->add('enabled', null, array('editable' => true,
                 'row_align' => 'center',
                 'header_style' => 'width: 100px',
@@ -117,8 +129,10 @@ class MetadataAdmin extends BaseResourceAdmin
         $formMapper
             ->with('form.group.datasource.descriptions', array("class" => "col-md-8"))
             ->add('name')
-            ->add('title')
-            ->add('description')
+            ->add('title', null, [
+                'required' => true
+            ])
+            //->add('description')
             ->end();
 
         $formMapper
@@ -132,7 +146,7 @@ class MetadataAdmin extends BaseResourceAdmin
                         $qb = $datasourceManager->alterBaseQueryBuilder($qb);
                         return $qb;
                     },
-                    'choice_label' => 'name',
+                    'choice_label' => 'title',
                     "multiple" => false, "expanded" => false, 'required' => true)
             )
             ->add('enabled')
@@ -250,7 +264,7 @@ class MetadataAdmin extends BaseResourceAdmin
                     }
 
                     if (!$one_selected) {
-                           $errorElement->with('fields')->addViolation('You must select at least a FIELD');
+                        $errorElement->with('fields')->addViolation('You must select at least a FIELD');
                     }
                 }
             }

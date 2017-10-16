@@ -76,6 +76,7 @@ class MetadataTableAdmin extends BaseResourceAdmin
             );
         $formMapper
             ->add('tableName', 'choice', array(
+                    'label' => 'form.label_table_name_or_custom_query',
                     "choices" => $tables_names,
                     "expanded" => false,
                     "multiple" => false,
@@ -85,12 +86,13 @@ class MetadataTableAdmin extends BaseResourceAdmin
                         'data-ctype' => 'metadata-table-name',
                         'data-last-value' => ($object == null || $object->getType() == 'query') ? $table_name_first : $object->getTableName()
                     ),
-                   // 'translation_domain' => $this->getResourceManager()->getBundleName()
+                    // 'translation_domain' => $this->getResourceManager()->getBundleName()
                 )
             );
 
         $formMapper
             ->add('customQuery', null, array(
+                    'label' => 'form.label_title',
                     'required' => false,
                     'attr' => array(
                         'style' => 'width: 100%',

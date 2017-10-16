@@ -87,7 +87,7 @@ class Metadata extends BaseResource implements HasResourceContext
 
     public function getDataSourceTitleMetadataTitleAndEnabled()
     {
-        return $this->getDatasource()->getName() . ' -> ' . $this->getTitle() . ($this->getEnabled() ? '' : ' (x)');
+        return $this->getDatasource()->getTitle() . ' [ ' . $this->getTitle() . ($this->getEnabled() ? '' : ' (x)').' ]';
     }
 
     //--------------------------------------------------------------------------

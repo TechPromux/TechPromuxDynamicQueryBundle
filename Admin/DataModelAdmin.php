@@ -69,7 +69,38 @@ class DataModelAdmin extends BaseResourceAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $datasourceManager = $this->getResourceManager()->getMetadataManager()->getDataSourceManager();
+
+        $metadaManager = $this->getResourceManager()->getMetadataManager();
+
         $datagridMapper
+            ->add('metadata.datasource', null, [], 'entity',
+                array(
+                    'class' => $datasourceManager->getResourceClass(),
+                    'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($datasourceManager) {
+                        $qb = $er->createQueryBuilder('t');
+                        $qb = $datasourceManager->alterBaseQueryBuilder($qb);
+                        return $qb;
+                    },
+                    'choice_label' => 'title',
+                    "multiple" => false, "expanded" => false, 'required' => true)
+            );
+
+        $datagridMapper
+            ->add('metadata', null, [], 'entity',
+                array(
+                    'class' => $metadaManager->getResourceClass(),
+                    'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($metadaManager) {
+                        $qb = $er->createQueryBuilder('m');
+                        $qb = $metadaManager->alterBaseQueryBuilder($qb);
+                        return $qb;
+                    },
+                    'choice_label' => 'title',
+                    "multiple" => false, "expanded" => false, 'required' => true)
+            );
+
+        $datagridMapper
+            ->add('name')
             ->add('title');
     }
 
@@ -113,12 +144,12 @@ class DataModelAdmin extends BaseResourceAdmin
             'header_style' => 'width: 190px',
             'actions' => array(
                 'edit' => array(),
-                'execute' => array(
-                    'template' => 'TechPromuxBaseBundle:Admin:CRUD/list__action_execute.html.twig'
-                ),
                 'copy' => array(
                     'template' => 'TechPromuxBaseBundle:Admin:CRUD/list__action_copy.html.twig',
                     'ask_confirmation' => true
+                ),
+                'execute' => array(
+                    'template' => 'TechPromuxBaseBundle:Admin:CRUD/list__action_execute.html.twig'
                 ),
                 'delete' => array(),
             )
@@ -144,8 +175,10 @@ class DataModelAdmin extends BaseResourceAdmin
             ->tab('form.tab.datamodel.description')
             ->with('form.group.datamodel.description', array("class" => "col-md-6"))
             ->add('name')
-            ->add('title')
-            ->add('description')
+            ->add('title', null, [
+                'required' => true
+            ])
+            //->add('description')
             ->end()
             ->with('form.group.datamodel.configuration', array("class" => "col-md-6"))
             ->add('metadata', 'entity', array(
@@ -202,9 +235,9 @@ class DataModelAdmin extends BaseResourceAdmin
                 ->end();
 
             $formMapper
-                ->tab('form.tab.datamodel.orders')
-                ->with('form.group.datamodel.select_orders')
-                ->add('orders', 'sonata_type_collection', array(
+                ->tab('form.tab.datamodel.conditions')
+                ->with('form.group.datamodel.select_conditions')
+                ->add('conditions', 'sonata_type_collection', array(
                     "label" => false,
                     "by_reference" => false,
                     'type_options' => array('delete' => true),
@@ -218,9 +251,9 @@ class DataModelAdmin extends BaseResourceAdmin
                 ->end();
 
             $formMapper
-                ->tab('form.tab.datamodel.conditions')
-                ->with('form.group.datamodel.select_conditions')
-                ->add('conditions', 'sonata_type_collection', array(
+                ->tab('form.tab.datamodel.orders')
+                ->with('form.group.datamodel.select_orders')
+                ->add('orders', 'sonata_type_collection', array(
                     "label" => false,
                     "by_reference" => false,
                     'type_options' => array('delete' => true),

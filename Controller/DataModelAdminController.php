@@ -2,9 +2,11 @@
 
 namespace TechPromux\DynamicQueryBundle\Controller;
 
+use Pagerfanta\Pagerfanta;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use TechPromux\BaseBundle\Adapter\Paginator\DoctrineDbalPaginatorAdapter;
 use TechPromux\DynamicQueryBundle\Entity\DataModel;
 use TechPromux\DynamicQueryBundle\Manager\DataModelManager;
 
@@ -75,7 +77,7 @@ class DataModelAdminController extends CRUDController
 
         // get results
 
-        $paginator = $manager->createPaginatorForQueryBuilder($queryBuilder);
+        $paginator = $this->createPaginatorForQueryBuilder($queryBuilder);
 
         $paginator->setCurrentPage($request->get('_page', 1));
         $paginator->setMaxPerPage($request->get('_items_per_page', 32));
@@ -321,4 +323,27 @@ class DataModelAdminController extends CRUDController
 
         return $orders_by;
     }
+
+    /**
+     * @param $queryBuilder
+     * @return DoctrineDbalPaginatorAdapter
+     */
+    protected function createPaginatorAdapterForQueryBuilder($queryBuilder)
+    {
+        return new DoctrineDbalPaginatorAdapter($queryBuilder);
+    }
+
+    /**
+     * @param $queryBuilder
+     * @return Pagerfanta
+     */
+    public function createPaginatorForQueryBuilder($queryBuilder)
+    {
+        $adapter = $this->createPaginatorAdapterForQueryBuilder($queryBuilder);
+
+        $paginator = new Pagerfanta($adapter);
+
+        return $paginator;
+    }
+
 }

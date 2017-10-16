@@ -10,6 +10,7 @@ namespace TechPromux\DynamicQueryBundle\Manager;
 
 
 use TechPromux\BaseBundle\Manager\BaseManager;
+use TechPromux\BaseBundle\Manager\Security\BaseSecurityManager;
 use TechPromux\DynamicQueryBundle\Entity\MetadataField;
 use TechPromux\DynamicQueryBundle\Type\ConditionalOperator\BaseConditionalOperatorType;
 use TechPromux\DynamicQueryBundle\Type\DynamicValue\BaseDynamicValueType;
@@ -60,16 +61,30 @@ class UtilDynamicQueryManager extends BaseManager
 
     //----------------------------------------------------------------------------
 
-    public function getDriverTypesChoices()
+    /**
+     * @param bool $translated
+     * @return array
+     */
+    public function getDriverTypesChoices($translated = false)
     {
-        return array('pdo_mysql' => 'pdo_mysql', 'pdo_postgres' => 'pdo_postgres');
+        return array(
+            'pdo_mysql' => $translated ? $this->getTranslator()->trans('pdo_mysql', array(), $this->getBundleName()) : 'pdo_mysql',
+            'pdo_postgres' => $translated ? $this->getTranslator()->trans('pdo_postgres', array(), $this->getBundleName()) : 'pdo_postgres',
+        );
     }
 
     //----------------------------------------------------------------------------------------------
 
-    public function getMetadataTableTypesChoices()
+    /**
+     * @param bool $translated
+     * @return array
+     */
+    public function getMetadataTableTypesChoices($translated = false)
     {
-        return array('table' => 'table', 'query' => 'query');
+        return array(
+            'table' => 'table',
+            'query' => 'query'
+        );
     }
 
     //----------------------------------------------------------------------------------------------

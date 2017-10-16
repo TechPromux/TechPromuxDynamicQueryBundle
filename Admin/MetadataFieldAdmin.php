@@ -40,6 +40,7 @@ class MetadataFieldAdmin extends BaseResourceAdmin
                 'data-ctype' => 'metadata-field-position-field'
             )))
             ->add('enabled', null, array(
+                'label' => 'form.label_selected',
                 'attr' => array(
                     'data-ctype' => 'metadata-field-enabled-field')
             ))

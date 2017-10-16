@@ -66,9 +66,15 @@ class DataSourceAdmin extends BaseResourceAdmin
         parent::configureDatagridFilters($datagridMapper);
         $datagridMapper
             ->add('name')
-            ->add('driverType')
+            ->add('title')
+            ->add('driverType', null, [], 'choice', array(
+                'choices' => $this->getResourceManager()->getUtilDynamicQueryManager()->getDriverTypesChoices(),
+                'translation_domain' => $this->getResourceManager()->getBundleName()
+            ))
             ->add('dbHost')
-            ->add('dbName');
+            ->add('dbPort')
+            ->add('dbName')
+            ->add('enabled');
     }
 
     /**
@@ -78,7 +84,13 @@ class DataSourceAdmin extends BaseResourceAdmin
     {
         $listMapper
             ->add('name')
+            ->add('title')
             //->add('description', 'html')
+            ->add('driverType', 'choice', array(
+                'choices' => $this->getResourceManager()->getUtilDynamicQueryManager()->getDriverTypesChoices(true),
+                'row_align' => 'center',
+                'header_style' => 'width: 100px',
+            ))
             ->add('dbHost', 'string', array(
                 'row_align' => 'center',
                 'header_style' => 'width: 100px',
@@ -87,22 +99,10 @@ class DataSourceAdmin extends BaseResourceAdmin
                 'row_align' => 'center',
                 'header_style' => 'width: 100px',
             ))
-            ->add('driverType', 'choice', array(
-                'choices' => $this->getResourceManager()->getUtilDynamicQueryManager()->getDriverTypesChoices(),
-                'row_align' => 'center',
-                'header_style' => 'width: 100px',
-            ))
             ->add('dbName', 'string', array(
                 'row_align' => 'left',
                 'header_style' => 'width: 120px',
             ))
-            /* ->add('metadatas', null, array(
-              'label' => 'Metadatas',
-              'row_align' => 'left',
-              'header_style' => 'width: 30%',
-              //'associated_property' => 'selectedTableNameOrCustomQuery',
-              'route' => array('name' => '__'),
-              )) */
             ->add('enabled', null, array('editable' => true,
                 'row_align' => 'center',
                 'header_style' => 'width: 100px',
@@ -116,13 +116,10 @@ class DataSourceAdmin extends BaseResourceAdmin
             'header_style' => 'width: 120px',
             'actions' => array(
                 //'show' => array(),
+                'edit' => array(),
                 'reload' => array(
                     'template' => 'TechPromuxBaseBundle:Admin:CRUD/list__action_reload.html.twig'
                 ),
-                'edit' => array(),
-                //'tech_prommux_dynamic_query.admin.datasourceconnection|tech_prommux_dynamic_query.admin.datasourcemetadata.list' => array(
-                //    'template' => 'TechPromuxDynamicQueryBundle:Metadata:list__action_datasourceconnection_metadata.html.twig'
-                //),
                 'delete' => array(),
             )
         ));
@@ -144,57 +141,48 @@ class DataSourceAdmin extends BaseResourceAdmin
         }
 
         $formMapper
-            ->with('form.group.datasource.description', array("class" => "col-md-7"))
-            ->add('name')
-            ->add('description')
+            ->with('form.group.datasource.description', array("class" => "col-md-5"));
+
+        $formMapper->add('name');
+
+        $formMapper
+            ->add('title', null, [
+                'required'=>true
+            ]);
+        $formMapper
+            //->add('description')
             //->add('code')
-            ->add('enabled')
-            ->end()
-            ->with('form.group.datasource.parameters', array("class" => "col-md-5"))
+            ->add('enabled');
+        $formMapper
+            ->end();
+        $formMapper
+            ->with('form.group.datasource.parameters', array("class" => "col-md-7"));
+        $formMapper
             ->add('driverType', 'choice', array(
                 'choices' => $this->getResourceManager()->getUtilDynamicQueryManager()->getDriverTypesChoices(),
                 'required' => true,
                 'translation_domain' => $this->getResourceManager()->getBundleName()
-            ))
+            ));
+        $formMapper
             ->add('dbHost', null, array(
                 'empty_data' => '127.0.0.1',
-            ))
+            ));
+        $formMapper
             ->add('dbPort', null, array(
                 'empty_data' => '3306',
-            ))
-            ->add('dbName')
-            ->add('dbUser')
+            ));
+        $formMapper
+            ->add('dbName');
+        $formMapper
+            ->add('dbUser');
+        $formMapper
             ->add('plainPassword', 'password', array(
                 'required' => false,
                 'trim' => false,
                 //'help' => 'Don\'t edit if you want mantain the same'
-            ))
+            ));
+        $formMapper
             ->end();
-    }
-
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $showMapper
-            ->add('name')
-            ->add('title')
-            ->add('description')
-            ->add('enabled')
-            ->add('driverType')
-            ->add('dbHost')
-            ->add('dbPort')
-            ->add('dbName')
-            ->add('dbUser')
-            //->add('dbPassword')
-            //->add('metadataInfo')
-            //->add('createdAt')
-            //->add('updatedAt')
-            //->add('options')
-            //->add('securityToken')
-            //->add('id')
-        ;
     }
 
     //----------------------------------------------------------------------------
@@ -220,9 +208,9 @@ class DataSourceAdmin extends BaseResourceAdmin
             ->assertNotBlank()
             ->assertLength(array('min' => 3))
             ->end()
-            ->with('description')
+            ->with('title')
             ->assertNotBlank()
-            ->assertLength(array('min' => 5))
+            ->assertLength(array('min' => 3))
             ->end()
             ->with('driverType')
             ->assertNotNull()
@@ -252,4 +240,14 @@ class DataSourceAdmin extends BaseResourceAdmin
 
     }
 
+    /**
+     * @param DataSource $object
+     */
+    public function preUpdate($object)
+    {
+        if (empty($object->getPlainPassword()) && !$this->getRequest()->isXmlHttpRequest()) {
+            $object->setPlainPassword('');
+        }
+        parent::preUpdate($object); // TODO: Change the autogenerated stub
+    }
 }

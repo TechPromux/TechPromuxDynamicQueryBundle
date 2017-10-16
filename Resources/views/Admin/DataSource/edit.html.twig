@@ -26,6 +26,14 @@
 
             $('#{{ form.vars.id }}_plainPassword_hide').hide();
 
+            $('#sonata-ba-field-container-{{ form.vars.id }}_driverType').addClass('col-md-4').css({'padding-left':'0px'});
+            $('#sonata-ba-field-container-{{ form.vars.id }}_dbHost').addClass('col-md-6');
+            $('#sonata-ba-field-container-{{ form.vars.id }}_dbPort').addClass('col-md-2');
+
+            $('#sonata-ba-field-container-{{ form.vars.id }}_dbName').addClass('col-md-12').css({'padding-left':'0px'});
+
+            $('#sonata-ba-field-container-{{ form.vars.id }}_dbUser').addClass('col-md-5').css({'padding-left':'0px'});
+            $('#sonata-ba-field-container-{{ form.vars.id }}_plainPassword').addClass('col-md-7').css({'padding-left':'0px'});
         });
     </script>
 {% endblock %}

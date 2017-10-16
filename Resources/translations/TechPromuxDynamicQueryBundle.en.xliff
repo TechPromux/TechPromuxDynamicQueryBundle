@@ -2,6 +2,10 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="TechPromuxDynamicQueryBundle.en.xliff">
         <body>
+            <trans-unit id="">
+                <source></source>
+                <target><![CDATA[]]></target>
+            </trans-unit>
             <trans-unit id="techpromux_dynamic_queries_group_label">
                 <source>techpromux_dynamic_queries_group_label</source>
                 <target><![CDATA[Dynamic Queries]]></target>
@@ -36,7 +40,7 @@
             </trans-unit>
             <trans-unit id="list.label_driver_type">
                 <source>list.label_driver_type</source>
-                <target><![CDATA[Type]]></target>
+                <target><![CDATA[Driver]]></target>
             </trans-unit>
             <trans-unit id="list.label_db_name">
                 <source>list.label_db_name</source>
@@ -56,15 +60,31 @@
             </trans-unit>
             <trans-unit id="filter.label_driver_type">
                 <source>filter.label_driver_type</source>
-                <target><![CDATA[Driver Type]]></target>
+                <target><![CDATA[Driver]]></target>
             </trans-unit>
             <trans-unit id="filter.label_db_host">
                 <source>filter.label_db_host</source>
                 <target><![CDATA[Host]]></target>
             </trans-unit>
+            <trans-unit id="filter.label_db_port">
+                <source>filter.label_db_port</source>
+                <target><![CDATA[Port]]></target>
+            </trans-unit>
             <trans-unit id="filter.label_db_name">
                 <source>filter.label_db_name</source>
-                <target><![CDATA[Name]]></target>
+                <target><![CDATA[Database]]></target>
+            </trans-unit>
+            <trans-unit id="filter.label_enabled">
+                <source>filter.label_enabled</source>
+                <target><![CDATA[Enabled]]></target>
+            </trans-unit>
+            <trans-unit id="filter.label_metadata_datasource">
+                <source>filter.label_metadata_datasource</source>
+                <target><![CDATA[Data Source]]></target>
+            </trans-unit>
+            <trans-unit id="filter.label_metadata">
+                <source>filter.label_metadata</source>
+                <target><![CDATA[Metadata]]></target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_data_source_list">
                 <source>breadcrumb.link_data_source_list</source>
@@ -93,6 +113,14 @@
             <trans-unit id="list.label_tables">
                 <source>list.label_tables</source>
                 <target><![CDATA[Tables]]></target>
+            </trans-unit>
+            <trans-unit id="list.label_datasource">
+                <source>list.label_datasource</source>
+                <target><![CDATA[Data Source]]></target>
+            </trans-unit>
+            <trans-unit id="filter.label_datasource">
+                <source>filter.label_datasource</source>
+                <target><![CDATA[Data Source]]></target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_metadata_list">
                 <source>breadcrumb.link_metadata_list</source>
@@ -125,19 +153,19 @@
             </trans-unit>
             <trans-unit id="form.tab.datamodel.details">
                 <source>form.tab.datamodel.details</source>
-                <target><![CDATA[Configure Details]]></target>
+                <target><![CDATA[Details]]></target>
             </trans-unit>
             <trans-unit id="form.tab.datamodel.groups">
                 <source>form.tab.datamodel.groups</source>
-                <target><![CDATA[Configure Groups]]></target>
+                <target><![CDATA[Groups]]></target>
             </trans-unit>
             <trans-unit id="form.tab.datamodel.orders">
                 <source>form.tab.datamodel.orders</source>
-                <target><![CDATA[Configure Orders]]></target>
+                <target><![CDATA[Orders]]></target>
             </trans-unit>
             <trans-unit id="form.tab.datamodel.conditions">
                 <source>form.tab.datamodel.conditions</source>
-                <target><![CDATA[Configure Conditions]]></target>
+                <target><![CDATA[Conditions]]></target>
             </trans-unit>
 
             <trans-unit id="form.group.datamodel.description">
@@ -619,13 +647,37 @@
                 <source>of</source>
                 <target><![CDATA[of]]></target>
             </trans-unit>
+            <trans-unit id="Execute">
+                <source>Execute</source>
+                <target><![CDATA[Execute]]></target>
+            </trans-unit>
             <trans-unit id="datamodel.execute.filter.title">
                 <source>datamodel.execute.filter.title</source>
                 <target><![CDATA[Filter Result from]]></target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_data_model_create">
+                <source>breadcrumb.link_data_model_create</source>
+                <target><![CDATA[Create]]></target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_data_model_execute">
                 <source>breadcrumb.link_data_model_execute</source>
                 <target><![CDATA[Execute]]></target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_data_model_delete">
+                <source>breadcrumb.link_data_model_delete</source>
+                <target><![CDATA[Delete]]></target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_metadata_create">
+                <source>breadcrumb.link_metadata_create</source>
+                <target><![CDATA[Create]]></target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_metadata_delete">
+                <source>breadcrumb.link_metadata_delete</source>
+                <target><![CDATA[Delete]]></target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_data_source_delete">
+                <source>breadcrumb.link_data_source_delete</source>
+                <target><![CDATA[Delete]]></target>
             </trans-unit>
             <trans-unit id="datamodel.execute.filter.error.msg">
                 <source>datamodel.execute.filter.error.msg</source>
@@ -644,187 +696,243 @@
                 <source>form.group.datasource.description</source>
                 <target><![CDATA[Description]]></target>
             </trans-unit>
-			<trans-unit id="form.group.datasource.parameters">
+            <trans-unit id="form.group.datasource.parameters">
                 <source>form.group.datasource.parameters</source>
                 <target><![CDATA[Parameters]]></target>
             </trans-unit>
-			<trans-unit id="form.label_driver_type">
+            <trans-unit id="form.label_driver_type">
                 <source>form.label_driver_type</source>
-                <target><![CDATA[Driver Type]]></target>
+                <target><![CDATA[Driver]]></target>
             </trans-unit>
-			<trans-unit id="pdo_mysql">
+            <trans-unit id="pdo_mysql">
                 <source>pdo_mysql</source>
                 <target><![CDATA[PDO Mysql]]></target>
             </trans-unit>
-			<trans-unit id="pdo_postgres">
+            <trans-unit id="pdo_postgres">
                 <source>pdo_postgres</source>
                 <target><![CDATA[PDO Postgres]]></target>
             </trans-unit>
-			<trans-unit id="form.label_db_host">
+            <trans-unit id="form.label_db_host">
                 <source>form.label_db_host</source>
-                <target><![CDATA[Db Host]]></target>
+                <target><![CDATA[Host]]></target>
             </trans-unit>
-			<trans-unit id="form.label_db_port">
+            <trans-unit id="form.label_db_port">
                 <source>form.label_db_port</source>
-                <target><![CDATA[Db Port]]></target>
+                <target><![CDATA[Port]]></target>
             </trans-unit>
-			<trans-unit id="form.label_db_name">
+            <trans-unit id="form.label_db_name">
                 <source>form.label_db_name</source>
-                <target><![CDATA[Db Name]]></target>
+                <target><![CDATA[Database]]></target>
             </trans-unit>
-			<trans-unit id="form.label_db_user">
+            <trans-unit id="form.label_db_user">
                 <source>form.label_db_user</source>
-                <target><![CDATA[Db User]]></target>
+                <target><![CDATA[Database User]]></target>
             </trans-unit>
-			<trans-unit id="form.label_plain_password">
+            <trans-unit id="form.label_plain_password">
                 <source>form.label_plain_password</source>
                 <target><![CDATA[Plain Password]]></target>
             </trans-unit>
-			<trans-unit id="breadcrumb.link_data_source_create">
+            <trans-unit id="breadcrumb.link_data_source_create">
                 <source>breadcrumb.link_data_source_create</source>
                 <target><![CDATA[Data Source]]></target>
             </trans-unit>
-			<trans-unit id="form.tab.datasource">
+            <trans-unit id="form.tab.datasource">
                 <source>form.tab.datasource</source>
                 <target><![CDATA[Data Source]]></target>
             </trans-unit>
-			<trans-unit id="form.tab.tables">
+            <trans-unit id="form.tab.tables">
                 <source>form.tab.tables</source>
                 <target><![CDATA[Tables]]></target>
             </trans-unit>
-			<trans-unit id="form.tab.relations">
+            <trans-unit id="form.tab.relations">
                 <source>form.tab.relations</source>
-                <target><![CDATA[relations]]></target>
+                <target><![CDATA[Relations]]></target>
             </trans-unit>
-			<trans-unit id="form.tab.fields">
+            <trans-unit id="form.tab.fields">
                 <source>form.tab.fields</source>
                 <target><![CDATA[Fields]]></target>
             </trans-unit>
-			<trans-unit id="form.group.datasource.descriptions">
+            <trans-unit id="form.group.datasource.descriptions">
                 <source>form.group.datasource.descriptions</source>
-                <target><![CDATA[Data source Descriptions]]></target>
+                <target><![CDATA[Description]]></target>
             </trans-unit>
-			<trans-unit id="form.group.datasource.selectdatasource">
+            <trans-unit id="form.group.datasource.selectdatasource">
                 <source>form.group.datasource.selectdatasource</source>
                 <target><![CDATA[Select Data Source]]></target>
             </trans-unit>
-			<trans-unit id="form.label_datasource">
+            <trans-unit id="form.label_datasource">
                 <source>form.label_datasource</source>
                 <target><![CDATA[Data Source]]></target>
-            </trans-unit>			
-			<trans-unit id="form.group.tables.selecttablesandqueries">
+            </trans-unit>
+            <trans-unit id="form.group.tables.selecttablesandqueries">
                 <source>form.group.tables.selecttablesandqueries</source>
                 <target><![CDATA[Select Tables and queries]]></target>
             </trans-unit>
-			<trans-unit id="form.label_table_name">
+            <trans-unit id="form.label_table_name">
                 <source>form.label_table_name</source>
                 <target><![CDATA[Table Name]]></target>
             </trans-unit>
-			<trans-unit id="form.label_custom_query">
+            <trans-unit id="form.label_custom_query">
                 <source>form.label_custom_query</source>
                 <target><![CDATA[Custom Query]]></target>
             </trans-unit>
-			<trans-unit id="table">
+            <trans-unit id="form.label_left_table">
+                <source>form.label_left_table</source>
+                <target><![CDATA[Left Table]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_left_column">
+                <source>form.label_left_column</source>
+                <target><![CDATA[Left Column]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_join_type">
+                <source>form.label_join_type</source>
+                <target><![CDATA[Join Type]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_right_table">
+                <source>form.label_right_table</source>
+                <target><![CDATA[Right Table]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_right_column">
+                <source>form.label_right_column</source>
+                <target><![CDATA[Right Column]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_table_name_or_custom_query">
+                <source>form.label_table_name_or_custom_query</source>
+                <target><![CDATA[Table or Query]]></target>
+            </trans-unit>
+            <trans-unit id="form.label_selected">
+                <source>form.label_selected</source>
+                <target><![CDATA[Selected]]></target>
+            </trans-unit>
+            <trans-unit id="JOIN">
+                <source>JOIN</source>
+                <target><![CDATA[JOIN]]></target>
+            </trans-unit>
+            <trans-unit id="LEFT JOIN">
+                <source>LEFT JOIN</source>
+                <target><![CDATA[LEFT JOIN]]></target>
+            </trans-unit>
+            <trans-unit id="datetime_immutable">
+                <source>datetime_immutable</source>
+                <target><![CDATA[Datetime Immutable]]></target>
+            </trans-unit>
+            <trans-unit id="datetimetz_immutable">
+                <source>datetimetz_immutable</source>
+                <target><![CDATA[Datetimetz Immutable]]></target>
+            </trans-unit>
+            <trans-unit id="date_immutable">
+                <source>date_immutable</source>
+                <target><![CDATA[Date Immutable]]></target>
+            </trans-unit>
+            <trans-unit id="time_immutable">
+                <source>time_immutable</source>
+                <target><![CDATA[Time Immutable]]></target>
+            </trans-unit>
+            <trans-unit id="dateinterval">
+                <source>dateinterval</source>
+                <target><![CDATA[Date Interval]]></target>
+            </trans-unit>
+            <trans-unit id="table">
                 <source>table</source>
                 <target><![CDATA[Table]]></target>
             </trans-unit>
-			<trans-unit id="query">
+            <trans-unit id="query">
                 <source>query</source>
                 <target><![CDATA[Query]]></target>
             </trans-unit>
-			<trans-unit id="form.group.relations.selecttablesandrelations">
+            <trans-unit id="form.group.relations.selecttablesandrelations">
                 <source>form.group.relations.selecttablesandrelations</source>
                 <target><![CDATA[Select Tables and Relations]]></target>
             </trans-unit>
-			<trans-unit id="form.group.fields.selectfields">
+            <trans-unit id="form.group.fields.selectfields">
                 <source>form.group.fields.selectfields</source>
                 <target><![CDATA[Select Fields]]></target>
             </trans-unit>
-			<trans-unit id="form.label_table_with_field_names">
+            <trans-unit id="form.label_table_with_field_names">
                 <source>form.label_table_with_field_names</source>
                 <target><![CDATA[Table with Field Names]]></target>
             </trans-unit>
-			<trans-unit id="array">
+            <trans-unit id="array">
                 <source>array</source>
                 <target><![CDATA[Array]]></target>
             </trans-unit>
-			<trans-unit id="simple_array">
+            <trans-unit id="simple_array">
                 <source>simple_array</source>
                 <target><![CDATA[Simple Array]]></target>
             </trans-unit>
-			<trans-unit id="json_array">
+            <trans-unit id="json_array">
                 <source>json_array</source>
                 <target><![CDATA[Json Array]]></target>
             </trans-unit>
-			<trans-unit id="object">
+            <trans-unit id="object">
                 <source>object</source>
                 <target><![CDATA[Object]]></target>
             </trans-unit>
-			<trans-unit id="boolean">
+            <trans-unit id="boolean">
                 <source>boolean</source>
                 <target><![CDATA[Boolean]]></target>
             </trans-unit>
-			<trans-unit id="integer">
+            <trans-unit id="integer">
                 <source>integer</source>
                 <target><![CDATA[Integer]]></target>
             </trans-unit>
-			<trans-unit id="smallint">
+            <trans-unit id="smallint">
                 <source>smallint</source>
                 <target><![CDATA[Smallint]]></target>
             </trans-unit>
-			<trans-unit id="bigint">
+            <trans-unit id="bigint">
                 <source>bigint</source>
                 <target><![CDATA[Bigint]]></target>
             </trans-unit>
-			<trans-unit id="string">
+            <trans-unit id="string">
                 <source>string</source>
                 <target><![CDATA[String]]></target>
             </trans-unit>
-			<trans-unit id="text">
+            <trans-unit id="text">
                 <source>text</source>
                 <target><![CDATA[Text]]></target>
             </trans-unit>
-			<trans-unit id="datetime">
+            <trans-unit id="datetime">
                 <source>datetime</source>
                 <target><![CDATA[Datetime]]></target>
             </trans-unit>
-			<trans-unit id="datetimetz">
+            <trans-unit id="datetimetz">
                 <source>datetimetz</source>
                 <target><![CDATA[Datetimetz]]></target>
             </trans-unit>
-			<trans-unit id="date">
+            <trans-unit id="date">
                 <source>date</source>
                 <target><![CDATA[Date]]></target>
             </trans-unit>
-			<trans-unit id="time">
+            <trans-unit id="time">
                 <source>time</source>
                 <target><![CDATA[Time]]></target>
             </trans-unit>
-			<trans-unit id="decimal">
+            <trans-unit id="decimal">
                 <source>decimal</source>
                 <target><![CDATA[Decimal]]></target>
             </trans-unit>
-			<trans-unit id="float">
+            <trans-unit id="float">
                 <source>float</source>
                 <target><![CDATA[Float]]></target>
             </trans-unit>
-			<trans-unit id="binary">
+            <trans-unit id="binary">
                 <source>binary</source>
                 <target><![CDATA[Binary]]></target>
             </trans-unit>
-			<trans-unit id="blob">
+            <trans-unit id="blob">
                 <source>blob</source>
                 <target><![CDATA[Blob]]></target>
             </trans-unit>
-			<trans-unit id="guid">
+            <trans-unit id="guid">
                 <source>guid</source>
                 <target><![CDATA[Guid]]></target>
             </trans-unit>
-			<trans-unit id="json">
+            <trans-unit id="json">
                 <source>json</source>
                 <target><![CDATA[Json]]></target>
             </trans-unit>
-			
+
         </body>
     </file>
 </xliff>
